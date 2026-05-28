@@ -9,14 +9,14 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#0e0b09;
-  --panel:#17120e;
-  --border:rgba(255,255,255,0.07);
-  --accent:#c9956a;
-  --accent2:#e8c4a0;
-  --green:#34c759;
-  --text:#f0e8e0;
-  --muted:rgba(240,232,224,0.45);
+  --bg:#08080f;
+  --panel:#0f0f1a;
+  --border:rgba(130,100,255,0.13);
+  --accent:#7c5cfc;
+  --accent2:#a78bfa;
+  --green:#34e8a0;
+  --text:#eeeaff;
+  --muted:rgba(200,190,255,0.45);
   --radius:20px;
 }
 
@@ -634,6 +634,34 @@ body{
 .orbitt-loading-text{font-size:13px;color:var(--muted);}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+
+/* ── T6: BEFORE/AFTER ───────────────────────────────────── */
+.t6-wrap{display:flex;flex-direction:row;height:calc(100% - 32px);overflow:hidden;border-radius:16px;}
+.t6-panel{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 16px;gap:12px;position:relative;}
+.t6-before{background:linear-gradient(135deg,#1a1030 0%,#0d0920 100%);}
+.t6-after{background:linear-gradient(135deg,#0d2030 0%,#091820 100%);}
+.t6-label{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--accent2);opacity:0.7;text-transform:uppercase;}
+.t6-text{font-size:14px;line-height:1.5;color:var(--text);text-align:center;font-family:'DM Serif Display',serif;}
+.t6-divider{width:36px;background:#0d0d1a;display:flex;align-items:center;justify-content:center;z-index:2;flex-shrink:0;}
+.t6-arrow{font-size:18px;color:var(--accent);font-weight:900;}
+.t6-caption{height:32px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);padding:0 12px;}
+
+/* ── T7: HOT TAKE ───────────────────────────────────────── */
+.t7-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(124,92,252,0.35) 0%,rgba(8,8,15,0) 70%),radial-gradient(ellipse at 80% 70%,rgba(167,139,250,0.2) 0%,transparent 60%);border-radius:inherit;}
+.t7-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:32px 24px;gap:20px;text-align:center;}
+.t7-eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--accent);text-transform:uppercase;}
+.t7-statement{font-family:'DM Serif Display',serif;font-size:22px;line-height:1.3;color:var(--text);font-style:italic;}
+.t7-sub{font-size:13px;color:var(--muted);line-height:1.5;max-width:260px;}
+.t7-cta{font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:1px;margin-top:8px;}
+
+/* ── T8: TIPS LIST ──────────────────────────────────────── */
+.t8-bg{position:absolute;inset:0;background:linear-gradient(160deg,#100a25 0%,#08080f 60%,#0a1020 100%);border-radius:inherit;}
+.t8-content{position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:28px 20px;gap:16px;}
+.t8-heading{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);line-height:1.3;font-style:italic;}
+.t8-list{display:flex;flex-direction:column;gap:10px;flex:1;}
+.t8-item{display:flex;align-items:flex-start;gap:10px;}
+.t8-num{min-width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.t8-tip{font-size:13px;color:var(--text);line-height:1.4;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/2.8.0/dom-to-image-more.min.js">
 // ══════════════════════════════════════════════════════════════════
@@ -668,16 +696,19 @@ function parseJSON(raw){
 function buildMegaPrompt(idea,tone){
   const toneMap={confident:'confident and direct',bold:'bold and punchy',funny:'funny and irreverent',casual:'casual and conversational'};
   const td = toneMap[tone]||'confident and direct';
-  return `Create social media content for ALL 5 formats about: "${idea}". Tone: ${td}. Be specific, creative, and punchy — lean into humour if the topic is funny.
+  return `Create social media content for ALL 8 formats about: "${idea}". Tone: ${td}. Be specific, creative, and punchy — lean into humour if the topic is funny.
 
-Return ONLY valid JSON:
+Return ONLY valid JSON (no markdown, no code block):
 {
-  "chat": {"messages":[{"dir":"in","text":"<question or reaction, max 12 words>"},{"dir":"out","text":"<reply, max 20 words>"},{"dir":"in","text":"<follow-up, max 10 words>"},{"dir":"out","text":"<closer, max 15 words>"}]},
-  "quote": {"quotes":["<bold quote 1, max 10 words>","<quote 2>","<quote 3>"],"attr":"<short attribution or context>"},
-  "myth": {"myth":"<misconception max 12 words>","fact":"<truth max 15 words>","extra":"<extra myth/fact pair, format: 'MYTH: xxx | FACT: xxx'>"},
-  "stats": {"stat1":{"num":"<big number>","label":"<what it measures, max 8 words>"},"stat2":{"num":"<number>","label":"<label>"},"stat3":{"num":"<number>","label":"<label>"},"stat4":{"num":"<number>","label":"<label>"}},
-  "pov": {"lines":["<POV line 1>","<POV line 2>","<POV line 3>"]},
-  "caption":"<2-3 sentence caption + 4 hashtags>"
+  "chat": {"messages":[{"dir":"in","text":"<question/reaction, max 12 words>"},{"dir":"out","text":"<reply, max 20 words>"},{"dir":"in","text":"<follow-up, max 10 words>"},{"dir":"out","text":"<punchy closer, max 15 words>"}]},
+  "quote": {"quotes":["<bold quote 1, max 12 words>","<quote 2>","<quote 3>"],"attr":"<short attribution or tag>"},
+  "myth": {"myth":"<common misconception, max 12 words>","fact":"<the truth, max 15 words>","extra":"MYTH: <second myth> | FACT: <second fact>"},
+  "stats": {"stat1":{"num":"<striking number>","label":"<what it means, max 8 words>"},"stat2":{"num":"<number>","label":"<label>"},"stat3":{"num":"<number>","label":"<label>"},"stat4":{"num":"<number>","label":"<label>"}},
+  "pov": {"lines":["<POV opener>","<POV middle>","<POV payoff>"]},
+  "beforeafter": {"before":"<the old/bad situation, max 15 words>","after":"<the new/good situation, max 15 words>","caption":"<one-liner>"},
+  "hottake": {"statement":"<bold controversial opinion, max 15 words>","sub":"<brief context or reason, max 20 words>","cta":"<engagement hook, max 8 words>"},
+  "tips": {"heading":"<list title, max 8 words>","tips":["<tip 1, max 10 words>","<tip 2>","<tip 3>","<tip 4>","<tip 5>"]},
+  "caption":"<2-3 punchy sentences + 4 hashtags>"
 }`;
 }
 
@@ -709,6 +740,21 @@ function applyGenerated(data){
   if(data.pov && data.pov.lines){
     window._povLines = data.pov.lines;
     t5restart();
+  }
+  // Template 6 — Before/After
+  if(data.beforeafter){
+    window._t6data = {before:data.beforeafter.before||'',after:data.beforeafter.after||'',caption:data.beforeafter.caption||''};
+    t6restart();
+  }
+  // Template 7 — Hot Take
+  if(data.hottake){
+    window._t7data = {eyebrow:'HOT TAKE 🔥',statement:data.hottake.statement||'',sub:data.hottake.sub||'',cta:data.hottake.cta||'Agree or disagree? ↓'};
+    t7restart();
+  }
+  // Template 8 — Tips List
+  if(data.tips){
+    window._t8data = {heading:data.tips.heading||'',tips:data.tips.tips||[]};
+    t8restart();
   }
   // Caption
   if(data.caption){
@@ -761,7 +807,7 @@ function handleBgUpload(e){
 }
 function applyBg(){
   if(!S.bg)return;
-  document.querySelectorAll('.t1-bg,.t2-bg,.t3-bg,.t4-bg,.t5-bg').forEach(el=>{
+  document.querySelectorAll('.t1-bg,.t2-bg,.t3-bg,.t4-bg,.t5-bg,.t6-before,.t6-after').forEach(el=>{
     el.style.backgroundImage=`url(${S.bg})`;
     el.style.backgroundSize='cover';
     el.style.backgroundPosition='center';
@@ -852,6 +898,18 @@ function hideOrbittLoading(){
   <div class="nav-item" onclick="switchTemplate(5,this)">
     <div class="nav-icon">🎥</div>
     <div><div class="nav-label">POV Story</div><div class="nav-sub">Reel / TikTok style</div></div>
+  </div>
+  <div class="nav-item" onclick="switchTemplate(6,this)">
+    <div class="nav-icon">⚡</div>
+    <div><div class="nav-label">Before / After</div><div class="nav-sub">Transformation reveal</div></div>
+  </div>
+  <div class="nav-item" onclick="switchTemplate(7,this)">
+    <div class="nav-icon">🔥</div>
+    <div><div class="nav-label">Hot Take</div><div class="nav-sub">Bold opinion card</div></div>
+  </div>
+  <div class="nav-item" onclick="switchTemplate(8,this)">
+    <div class="nav-icon">✅</div>
+    <div><div class="nav-label">Tips List</div><div class="nav-sub">Numbered tips card</div></div>
   </div>
 
   <div class="sidebar-generate">
@@ -981,6 +1039,51 @@ function hideOrbittLoading(){
           </div>
         </div>
         <div class="frame-label">9:16 · POV Story / Reel</div>
+      </div>
+
+      <!-- ── T6: BEFORE / AFTER ── -->
+      <div class="template-frame" id="frame6">
+        <div class="phone-shell">
+          <div class="t6-wrap">
+            <div class="t6-panel t6-before">
+              <div class="t6-label">BEFORE</div>
+              <div class="t6-text" id="t6beforeText">...</div>
+            </div>
+            <div class="t6-divider"><span class="t6-arrow">→</span></div>
+            <div class="t6-panel t6-after">
+              <div class="t6-label">AFTER</div>
+              <div class="t6-text" id="t6afterText">...</div>
+            </div>
+          </div>
+          <div class="t6-caption" id="t6caption"></div>
+        </div>
+        <div class="frame-label">1:1 · Before / After</div>
+      </div>
+
+      <!-- ── T7: HOT TAKE ── -->
+      <div class="template-frame" id="frame7">
+        <div class="phone-shell">
+          <div class="t7-bg"></div>
+          <div class="t7-content">
+            <div class="t7-eyebrow" id="t7eyebrow">HOT TAKE 🔥</div>
+            <div class="t7-statement" id="t7statement">Loading...</div>
+            <div class="t7-sub" id="t7sub"></div>
+            <div class="t7-cta" id="t7cta">Agree or disagree? ↓</div>
+          </div>
+        </div>
+        <div class="frame-label">1:1 · Hot Take</div>
+      </div>
+
+      <!-- ── T8: TIPS LIST ── -->
+      <div class="template-frame" id="frame8">
+        <div class="phone-shell">
+          <div class="t8-bg"></div>
+          <div class="t8-content">
+            <div class="t8-heading" id="t8heading">5 things you need to know</div>
+            <div class="t8-list" id="t8list"></div>
+          </div>
+        </div>
+        <div class="frame-label">1:1 · Tips List</div>
       </div>
 
     </div><!-- /preview-area -->
@@ -1290,14 +1393,17 @@ t5start();
 // NAV SWITCHING
 // ──────────────────────────────────
 const meta={
-  1:{label:'Text Chat',desc:'Animated conversation bubbles with sound. Great for Instagram Reels & TikTok.',dims:'1080 × 1920',ratio:'9:16 vertical',platforms:['Instagram Reels','TikTok','YouTube Shorts'],theme:'A real conversation about birth induction, informed consent and doula support.'},
-  2:{label:'Bold Quote',desc:'Full-bleed image with powerful typographic overlay. Stops the scroll.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Pinterest','Facebook'],theme:'Striking single statements that capture the emotional truth of birth.'},
-  3:{label:'Myth vs Fact',desc:'Side-by-side debunking cards. High save & share rate on educational content.',dims:'1080 × 1350',ratio:'4:5 portrait',platforms:['Instagram Feed','Facebook','Threads'],theme:'Dismantling common misconceptions around induction and birth rights.'},
-  4:{label:'Stat Cards',desc:'Data-driven content builds authority. High engagement from birth workers.',dims:'1080 × 1350',ratio:'4:5 portrait',platforms:['Instagram Feed','LinkedIn','Facebook'],theme:'Australian birth statistics that contextualise why informed consent matters.'},
-  5:{label:'POV Story',desc:'Sequential storytelling. The most shared format on TikTok & Reels.',dims:'1080 × 1920',ratio:'9:16 vertical',platforms:['TikTok','Instagram Reels','YouTube Shorts'],theme:'Walking the audience through a birth empowerment journey in 5 slides.'},
+  1:{label:'Text Chat',desc:'Animated conversation bubbles. Great for Reels & TikTok — feels like a real DM thread.',dims:'1080 × 1920',ratio:'9:16 vertical',platforms:['Instagram Reels','TikTok','YouTube Shorts'],theme:'A relatable back-and-forth that draws viewers in.'},
+  2:{label:'Bold Quote',desc:'Full-bleed image with powerful typographic overlay. Scroll-stopping statement format.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Pinterest','Facebook'],theme:'One striking line that makes people stop and save.'},
+  3:{label:'Myth vs Fact',desc:'Side-by-side debunking cards. Highest save & share rate for educational content.',dims:'1080 × 1350',ratio:'4:5 portrait',platforms:['Instagram Feed','Facebook','Threads'],theme:'Bust a common misconception in your niche.'},
+  4:{label:'Stat Cards',desc:'Data-driven content builds authority and credibility fast.',dims:'1080 × 1350',ratio:'4:5 portrait',platforms:['Instagram Feed','LinkedIn','Facebook'],theme:'Numbers that make your audience stop and screenshot.'},
+  5:{label:'POV Story',desc:'Sequential storytelling — the most shared format on TikTok & Reels.',dims:'1080 × 1920',ratio:'9:16 vertical',platforms:['TikTok','Instagram Reels','YouTube Shorts'],theme:'Walk your audience through a moment or transformation.'},
+  6:{label:'Before / After',desc:'Transformation reveal. High engagement from contrast and relatability.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Facebook','LinkedIn'],theme:'Show the gap between the old way and the new way.'},
+  7:{label:'Hot Take',desc:'Bold opinion card. Drives comments and shares through controversy.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Twitter/X','LinkedIn'],theme:'Say the thing everyone's thinking but nobody's posting.'},
+  8:{label:'Tips List',desc:'Numbered tips — highest saved format on Instagram. Great for authority building.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Pinterest','LinkedIn'],theme:'Give genuine value in a scannable format.'},
 };
 
-const titles=[null,'Text Chat — Conversation Format','Bold Quote — Statement Poster','Myth vs Fact — Debunk Format','Stat Cards — Data Storytelling','POV Story — Reel Format'];
+const titles=[null,'Text Chat — Conversation Format','Bold Quote — Statement Poster','Myth vs Fact — Debunk Format','Stat Cards — Data Storytelling','POV Story — Reel Format','Before / After — Transformation','Hot Take — Bold Opinion','Tips List — Authority Format'];
 
 function switchTemplate(n,el){
   document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
@@ -1306,10 +1412,10 @@ function switchTemplate(n,el){
   document.getElementById('frame'+n).classList.add('active');
   document.getElementById('topbarTitle').textContent=titles[n];
   const m=meta[n];
-  document.getElementById('spLabel').textContent=m.label;
+  if(m){document.getElementById('spLabel').textContent=m.label;
   document.getElementById('spDesc').textContent=m.desc;
   document.getElementById('spDims').textContent=m.dims;
-  document.getElementById('spRatio').textContent=m.ratio;
+  document.getElementById('spRatio').textContent=m.ratio;}
   document.getElementById('spPlatforms').innerHTML=m.platforms.map(p=>`<span class="sp-tag">${p}</span>`).join('');
   document.getElementById('spTheme').textContent=m.theme;
 }
@@ -1323,7 +1429,52 @@ function replayActive(){
   else if(id==='frame3')t3start();
   else if(id==='frame4')t4start();
   else if(id==='frame5')t5start();
+  else if(id==='frame6')t6start();
+  else if(id==='frame7')t7start();
+  else if(id==='frame8')t8start();
+
 }
+
+// ── T6: BEFORE/AFTER ─────────────────────────────────────
+let t6data = {before:'You used to do things the hard way.',after:'Now everything clicks into place.',caption:''};
+function t6start(){
+  document.getElementById('t6beforeText').textContent = t6data.before;
+  document.getElementById('t6afterText').textContent  = t6data.after;
+  document.getElementById('t6caption').textContent    = t6data.caption||'';
+}
+function t6restart(){
+  if(window._t6data) t6data = window._t6data;
+  t6start();
+}
+
+// ── T7: HOT TAKE ─────────────────────────────────────────
+let t7data = {eyebrow:'HOT TAKE 🔥',statement:'Most people are doing it wrong.',sub:"Here's what actually works.",cta:'Agree or disagree? ↓'};
+function t7start(){
+  document.getElementById('t7eyebrow').textContent   = t7data.eyebrow||'HOT TAKE 🔥';
+  document.getElementById('t7statement').textContent = t7data.statement;
+  document.getElementById('t7sub').textContent       = t7data.sub||'';
+  document.getElementById('t7cta').textContent       = t7data.cta||'Agree or disagree? ↓';
+}
+function t7restart(){
+  if(window._t7data) t7data = window._t7data;
+  t7start();
+}
+
+// ── T8: TIPS LIST ─────────────────────────────────────────
+let t8data = {heading:'Things worth knowing',tips:['Start before you feel ready.','Done beats perfect every time.','The best system is one you use.','Rest is part of the work.','Just begin.']};
+function t8start(){
+  document.getElementById('t8heading').textContent = t8data.heading;
+  const ul = document.getElementById('t8list');
+  ul.innerHTML = t8data.tips.map((tip,i)=>
+    '<div class="t8-item"><div class="t8-num">'+(i+1)+'</div><div class="t8-tip">'+tip+'</div></div>'
+  ).join('');
+}
+function t8restart(){
+  if(window._t8data) t8data = window._t8data;
+  t8start();
+}
+
+t6start(); t7start(); t8start();
 
 // ── EXPORT ──
 // The base64 image used across all templates
@@ -1443,7 +1594,7 @@ async function exportTemplate() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spin">⏳</span> Rendering…';
 
-  const names = {frame1:'text-chat',frame2:'bold-quote',frame3:'myth-vs-fact',frame4:'stat-cards',frame5:'pov-story'};
+  const names = {frame1:'text-chat',frame2:'bold-quote',frame3:'myth-vs-fact',frame4:'stat-cards',frame5:'pov-story',frame6:'before-after',frame7:'hot-take',frame8:'tips-list'};
   const filename = 'doula-' + (names[active.id]||'template') + '.png';
 
   try {
