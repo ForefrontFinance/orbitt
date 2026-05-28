@@ -662,288 +662,212 @@ body{
 .t8-item{display:flex;align-items:flex-start;gap:10px;}
 .t8-num{min-width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
 .t8-tip{font-size:13px;color:var(--text);line-height:1.4;}
+
+/* ══ RESPONSIVE LAYOUT ══════════════════════════════════════════════════════ */
+
+/* Shared */
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
+
+/* ── DESKTOP LAYOUT (CapCut style) ─────────────────────────────────── */
+.layout-desktop{display:flex;flex-direction:column;height:100vh;width:100%;}
+
+/* Top bar */
+.dt-topbar{height:44px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:16px;flex-shrink:0;}
+.dt-logo{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:1px;font-family:'Playfair Display',serif;}
+.dt-nav{display:flex;gap:2px;margin-left:8px;}
+.dt-ntab{padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;border-radius:6px;transition:all .15s;}
+.dt-ntab:hover{color:var(--text);background:rgba(124,92,252,0.1);}
+.dt-ntab.on{color:var(--text);background:rgba(124,92,252,0.15);}
+.dt-topbar-actions{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.dt-topbar-title{font-size:12px;color:var(--muted);margin-right:4px;}
+
+/* Body */
+.dt-body{flex:1;display:flex;overflow:hidden;}
+
+/* Left — template grid */
+.dt-left{width:130px;background:var(--panel);border-right:1px solid var(--border);flex-shrink:0;overflow-y:auto;padding:10px 8px;}
+.dt-left-label{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:4px 4px 8px;opacity:0.6;}
+.dt-tpl-grid{display:flex;flex-direction:column;gap:4px;}
+.dt-tpl-card{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all .15s;}
+.dt-tpl-card:hover{background:rgba(124,92,252,0.08);border-color:rgba(124,92,252,0.15);}
+.dt-tpl-card.active{background:rgba(124,92,252,0.15);border-color:rgba(124,92,252,0.3);}
+.dt-tpl-icon{font-size:16px;flex-shrink:0;width:20px;text-align:center;}
+.dt-tpl-name{font-size:11px;color:rgba(255,255,255,0.6);line-height:1.2;}
+.dt-tpl-card.active .dt-tpl-name{color:var(--text);}
+
+/* Center */
+.dt-center{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.dt-preview{flex:1;display:flex;align-items:center;justify-content:center;position:relative;background:#08080f;}
+.dt-preview-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(124,92,252,0.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+
+/* Generate bar */
+.dt-genbar{height:80px;background:var(--panel);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0;}
+.dt-genbar-idea{flex:1;position:relative;}
+.dt-idea-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text);resize:none;height:52px;font-family:'DM Sans',sans-serif;line-height:1.4;}
+.dt-idea-input:focus{outline:none;border-color:rgba(124,92,252,0.4);}
+.dt-idea-input::placeholder{color:var(--muted);}
+.dt-genbar-right{display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0;}
+.dt-tone-row{display:flex;gap:4px;}
+.dt-tone{padding:3px 8px;border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.dt-tone:hover{border-color:var(--accent);color:var(--accent);}
+.dt-tone.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.dt-gen-btns{display:flex;gap:6px;align-items:center;}
+.dt-gbtn{padding:8px 18px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap;}
+.dt-gbtn:hover{opacity:0.85;}
+.dt-iter-row{display:flex;gap:4px;}
+.dt-iter{padding:4px 8px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;font-size:10px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.dt-iter:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Right panel */
+.dt-right{width:200px;background:var(--panel);border-left:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;}
+.dt-rtabs{display:flex;border-bottom:1px solid var(--border);}
+.dt-rtab{flex:1;padding:9px 4px;font-size:10px;color:var(--muted);text-align:center;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent;}
+.dt-rtab:hover{color:var(--text);}
+.dt-rtab.on{color:var(--accent);border-bottom-color:var(--accent);}
+.dt-rpane{display:none;flex:1;overflow-y:auto;padding:12px;}
+.dt-rpane.on{display:block;}
+.dt-rp-section{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;opacity:0.7;}
+.dt-rp-val{font-size:11px;color:var(--text);margin-bottom:12px;line-height:1.4;}
+.dt-rp-muted{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.4;}
+.dt-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
+.dt-tag{padding:2px 7px;border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--muted);}
+.dt-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:11px;color:var(--text);margin-bottom:8px;font-family:'DM Sans',sans-serif;}
+.dt-input::placeholder{color:var(--muted);}
+.dt-upload-btn{display:block;width:100%;padding:7px;background:rgba(255,255,255,0.04);border:1px dashed var(--border);border-radius:6px;color:var(--muted);font-size:11px;text-align:center;cursor:pointer;margin-bottom:8px;transition:all .15s;}
+.dt-upload-btn:hover{border-color:var(--accent);color:var(--accent);}
+.dt-caption-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:11px;color:var(--muted);line-height:1.4;min-height:60px;margin-bottom:8px;}
+.dt-copy-btn{width:100%;padding:6px;background:rgba(124,92,252,0.1);border:1px solid rgba(124,92,252,0.2);border-radius:6px;color:var(--accent2);font-size:11px;cursor:pointer;transition:all .15s;}
+.dt-copy-btn:hover{background:rgba(124,92,252,0.2);}
+.dt-unsplash-row{display:flex;gap:6px;margin-bottom:6px;}
+.dt-unsplash-q{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:11px;color:var(--text);font-family:'DM Sans',sans-serif;}
+.dt-unsplash-q::placeholder{color:var(--muted);}
+.dt-go-btn{padding:5px 10px;background:rgba(124,92,252,0.15);border:1px solid rgba(124,92,252,0.2);border-radius:6px;color:var(--accent);font-size:11px;cursor:pointer;}
+.dt-thumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.dt-thumb{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;cursor:pointer;border:2px solid transparent;}
+.dt-thumb.selected{border-color:var(--accent);}
+
+/* ── MOBILE LAYOUT (Wizard style) ──────────────────────────────────── */
+.layout-mobile{display:none;flex-direction:column;height:100vh;width:100%;overflow:hidden;}
+
+.mob-header{height:44px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;justify-content:space-between;flex-shrink:0;}
+.mob-logo{font-size:15px;font-weight:700;color:var(--accent);font-family:'Playfair Display',serif;}
+.mob-header-actions{display:flex;gap:8px;}
+.mob-hbtn{padding:5px 10px;background:rgba(124,92,252,0.12);border:1px solid rgba(124,92,252,0.2);border-radius:6px;color:var(--accent);font-size:11px;cursor:pointer;}
+
+/* Mobile template strip */
+.mob-tpl-strip{background:var(--panel);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;gap:8px;overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
+.mob-tpl-strip::-webkit-scrollbar{display:none;}
+.mob-tpl-chip{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;border-radius:8px;border:1px solid var(--border);cursor:pointer;flex-shrink:0;transition:all .15s;min-width:56px;}
+.mob-tpl-chip.active{background:rgba(124,92,252,0.15);border-color:rgba(124,92,252,0.4);}
+.mob-tpl-chip-icon{font-size:16px;}
+.mob-tpl-chip-name{font-size:9px;color:var(--muted);white-space:nowrap;}
+.mob-tpl-chip.active .mob-tpl-chip-name{color:var(--text);}
+
+/* Mobile preview */
+.mob-preview{flex:1;display:flex;align-items:center;justify-content:center;background:#08080f;overflow:hidden;min-height:0;}
+
+/* Mobile wizard */
+.mob-wizard{background:var(--panel);border-top:1px solid var(--border);flex-shrink:0;padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.mob-step{display:flex;gap:10px;align-items:flex-start;}
+.mob-step-num{width:20px;height:20px;border-radius:50%;background:rgba(124,92,252,0.2);border:1px solid rgba(124,92,252,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--accent);flex-shrink:0;margin-top:2px;}
+.mob-step-body{flex:1;}
+.mob-step-label{font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:0.5px;}
+.mob-idea-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--text);resize:none;height:44px;font-family:'DM Sans',sans-serif;}
+.mob-idea-input:focus{outline:none;border-color:rgba(124,92,252,0.4);}
+.mob-idea-input::placeholder{color:var(--muted);}
+.mob-tone-row{display:flex;gap:5px;flex-wrap:wrap;}
+.mob-tone{padding:4px 10px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted);cursor:pointer;}
+.mob-tone.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mob-gen-row{display:flex;gap:8px;}
+.mob-gen-btn{flex:1;padding:10px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;}
+.mob-export-btn{padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;}
+
+/* Responsive breakpoint */
+@media (max-width: 768px) {
+  .layout-desktop{display:none;}
+  .layout-mobile{display:flex;}
+}
+
+/* template-frame shared styles */
+.template-frame{display:none;}
+.template-frame.active{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/2.8.0/dom-to-image-more.min.js">
-// ══════════════════════════════════════════════════════════════════
-// ORBITT AI GENERATION
-// ══════════════════════════════════════════════════════════════════
-let S = { tone:'confident', idea:'', bg:null, handle:'@forefrontfinance', caption:'' };
-
-function setTone(btn){
-  S.tone = btn.dataset.tone;
-  document.querySelectorAll('.sg-tone').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function updateHandle(){
-  S.handle = document.getElementById('brandHandle').value || '@yourbrand';
-  document.querySelectorAll('[id$="-handle"]').forEach(el => el.textContent = S.handle);
-}
-
-async function apiAsk(prompt){
-  const r = await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
-  if(!r.ok) throw new Error(await r.text());
-  const d = await r.json();
-  return d.content[0].text;
-}
-
-function parseJSON(raw){
-  const m = raw.match(/\{[\s\S]*\}/);
-  if(!m) throw new Error('No JSON in response');
-  return JSON.parse(m[0]);
-}
-
-function buildMegaPrompt(idea,tone){
-  const toneMap={confident:'confident and direct',bold:'bold and punchy',funny:'funny and irreverent',casual:'casual and conversational'};
-  const td = toneMap[tone]||'confident and direct';
-  return `Create social media content for ALL 8 formats about: "${idea}". Tone: ${td}. Be specific, creative, and punchy — lean into humour if the topic is funny.
-
-Return ONLY valid JSON (no markdown, no code block):
-{
-  "chat": {"messages":[{"dir":"in","text":"<question/reaction, max 12 words>"},{"dir":"out","text":"<reply, max 20 words>"},{"dir":"in","text":"<follow-up, max 10 words>"},{"dir":"out","text":"<punchy closer, max 15 words>"}]},
-  "quote": {"quotes":["<bold quote 1, max 12 words>","<quote 2>","<quote 3>"],"attr":"<short attribution or tag>"},
-  "myth": {"myth":"<common misconception, max 12 words>","fact":"<the truth, max 15 words>","extra":"MYTH: <second myth> | FACT: <second fact>"},
-  "stats": {"stat1":{"num":"<striking number>","label":"<what it means, max 8 words>"},"stat2":{"num":"<number>","label":"<label>"},"stat3":{"num":"<number>","label":"<label>"},"stat4":{"num":"<number>","label":"<label>"}},
-  "pov": {"lines":["<POV opener>","<POV middle>","<POV payoff>"]},
-  "beforeafter": {"before":"<the old/bad situation, max 15 words>","after":"<the new/good situation, max 15 words>","caption":"<one-liner>"},
-  "hottake": {"statement":"<bold controversial opinion, max 15 words>","sub":"<brief context or reason, max 20 words>","cta":"<engagement hook, max 8 words>"},
-  "tips": {"heading":"<list title, max 8 words>","tips":["<tip 1, max 10 words>","<tip 2>","<tip 3>","<tip 4>","<tip 5>"]},
-  "caption":"<2-3 punchy sentences + 4 hashtags>"
-}`;
-}
-
-function applyGenerated(data){
-  // Template 1 — Chat
-  if(data.chat && data.chat.messages){
-    const newConv = data.chat.messages.map((m,i)=>({dir:m.dir,text:m.text,delay:i*2200+500}));
-    // Replace t1conv and restart
-    window._t1conv = newConv;
-    t1restart();
-  }
-  // Template 2 — Quote
-  if(data.quote){
-    const qs = data.quote.quotes||[];
-    window._t2quotes = qs.map((q,i)=>({quote:q,attr:data.quote.attr||''}));
-    if(window._t2quotes.length) t2restart();
-  }
-  // Template 3 — Myth
-  if(data.myth){
-    window._mythData = data.myth;
-    t3restart();
-  }
-  // Template 4 — Stats
-  if(data.stats){
-    window._statsData = data.stats;
-    t4restart();
-  }
-  // Template 5 — POV
-  if(data.pov && data.pov.lines){
-    window._povLines = data.pov.lines;
-    t5restart();
-  }
-  // Template 6 — Before/After
-  if(data.beforeafter){
-    window._t6data = {before:data.beforeafter.before||'',after:data.beforeafter.after||'',caption:data.beforeafter.caption||''};
-    t6restart();
-  }
-  // Template 7 — Hot Take
-  if(data.hottake){
-    window._t7data = {eyebrow:'HOT TAKE 🔥',statement:data.hottake.statement||'',sub:data.hottake.sub||'',cta:data.hottake.cta||'Agree or disagree? ↓'};
-    t7restart();
-  }
-  // Template 8 — Tips List
-  if(data.tips){
-    window._t8data = {heading:data.tips.heading||'',tips:data.tips.tips||[]};
-    t8restart();
-  }
-  // Caption
-  if(data.caption){
-    S.caption = data.caption;
-    const cb = document.getElementById('captionBox');
-    if(cb) cb.textContent = data.caption;
-  }
-}
-
-async function generateAll(){
-  const idea = document.getElementById('ideaInput').value.trim();
-  if(!idea){showOrbittToast('Add an idea first');return;}
-  S.idea = idea;
-  showOrbittLoading('Generating all templates…');
-  try{
-    const raw = await apiAsk(buildMegaPrompt(idea,S.tone));
-    const data = parseJSON(raw);
-    applyGenerated(data);
-    showOrbittToast('All templates generated ✦');
-  }catch(e){
-    showOrbittToast('Error: '+e.message);
-    console.error(e);
-  }finally{
-    hideOrbittLoading();
-  }
-}
-
-async function iterateAll(instruction){
-  if(!S.idea){showOrbittToast('Generate first');return;}
-  showOrbittLoading('Iterating — '+instruction+'…');
-  try{
-    const prompt = buildMegaPrompt(S.idea,S.tone)+'\n\nIMPORTANT: Make everything '+instruction+'. Same JSON structure.';
-    const raw = await apiAsk(prompt);
-    const data = parseJSON(raw);
-    applyGenerated(data);
-    showOrbittToast('Done — '+instruction);
-  }catch(e){
-    showOrbittToast('Error: '+e.message);
-  }finally{
-    hideOrbittLoading();
-  }
-}
-
-// Background image
-function handleBgUpload(e){
-  const file=e.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{S.bg=ev.target.result;applyBg();};
-  reader.readAsDataURL(file);
-}
-function applyBg(){
-  if(!S.bg)return;
-  document.querySelectorAll('.t1-bg,.t2-bg,.t3-bg,.t4-bg,.t5-bg,.t6-before,.t6-after').forEach(el=>{
-    el.style.backgroundImage=`url(${S.bg})`;
-    el.style.backgroundSize='cover';
-    el.style.backgroundPosition='center';
-  });
-}
-
-// Unsplash
-function saveUnsplashKey(){
-  const k=document.getElementById('unsplashKey').value.trim();
-  if(k)localStorage.setItem('unsplash_key',k);
-}
-async function searchUnsplash(){
-  const key=localStorage.getItem('unsplash_key')||document.getElementById('unsplashKey').value.trim();
-  if(!key){showOrbittToast('Enter Unsplash key first');return;}
-  const q=document.getElementById('unsplashQ').value.trim();if(!q)return;
-  const res=document.getElementById('unsplashResults');
-  res.innerHTML='<span style="font-size:10px;color:var(--muted)">Searching…</span>';
-  try{
-    const r=await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(q)}&per_page=9&orientation=squarish`,{headers:{Authorization:`Client-ID ${key}`}});
-    const d=await r.json();
-    if(!d.results||!d.results.length){res.innerHTML='<span style="font-size:10px;color:var(--muted)">No results</span>';return;}
-    res.innerHTML=d.results.map(p=>`<img class="sp-thumb" src="${p.urls.thumb}" onclick="selectUnsplash('${p.urls.regular}')" />`).join('');
-  }catch(e){res.innerHTML='<span style="font-size:10px;color:var(--muted)">Error</span>';}
-}
-function selectUnsplash(url){
-  S.bg=url;applyBg();
-  document.querySelectorAll('.sp-thumb').forEach(t=>t.classList.remove('selected'));
-  event.target.classList.add('selected');
-}
-
-function copyCaption(){
-  if(!S.caption){showOrbittToast('No caption yet');return;}
-  navigator.clipboard.writeText(S.caption).then(()=>showOrbittToast('Copied!'));
-}
-
-// Toast & Loading
-let _toastTimer;
-function showOrbittToast(msg){
-  const t=document.getElementById('orbitToast');
-  t.textContent=msg;t.classList.add('show');
-  clearTimeout(_toastTimer);
-  _toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
-}
-function showOrbittLoading(txt='Generating…'){
-  document.getElementById('orbitLoadingText').textContent=txt;
-  document.getElementById('orbitLoading').classList.add('show');
-}
-function hideOrbittLoading(){
-  document.getElementById('orbitLoading').classList.remove('show');
-}
-
-// Load unsplash key
-(function(){const k=localStorage.getItem('unsplash_key');if(k&&document.getElementById('unsplashKey'))document.getElementById('unsplashKey').value=k;})();
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/2.8.0/dom-to-image-more.min.js"></script>
 </head>
 <body>
 
-<!-- ══ SIDEBAR ══ -->
+<!-- overlays (shared) -->
 <div class="orbitt-toast" id="orbitToast"></div>
 <div class="orbitt-loading" id="orbitLoading">
   <div class="orbitt-spinner"></div>
   <div class="orbitt-loading-text" id="orbitLoadingText">Generating…</div>
 </div>
-<div class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-eyebrow">Content Studio</div>
-    <div class="logo-title">orbitt</div>
-  </div>
-  <div class="sidebar-section">Templates</div>
 
-  <div class="nav-item active" onclick="switchTemplate(1,this)">
-    <div class="nav-icon">💬</div>
-    <div><div class="nav-label">Text Chat</div><div class="nav-sub">Conversation format</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(2,this)">
-    <div class="nav-icon">✦</div>
-    <div><div class="nav-label">Bold Quote</div><div class="nav-sub">Statement poster</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(3,this)">
-    <div class="nav-icon">⚖️</div>
-    <div><div class="nav-label">Myth vs Fact</div><div class="nav-sub">Debunk format</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(4,this)">
-    <div class="nav-icon">📊</div>
-    <div><div class="nav-label">Stat Cards</div><div class="nav-sub">Data storytelling</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(5,this)">
-    <div class="nav-icon">🎥</div>
-    <div><div class="nav-label">POV Story</div><div class="nav-sub">Reel / TikTok style</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(6,this)">
-    <div class="nav-icon">⚡</div>
-    <div><div class="nav-label">Before / After</div><div class="nav-sub">Transformation reveal</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(7,this)">
-    <div class="nav-icon">🔥</div>
-    <div><div class="nav-label">Hot Take</div><div class="nav-sub">Bold opinion card</div></div>
-  </div>
-  <div class="nav-item" onclick="switchTemplate(8,this)">
-    <div class="nav-icon">✅</div>
-    <div><div class="nav-label">Tips List</div><div class="nav-sub">Numbered tips card</div></div>
-  </div>
+<!-- ══ DESKTOP LAYOUT ══ -->
+<div class="layout-desktop">
 
-  <div class="sidebar-generate">
-    <div class="sg-label">GENERATE</div>
-    <textarea id="ideaInput" class="sg-idea" placeholder="What do you want to post about?&#10;e.g. Carl Sagan obsession, Watto, fast finance…"></textarea>
-    <div class="sg-tones">
-      <button class="sg-tone active" data-tone="confident" onclick="setTone(this)">Confident</button>
-      <button class="sg-tone" data-tone="bold" onclick="setTone(this)">Bold</button>
-      <button class="sg-tone" data-tone="funny" onclick="setTone(this)">Funny</button>
-      <button class="sg-tone" data-tone="casual" onclick="setTone(this)">Casual</button>
+  <div class="dt-topbar">
+    <div class="dt-logo">orbitt</div>
+    <div class="dt-nav">
+      <div class="dt-ntab on">Create</div>
+      <div class="dt-ntab">History</div>
+      <div class="dt-ntab">Brand</div>
     </div>
-    <button class="sg-btn" onclick="generateAll()">✦ Generate All</button>
-    <div class="sg-iters">
-      <button class="sg-iter" onclick="iterateAll('shorter')">Shorter</button>
-      <button class="sg-iter" onclick="iterateAll('punchier')">Punchier</button>
-      <button class="sg-iter" onclick="iterateAll('funnier')">Funnier</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ MAIN ══ -->
-<div class="main">
-  <div class="topbar">
-    <div class="topbar-title" id="topbarTitle">Text Chat — Conversation Format</div>
-    <div class="topbar-actions">
-      <button class="tbtn tbtn-outline" id="replayAllBtn" onclick="replayActive()">↺ Replay</button>
-      <button class="tbtn tbtn-primary" id="exportBtn" onclick="exportTemplate()">⬇ Export PNG</button>
+    <div class="dt-topbar-actions">
+      <span class="dt-topbar-title" id="topbarTitle">Text Chat — Conversation Format</span>
+      <button class="tbtn tbtn-outline" onclick="replayActive()" style="padding:5px 10px;font-size:11px">↺ Replay</button>
+      <button class="tbtn tbtn-primary" onclick="exportTemplate()" style="padding:5px 10px;font-size:11px">⬇ Export PNG</button>
     </div>
   </div>
 
-  <div class="workspace">
-    <div class="preview-area">
+  <div class="dt-body">
 
-      <!-- ── T1: TEXT CHAT ── -->
+    <!-- Left: template grid -->
+    <div class="dt-left">
+      <div class="dt-left-label">Templates</div>
+      <div class="dt-tpl-grid">
+  <div class="dt-tpl-card active" onclick="switchTemplate(1,this)">
+    <span class="dt-tpl-icon">💬</span>
+    <span class="dt-tpl-name">Text Chat</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(2,this)">
+    <span class="dt-tpl-icon">✦</span>
+    <span class="dt-tpl-name">Bold Quote</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(3,this)">
+    <span class="dt-tpl-icon">⚖️</span>
+    <span class="dt-tpl-name">Myth vs Fact</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(4,this)">
+    <span class="dt-tpl-icon">📊</span>
+    <span class="dt-tpl-name">Stat Cards</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(5,this)">
+    <span class="dt-tpl-icon">🎥</span>
+    <span class="dt-tpl-name">POV Story</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(6,this)">
+    <span class="dt-tpl-icon">⚡</span>
+    <span class="dt-tpl-name">Before / After</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(7,this)">
+    <span class="dt-tpl-icon">🔥</span>
+    <span class="dt-tpl-name">Hot Take</span>
+  </div>
+  <div class="dt-tpl-card" onclick="switchTemplate(8,this)">
+    <span class="dt-tpl-icon">✅</span>
+    <span class="dt-tpl-name">Tips List</span>
+  </div>
+      </div>
+    </div>
+
+    <!-- Center: preview + generate bar -->
+    <div class="dt-center">
+      <div class="dt-preview" id="previewArea">
+        <div class="dt-preview-grid"></div>
+              <!-- ── T1: TEXT CHAT ── -->
       <div class="template-frame active" id="frame1">
         <div class="phone-shell">
           <div class="t1-bg" id="bgSource" style="background-image:url('')"></div>
@@ -1086,55 +1010,137 @@ function hideOrbittLoading(){
         <div class="frame-label">1:1 · Tips List</div>
       </div>
 
-    </div><!-- /preview-area -->
+      </div>
 
-    <!-- ══ SETTINGS ══ -->
-    <div class="settings-panel">
-      <div>
-        <div class="sp-section-title">Format Info</div>
-        <div class="sp-info">
-          <div class="sp-info-label" id="spLabel">Text Chat</div>
-          <div class="sp-info-val" id="spDesc">Animated conversation format — great for Reels &amp; TikTok.</div>
+      <!-- Generate bar -->
+      <div class="dt-genbar">
+        <div class="dt-genbar-idea">
+          <textarea class="dt-idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. Carl Sagan obsession, Watto, fast finance…"></textarea>
         </div>
-        <div class="sp-info" style="margin-top:8px">
-          <div class="sp-info-label" id="spDims">1080 × 1920</div>
-          <div class="sp-info-val" id="spRatio">9:16 vertical</div>
+        <div class="dt-genbar-right">
+          <div class="dt-tone-row">
+            <div class="dt-tone active" data-tone="confident" onclick="setTone(this)">Confident</div>
+            <div class="dt-tone" data-tone="bold" onclick="setTone(this)">Bold</div>
+            <div class="dt-tone" data-tone="funny" onclick="setTone(this)">Funny</div>
+            <div class="dt-tone" data-tone="casual" onclick="setTone(this)">Casual</div>
+          </div>
+          <div class="dt-gen-btns">
+            <div class="dt-iter-row">
+              <button class="dt-iter" onclick="iterateAll('shorter')">Shorter</button>
+              <button class="dt-iter" onclick="iterateAll('punchier')">Punchier</button>
+              <button class="dt-iter" onclick="iterateAll('funnier')">Funnier</button>
+            </div>
+            <button class="dt-gbtn" onclick="generateAll()">✦ Generate All</button>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="sp-section-title">Platforms</div>
-        <div id="spPlatforms">
-          <span class="sp-tag">Instagram Reels</span>
-          <span class="sp-tag">TikTok</span>
-          <span class="sp-tag">YouTube Shorts</span>
+    </div>
+
+    <!-- Right: info/brand/export -->
+    <div class="dt-right">
+      <div class="dt-rtabs">
+        <div class="dt-rtab on" onclick="switchRTab(this,'rtInfo')">Info</div>
+        <div class="dt-rtab" onclick="switchRTab(this,'rtBrand')">Brand</div>
+        <div class="dt-rtab" onclick="switchRTab(this,'rtCaption')">Caption</div>
+      </div>
+
+      <div class="dt-rpane on" id="rtInfo">
+        <div class="dt-rp-section">Format</div>
+        <div class="dt-rp-val" id="spLabel">Text Chat</div>
+        <div class="dt-rp-muted" id="spDesc">Animated conversation format.</div>
+        <div class="dt-rp-section">Dimensions</div>
+        <div class="dt-rp-val" id="spDims">1080 × 1920</div>
+        <div class="dt-rp-muted" id="spRatio">9:16 vertical</div>
+        <div class="dt-rp-section">Platforms</div>
+        <div class="dt-tags" id="spPlatforms">
+          <span class="dt-tag">Instagram Reels</span>
+          <span class="dt-tag">TikTok</span>
         </div>
+        <div class="dt-rp-muted" id="spTheme" style="font-size:10px;opacity:0.7"></div>
       </div>
-      <div>
-        <div class="sp-section-title">Brand Handle</div>
-        <input class="sp-input" id="brandHandle" placeholder="@yourbrand" value="@forefrontfinance" oninput="updateHandle()"/>
-      </div>
-      <div>
-        <div class="sp-section-title">Background Photo</div>
-        <label class="sp-upload">
+
+      <div class="dt-rpane" id="rtBrand">
+        <div class="dt-rp-section">Handle</div>
+        <input class="dt-input" id="brandHandle" placeholder="@yourbrand" oninput="updateHandle()"/>
+        <div class="dt-rp-section">Background</div>
+        <label class="dt-upload-btn">
           <input type="file" accept="image/*" onchange="handleBgUpload(event)" style="display:none">
           ↑ Upload Photo
         </label>
-        <div class="sp-unsplash-row">
-          <input class="sp-input" id="unsplashQ" placeholder="farm, tractors…"/>
-          <button class="sp-go" onclick="searchUnsplash()">Go</button>
+        <div class="dt-unsplash-row">
+          <input class="dt-unsplash-q" id="unsplashQ" placeholder="Search Unsplash…"/>
+          <button class="dt-go-btn" onclick="searchUnsplash()">Go</button>
         </div>
-        <input class="sp-input" id="unsplashKey" placeholder="Unsplash access key" style="font-size:10px;margin-top:4px"/>
-        <div class="sp-thumbs" id="unsplashResults"></div>
+        <input class="dt-input" id="unsplashKey" placeholder="Unsplash key" style="font-size:10px"/>
+        <div class="dt-thumb-grid" id="unsplashResults"></div>
       </div>
-      <div>
-        <div class="sp-section-title">Caption</div>
-        <div class="sp-caption-box" id="captionBox">Caption appears here after generating…</div>
-        <button class="sp-copy" onclick="copyCaption()">Copy Caption</button>
+
+      <div class="dt-rpane" id="rtCaption">
+        <div class="dt-rp-section">Caption</div>
+        <div class="dt-caption-box" id="captionBox">Caption appears here after generating…</div>
+        <button class="dt-copy-btn" onclick="copyCaption()">Copy Caption</button>
       </div>
     </div>
 
   </div>
 </div>
+
+<!-- ══ MOBILE LAYOUT ══ -->
+<div class="layout-mobile">
+
+  <div class="mob-header">
+    <div class="mob-logo">orbitt</div>
+    <div class="mob-header-actions">
+      <button class="mob-hbtn" onclick="replayActive()">↺</button>
+      <button class="mob-hbtn" onclick="exportTemplate()">⬇ Export</button>
+    </div>
+  </div>
+
+  <!-- Template strip -->
+  <div class="mob-tpl-strip" id="mobTplStrip">
+    <div class="mob-tpl-chip active" onclick="switchTemplate(1,this)"><span class="mob-tpl-chip-icon">💬</span><span class="mob-tpl-chip-name">Text Chat</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(2,this)"><span class="mob-tpl-chip-icon">✦</span><span class="mob-tpl-chip-name">Bold Quote</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(3,this)"><span class="mob-tpl-chip-icon">⚖️</span><span class="mob-tpl-chip-name">Myth vs Fact</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(4,this)"><span class="mob-tpl-chip-icon">📊</span><span class="mob-tpl-chip-name">Stat Cards</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(5,this)"><span class="mob-tpl-chip-icon">🎥</span><span class="mob-tpl-chip-name">POV Story</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(6,this)"><span class="mob-tpl-chip-icon">⚡</span><span class="mob-tpl-chip-name">Before / After</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(7,this)"><span class="mob-tpl-chip-icon">🔥</span><span class="mob-tpl-chip-name">Hot Take</span></div>
+<div class="mob-tpl-chip" onclick="switchTemplate(8,this)"><span class="mob-tpl-chip-icon">✅</span><span class="mob-tpl-chip-name">Tips List</span></div>
+  </div>
+
+  <!-- Preview (shared frames live here on mobile too — JS handles which is active) -->
+  <div class="mob-preview" id="mobPreview">
+  </div>
+
+  <!-- Wizard input -->
+  <div class="mob-wizard">
+    <div class="mob-step">
+      <div class="mob-step-num">1</div>
+      <div class="mob-step-body">
+        <div class="mob-step-label">Your idea</div>
+        <textarea class="mob-idea-input" id="mobIdeaInput" placeholder="What do you want to post about?"></textarea>
+      </div>
+    </div>
+    <div class="mob-step">
+      <div class="mob-step-num">2</div>
+      <div class="mob-step-body">
+        <div class="mob-step-label">Tone</div>
+        <div class="mob-tone-row">
+          <div class="mob-tone active" data-tone="confident" onclick="setToneMob(this)">Confident</div>
+          <div class="mob-tone" data-tone="bold" onclick="setToneMob(this)">Bold</div>
+          <div class="mob-tone" data-tone="funny" onclick="setToneMob(this)">Funny</div>
+          <div class="mob-tone" data-tone="casual" onclick="setToneMob(this)">Casual</div>
+        </div>
+      </div>
+    </div>
+    <div class="mob-gen-row">
+      <button class="mob-gen-btn" onclick="generateAllMob()">✦ Generate All</button>
+      <button class="mob-export-btn" onclick="exportTemplate()">Export</button>
+    </div>
+  </div>
+
+</div>
+
 
 <script>
 // ── Audio ──
@@ -1704,6 +1710,83 @@ function showToast(msg) {
   document.body.appendChild(t);
   setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 320); }, 2800);
 }
+
+
+function switchRTab(el, paneId){
+  document.querySelectorAll('.dt-rtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.dt-rpane').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById(paneId).classList.add('on');
+}
+
+function setToneMob(el){
+  document.querySelectorAll('.mob-tone').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  S.tone = el.dataset.tone;
+  // sync to desktop
+  document.querySelectorAll('.dt-tone').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tone===S.tone);
+  });
+}
+
+function generateAllMob(){
+  const mob = document.getElementById('mobIdeaInput');
+  const desk = document.getElementById('ideaInput');
+  if(mob && mob.value.trim()) desk.value = mob.value;
+  generateAll();
+}
+
+// sync mobile preview — move active frame into mob-preview
+function syncMobPreview(){
+  const mp = document.getElementById('mobPreview');
+  if(!mp) return;
+  const active = document.querySelector('.template-frame.active');
+  if(active && mp && !mp.contains(active)){
+    mp.appendChild(active);
+  }
+}
+
+// patch switchTemplate to also sync mobile preview and both nav UIs
+const _origSwitch = switchTemplate;
+function switchTemplate(n, el){
+  // update both nav strips
+  document.querySelectorAll('.dt-tpl-card').forEach((c,i)=>c.classList.toggle('active',i===n-1));
+  document.querySelectorAll('.mob-tpl-chip').forEach((c,i)=>c.classList.toggle('active',i===n-1));
+  // call original but prevent double-active-toggle (we already did it)
+  document.querySelectorAll('.template-frame').forEach(f=>f.classList.remove('active'));
+  document.getElementById('frame'+n).classList.add('active');
+  const m=meta[n];
+  if(m){
+    document.getElementById('topbarTitle').textContent=m.label+' — '+m.desc.split('.')[0];
+    document.getElementById('spLabel').textContent=m.label;
+    document.getElementById('spDesc').textContent=m.desc;
+    document.getElementById('spDims').textContent=m.dims;
+    document.getElementById('spRatio').textContent=m.ratio;
+    document.getElementById('spPlatforms').innerHTML=m.platforms.map(p=>'<span class="dt-tag">'+p+'</span>').join('');
+    document.getElementById('spTheme').textContent=m.theme;
+  }
+  if(n===1)t1start();
+  else if(n===2)t2start();
+  else if(n===3)t3start();
+  else if(n===4)t4start();
+  else if(n===5)t5start();
+  else if(n===6)t6start();
+  else if(n===7)t7start();
+  else if(n===8)t8start();
+  syncMobPreview();
+}
+
+// On load, move active frame to mob-preview if on mobile
+document.addEventListener('DOMContentLoaded', ()=>{
+  syncMobPreview();
+  // sync mob idea input with desktop
+  const mob = document.getElementById('mobIdeaInput');
+  const desk = document.getElementById('ideaInput');
+  if(mob && desk){
+    mob.addEventListener('input', ()=>{ desk.value = mob.value; });
+    desk.addEventListener('input', ()=>{ mob.value = desk.value; });
+  }
+});
 
 </script>
 </body>
