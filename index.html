@@ -697,7 +697,7 @@ input[type=color]{width:34px;height:26px;border:1px solid var(--border);border-r
 
   <div class="sidebar-section-label" style="margin-top:auto;padding-top:12px">Generate</div>
   <div class="gen-area">
-    <textarea class="idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. 'Fast equipment finance for farmers'"></textarea>
+    <textarea class="idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. 'My brother-in-law loves Carl Sagan'"></textarea>
     <div class="tone-row">
       <button class="tone-btn active" data-tone="confident" onclick="setTone(this)">Confident</button>
       <button class="tone-btn" data-tone="educational" onclick="setTone(this)">Educational</button>
@@ -746,7 +746,7 @@ input[type=color]{width:34px;height:26px;border:1px solid var(--border);border-r
             <div class="tc-bg"></div>
             <div class="tc-inner">
               <div class="tc-bubble tc-q" id="tc-q">What's the fastest way to finance a tractor?</div>
-              <div class="tc-bubble tc-a" id="tc-a">With Forefront Finance — approvals in 24 hours, no bank drama. Just gear in the paddock.</div>
+              <div class="tc-bubble tc-a" id="tc-a">Type your idea below and hit Generate to create your post.</div>
             </div>
             <div class="tc-brand" id="tc-brand">@forefrontfinance</div>
           </div>
@@ -962,7 +962,7 @@ const S = {
     'Finance that moves as fast as your season.',
     'No banks. No delays. Just gear in the paddock.',
     'Your next header shouldn\'t wait on paperwork.',
-    'Fast approvals. Fair rates. Forefront Finance.',
+    'Hit Generate to create your custom quote variations.',
     'When the season calls, we answer in 24 hours.'
   ],
   quoteIndex: 0,
@@ -1410,9 +1410,7 @@ async function generateCaption() {
   if (!S.idea) { showToast('Generate content first'); return; }
   showLoading('Writing caption…');
   try {
-    const raw = await askClaude(`Write an Instagram/LinkedIn caption for a ${TPL_INFO[S.tpl].name} post about: ${S.idea}.
-Brand: Forefront Finance — fast equipment finance for farmers.
-Tone: ${S.tone}. 2–3 sentences + 4 relevant hashtags. Return caption text only.`);
+    const raw = await askClaude(`Write an Instagram/LinkedIn caption for a ${TPL_INFO[S.tpl].name} post about: ${S.idea}. Tone: ${S.tone}. 2–3 sentences + 4 relevant hashtags. Return caption text only.`);
     S.caption = raw.trim();
     document.getElementById('captionBox').value = S.caption;
     scoreCaptionHook(S.caption);
