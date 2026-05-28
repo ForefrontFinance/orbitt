@@ -976,7 +976,7 @@ function hideOrbittLoading(){
           <div class="t2-bg"></div>
           <div class="t2-gradient"></div>
           <div class="t2-quotes-icon">"</div>
-          <div class="t2-logo">@yourdoulahandle</div>
+          <div class="t2-logo">@yourhandle</div>
           <div class="t2-content" id="t2content">
             <div class="t2-eyebrow">Birth Truth</div>
             <div class="t2-quote" id="t2quote"></div>
@@ -1025,7 +1025,7 @@ function hideOrbittLoading(){
             <div class="t5-top">
               <div class="t5-av"><img src="" alt=""></div>
               <div>
-                <div class="t5-handle">@yourdoulahandle</div>
+                <div class="t5-handle">@yourhandle</div>
               </div>
               <button class="t5-follow">Follow</button>
             </div>
@@ -1164,16 +1164,16 @@ function playTone(type){
 // TEMPLATE 1 — TEXT CHAT
 // ──────────────────────────────────
 let t1conv=[
-  {dir:'in', text:"You're nearly there!! Are you getting a doula? 🥺",delay:600},
-  {dir:'out',text:"Already have one. Best decision I've made this whole pregnancy.",delay:2400},
-  {dir:'in', text:"What does she actually DO though?",delay:4600},
-  {dir:'out',text:"She knows my birth preferences. She knows when to advocate for me. She stays when the midwives change shifts.",delay:7000},
-  {dir:'in', text:"The midwives change shifts during labour??",delay:10500},
-  {dir:'out',text:"Yep. Your doula is the only constant in the room.",delay:12800},
-  {dir:'in', text:"I never thought about that 😳",delay:15200},
-  {dir:'out',text:"Research shows having a doula reduces c-section rates by 39%. Not a small thing.",delay:17500},
-  {dir:'in', text:"Okay I'm googling doulas RIGHT NOW",delay:21500},
-  {dir:'out',text:"You deserve continuous support. Every woman does. 🖤",delay:24000},
+  {dir:'in', text:"Wait — is this actually worth it? 👀",delay:600},
+  {dir:'out',text:"100%. Completely changed how I operate.",delay:2400},
+  {dir:'in', text:"But where do you even start?",delay:4600},
+  {dir:'out',text:"You pick one thing. You commit. You start before you feel ready.",delay:7000},
+  {dir:'in', text:"That sounds too simple 😅",delay:10500},
+  {dir:'out',text:"Most things that work are.",delay:12800},
+  {dir:'in', text:"I never thought of it that way 👁️",delay:15200},
+  {dir:'out',text:"The gap between knowing and doing is just a decision.",delay:17500},
+  {dir:'in', text:"Okay I'm starting RIGHT NOW",delay:21500},
+  {dir:'out',text:"That's the whole game. 🖤",delay:24000},
 ];
 let t1timers=[];
 function t1restart(){
@@ -1284,7 +1284,7 @@ t3start();
 let t4stats=[
   {num:'41%',label:'of Australian births end in caesarean section',highlight:false},
   {num:'35%',label:'of women are induced before labour begins naturally',highlight:false},
-  {num:'39%',label:'reduction in c-sections with continuous doula support',highlight:false},
+  {num:'73%',label:'of people wish they had started sooner',highlight:false},
   {num:'1 in 3',label:'women say they felt they had no real choice in their birth',highlight:false},
 ];
 let t4timers=[];
@@ -1316,8 +1316,8 @@ t4start();
 let t5slides=[
   {pov:`POV: You're 40 weeks and your OB just told you to book an induction.`,tags:['#birthautonomy','#40weekspregnant']},
   {pov:`You go home and start Googling.<br>You find out 40 weeks is not an <em>expiry date.</em>`,tags:['#informedconsent','#birthtruth']},
-  {pov:`You ask your doctor about the risks <em>of</em> induction.<br>They've never been asked before.`,tags:['#birthadvocacy','#doulasupport']},
-  {pov:`You hire a doula.<br>You write your birth preferences.<br><em>You walk in informed.</em>`,tags:['#doulalife','#birthempowerment']},
+  {pov:`You finally decide to just go for it.<br><em>Everything shifts from that moment.</em>`,tags:['#momentum','#juststart']},
+  {pov:`You do the work.<br>You back yourself.<br><em>You walk in ready.</em>`,tags:['#growth','#mindset']},
   {pov:`Your baby arrives in their own time.<br>Your body didn't fail.<br><em>It was trusted.</em>`,tags:['#trustyourbody','#birthstory']},
 ];
 let t5current=0,t5interval=null,t5fillTimers=[];
@@ -1399,7 +1399,7 @@ const meta={
   4:{label:'Stat Cards',desc:'Data-driven content builds authority and credibility fast.',dims:'1080 × 1350',ratio:'4:5 portrait',platforms:['Instagram Feed','LinkedIn','Facebook'],theme:'Numbers that make your audience stop and screenshot.'},
   5:{label:'POV Story',desc:'Sequential storytelling — the most shared format on TikTok & Reels.',dims:'1080 × 1920',ratio:'9:16 vertical',platforms:['TikTok','Instagram Reels','YouTube Shorts'],theme:'Walk your audience through a moment or transformation.'},
   6:{label:'Before / After',desc:'Transformation reveal. High engagement from contrast and relatability.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Facebook','LinkedIn'],theme:'Show the gap between the old way and the new way.'},
-  7:{label:'Hot Take',desc:'Bold opinion card. Drives comments and shares through controversy.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Twitter/X','LinkedIn'],theme:'Say the thing everyone's thinking but nobody's posting.'},
+  7:{label:'Hot Take',desc:'Bold opinion card. Drives comments and shares through controversy.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Twitter/X','LinkedIn'],theme:'Say the thing everyone is thinking but no one is posting.'},
   8:{label:'Tips List',desc:'Numbered tips — highest saved format on Instagram. Great for authority building.',dims:'1080 × 1080',ratio:'1:1 square',platforms:['Instagram Feed','Pinterest','LinkedIn'],theme:'Give genuine value in a scannable format.'},
 };
 
@@ -1597,7 +1597,7 @@ async function exportTemplate() {
   btn.innerHTML = '<span class="spin">⏳</span> Rendering…';
 
   const names = {frame1:'text-chat',frame2:'bold-quote',frame3:'myth-vs-fact',frame4:'stat-cards',frame5:'pov-story',frame6:'before-after',frame7:'hot-take',frame8:'tips-list'};
-  const filename = 'doula-' + (names[active.id]||'template') + '.png';
+  const filename = 'orbitt-' + (names[active.id]||'template') + '.png';
 
   try {
     const SCALE  = 3;
