@@ -1263,50 +1263,49 @@ function buildPrompt(tpl, idea, tone) {
     bold: 'bold, punchy, and attention-grabbing',
   }[tone] || 'confident';
 
-  const brand = 'Forefront Finance — equipment finance for farmers and contractors (tractors, headers, combine harvesters, seeding rigs). Fast approvals, no bank bureaucracy.';
-
   const prompts = {
-    chat: `Create a social media "Conversation Starter" post for ${brand}.
+    chat: `Create a social media "Conversation Starter" post.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
-{"question":"<hook question, max 12 words>","answer":"<punchy answer, max 20 words>","caption":"<Instagram caption 2–3 sentences + 3 hashtags>"}`,
+{"question":"<hook question, max 12 words>","answer":"<punchy answer, max 20 words>","caption":"<Instagram caption 2-3 sentences + 3 hashtags>"}`,
 
-    quote: `Create 5 bold quote variations for ${brand}.
+    quote: `Create 5 bold quote variations for a social post.
 Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
+Return JSON only — no other text:
 {"quotes":["<quote1 max 12 words>","<quote2>","<quote3>","<quote4>","<quote5>"],"caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    myth: `Create a "Myth vs Fact" post for ${brand}.
+    myth: `Create a "Myth vs Fact" social media post.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
-{"myth":"<common misconception, max 12 words>","fact":"<true counter, max 15 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
+{"myth":"<common misconception about the topic, max 12 words>","fact":"<true counter, max 15 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    stats: `Create a "Stats & Facts" post for ${brand}.
+    stats: `Create a "Stats & Facts" social media post with made-up but plausible-sounding stats.
 Topic: ${idea}. Tone: ${toneDesc}.
+Be creative and funny if the topic calls for it.
 Return JSON only:
-{"headline":"<big stat or number, max 6 words>","sub":"<context for stat, max 12 words>","context":"<so-what insight, max 15 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
+{"headline":"<big bold stat or number, max 8 words>","sub":"<context, max 14 words>","context":"<punchline or insight, max 18 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    pov: `Create a "POV Post" for ${brand}.
+    pov: `Create a "POV Post" for social media.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
 {"pov":"<POV scenario, max 20 words — second person, present tense>","caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    ba: `Create a "Before & After" post for ${brand}.
+    ba: `Create a "Before & After" social media post.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
 {"before":"<before state, max 15 words>","after":"<after state, max 15 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    testi: `Create a fake-style testimonial for ${brand} (clearly fictional, for design mockup).
+    testi: `Create a funny fake testimonial for a social media post.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
-{"quote":"<testimonial quote in first person, max 20 words>","author":"<FirstName L., occupation, state>","caption":"<caption 2-3 sentences + hashtags>"}`,
+{"quote":"<testimonial quote in first person, max 20 words>","author":"<FirstName L., role/description>","caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    list: `Create a "List Post" for ${brand}.
+    list: `Create a "List Post" for social media.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
-{"headline":"<list headline, max 8 words>","items":["<item1 max 10 words>","<item2>","<item3>"],"caption":"<caption 2-3 sentences + hashtags>"}`,
+{"headline":"<list headline, max 8 words>","items":["<item1 max 12 words>","<item2>","<item3>"],"caption":"<caption 2-3 sentences + hashtags>"}`,
 
-    hottake: `Create a "Hot Take" social post for ${brand}.
+    hottake: `Create a "Hot Take" social media post.
 Topic: ${idea}. Tone: ${toneDesc}.
 Return JSON only:
 {"take":"<controversial but true statement, max 12 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
