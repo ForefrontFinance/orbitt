@@ -1060,7 +1060,7 @@ function playTone(type){
 // ──────────────────────────────────
 // TEMPLATE 1 — TEXT CHAT
 // ──────────────────────────────────
-const t1conv=[
+let t1conv=[
   {dir:'in', text:"You're nearly there!! Are you getting a doula? 🥺",delay:600},
   {dir:'out',text:"Already have one. Best decision I've made this whole pregnancy.",delay:2400},
   {dir:'in', text:"What does she actually DO though?",delay:4600},
@@ -1073,9 +1073,14 @@ const t1conv=[
   {dir:'out',text:"You deserve continuous support. Every woman does. 🖤",delay:24000},
 ];
 let t1timers=[];
-function t1restart(){t1start();}
+function t1restart(){
+  if(window._t1conv && window._t1conv.length){
+    t1conv = window._t1conv;
+  }
+  t1start();
+}
 function t1start(){
-  const conv=window._t1conv||t1conv;
+  const conv=t1conv;
   t1timers.forEach(clearTimeout);t1timers=[];
   const el=document.getElementById('t1msgs');el.innerHTML='';
   const ts=document.createElement('div');ts.className='t1-ts';ts.textContent='Today';el.appendChild(ts);
@@ -1109,7 +1114,7 @@ t1start();
 // ──────────────────────────────────
 // TEMPLATE 2 — BOLD QUOTE
 // ──────────────────────────────────
-const t2quotes=[
+let t2quotes=[
   {quote:`Her body didn't fail.<br><em>It was never given the chance.</em>`,attr:`On induction & trust`},
   {quote:`Birth is not a medical emergency.<br><em>It is a sacred threshold.</em>`,attr:`On pathologising birth`},
   {quote:`The most powerful thing you can do<br>is <em>ask a second question.</em>`,attr:`On informed consent`},
@@ -1120,7 +1125,7 @@ function t2show(i){
   document.getElementById('t2quote').innerHTML=q.quote;
   document.getElementById('t2attr').textContent=q.attr;
 }
-function t2restart(){if(window._t2quotes)t2quotes=window._t2quotes;t2idx=0;t2show(0);}
+function t2restart(){if(window._t2quotes&&window._t2quotes.length)t2quotes=window._t2quotes;t2idx=0;if(t2timer)clearInterval(t2timer);t2show(0);t2start();}
 function t2start(){
   if(t2timer)clearInterval(t2timer);
   t2idx=0;t2show(0);
@@ -1131,7 +1136,7 @@ t2show(0);
 // ──────────────────────────────────
 // TEMPLATE 3 — MYTH vs FACT
 // ──────────────────────────────────
-const t3data=[
+let t3data=[
   {
     title:`40 weeks = time's up?`,
     pairs:[
@@ -1145,11 +1150,13 @@ const t3data=[
 let t3timers=[];
 function t3restart(){
   if(window._mythData){
-    const d=window._mythData;
-    const myths=document.querySelectorAll('.t3-myth span');
-    const facts=document.querySelectorAll('.t3-fact span');
-    if(myths[0])myths[0].textContent=d.myth||myths[0].textContent;
-    if(facts[0])facts[0].textContent=d.fact||facts[0].textContent;
+    const d = window._mythData;
+    const pairs = [{type:'myth',text:d.myth||''},{type:'fact',text:d.fact||''}];
+    if(d.extra){
+      const p=d.extra.split('|');
+      if(p.length>=2){pairs.push({type:'myth',text:p[0].replace(/MYTH:\s*/i,'').trim()});pairs.push({type:'fact',text:p[1].replace(/FACT:\s*/i,'').trim()});}
+    }
+    t3data = [{title:'Myth vs Fact', pairs}];
   }
   t3start();
 }
@@ -1171,7 +1178,7 @@ t3start();
 // ──────────────────────────────────
 // TEMPLATE 4 — STAT CARDS
 // ──────────────────────────────────
-const t4stats=[
+let t4stats=[
   {num:'41%',label:'of Australian births end in caesarean section',highlight:false},
   {num:'35%',label:'of women are induced before labour begins naturally',highlight:false},
   {num:'39%',label:'reduction in c-sections with continuous doula support',highlight:false},
@@ -1181,14 +1188,9 @@ let t4timers=[];
 function t4restart(){
   if(window._statsData){
     const d=window._statsData;
-    ['stat1','stat2','stat3','stat4'].forEach((k,i)=>{
-      const numEl=document.getElementById('t4num'+(i+1));
-      const lblEl=document.getElementById('t4lbl'+(i+1));
-      if(d[k]){
-        if(numEl)numEl.textContent=d[k].num||numEl.textContent;
-        if(lblEl)lblEl.textContent=d[k].label||lblEl.textContent;
-      }
-    });
+    const ns=[];
+    ['stat1','stat2','stat3','stat4'].forEach(k=>{ if(d[k]) ns.push({num:d[k].num||'—',label:d[k].label||'',highlight:false}); });
+    if(ns.length) t4stats=ns;
   }
   t4start();
 }
@@ -1208,7 +1210,7 @@ t4start();
 // ──────────────────────────────────
 // TEMPLATE 5 — POV STORY
 // ──────────────────────────────────
-const t5slides=[
+let t5slides=[
   {pov:`POV: You're 40 weeks and your OB just told you to book an induction.`,tags:['#birthautonomy','#40weekspregnant']},
   {pov:`You go home and start Googling.<br>You find out 40 weeks is not an <em>expiry date.</em>`,tags:['#informedconsent','#birthtruth']},
   {pov:`You ask your doctor about the risks <em>of</em> induction.<br>They've never been asked before.`,tags:['#birthadvocacy','#doulasupport']},
@@ -1217,10 +1219,12 @@ const t5slides=[
 ];
 let t5current=0,t5interval=null,t5fillTimers=[];
 function t5restart(){
-  if(window._povLines){
-    const lines=window._povLines;
-    const els=document.querySelectorAll('.t5-line');
-    els.forEach((el,i)=>{if(lines[i])el.textContent=lines[i];});
+  if(window._povLines && window._povLines.length){
+    const lines = window._povLines;
+    t5slides = lines.map((line,i) => ({
+      pov: line,
+      tags: []
+    }));
   }
   t5start();
 }
