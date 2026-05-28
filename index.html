@@ -1253,8 +1253,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
         <input class="dt-unsplash-q" id="unsplashQ" placeholder="Search Unsplash…"/>
         <button class="dt-go-btn" onclick="searchUnsplash()">Go</button>
       </div>
-      <input class="dt-input" id="unsplashKey" placeholder="Unsplash key" style="font-size:10px"/>
+      <div style="display:flex;gap:5px;margin-bottom:4px;">
+        <input class="dt-unsplash-q" id="unsplashKey" placeholder="Unsplash Access Key…" style="font-size:10px;flex:1;"/>
+        <button class="dt-go-btn" id="unsplashKeySaveBtn" onclick="saveUnsplashKey()">Save</button>
+      </div>
+      <div id="unsplashKeyStatus" style="font-size:10px;margin-bottom:6px;display:none;"></div>
       <div class="dt-thumb-grid" id="unsplashResults"></div>
+      <div id="unsplashAttrib" style="display:none;font-size:9px;color:var(--muted);text-align:right;margin-top:3px;line-height:1.4;"></div>
     </div>
     <div class="dt-rpane" id="rtInfo">
       <div class="dt-rp-section">Format</div>
@@ -1927,45 +1932,107 @@ function handleBgUpload(ev) {
   reader.readAsDataURL(file);
 }
 
+// ── Unsplash helpers ─────────────────────────────────────────────────────────
+function unsplashKey() {
+  return localStorage.getItem('unsplash_key') ||
+         ((document.getElementById('unsplashKey')||{}).value || '');
+}
+
+function saveUnsplashKey() {
+  var el = document.getElementById('unsplashKey');
+  var k = el ? el.value.trim() : '';
+  if (!k) { showToast('Paste your Unsplash Access Key first'); return; }
+  localStorage.setItem('unsplash_key', k);
+  unsplashShowKeyStatus(true);
+  showToast('Unsplash key saved ✓');
+}
+
+function unsplashShowKeyStatus(connected) {
+  var st = document.getElementById('unsplashKeyStatus');
+  var btn = document.getElementById('unsplashKeySaveBtn');
+  if (!st) return;
+  if (connected) {
+    st.style.display = 'block';
+    st.style.color = 'var(--green)';
+    st.textContent = '✓ Connected';
+    if (btn) { btn.textContent = '✓'; btn.style.background = 'rgba(52,232,160,0.15)'; btn.style.borderColor = 'rgba(52,232,160,0.3)'; btn.style.color = 'var(--green)'; }
+  } else {
+    st.style.display = 'none';
+    if (btn) { btn.textContent = 'Save'; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; }
+  }
+}
+
+function unsplashTrackDownload(id) {
+  var k = unsplashKey(); if (!k) return;
+  fetch('https://api.unsplash.com/photos/' + id + '/download',
+    { headers: { Authorization: 'Client-ID ' + k } }
+  ).catch(function(){});
+}
+
+function unsplashApplyPhoto(photo) {
+  applyBg(photo.urls.regular);
+  unsplashTrackDownload(photo.id);
+  // Show attribution (required by Unsplash guidelines)
+  var attrib = document.getElementById('unsplashAttrib');
+  if (attrib) {
+    attrib.style.display = 'block';
+    attrib.innerHTML = 'Photo by <a href="' + photo.user.links.html +
+      '?utm_source=orbitt&utm_medium=referral" target="_blank" ' +
+      'style="color:var(--accent2);text-decoration:none;">' + photo.user.name +
+      '</a> on <a href="https://unsplash.com?utm_source=orbitt&utm_medium=referral" ' +
+      'target="_blank" style="color:var(--accent2);text-decoration:none;">Unsplash</a>';
+  }
+  // mark selected
+  document.querySelectorAll('#unsplashResults .dt-thumb').forEach(function(t){
+    t.classList.toggle('selected', t.dataset.unsplashId === photo.id);
+  });
+  showToast('Photo by ' + photo.user.name + ' applied ✓');
+}
+
 async function searchUnsplash() {
-  const q   = (document.getElementById('unsplashQ')  ||{}).value || '';
-  const key = (document.getElementById('unsplashKey')||{}).value ||
-              localStorage.getItem('unsplash_key') || '';
-  if (!key) { showToast('Add your Unsplash API key first'); return; }
-  if (!q) return;
-  localStorage.setItem('unsplash_key', key);
+  var q   = (document.getElementById('unsplashQ')  ||{}).value.trim() || '';
+  var key = unsplashKey();
+  if (!key) { showToast('Save your Unsplash Access Key first'); return; }
+  if (!q)   { showToast('Enter a search term'); return; }
+  var btn = document.querySelector('.dt-go-btn[onclick="searchUnsplash()"]');
+  if (btn) btn.textContent = '…';
   try {
-    const res  = await fetch(
-      'https://api.unsplash.com/search/photos?query=' + encodeURIComponent(q) + '&per_page=6&orientation=portrait',
+    var res  = await fetch(
+      'https://api.unsplash.com/search/photos?query=' + encodeURIComponent(q) +
+      '&per_page=9&orientation=portrait',
       { headers: { Authorization: 'Client-ID ' + key } }
     );
-    const data = await res.json();
-    const grid = document.getElementById('unsplashResults');
+    var data = await res.json();
+    if (data.errors) { showToast('Unsplash: ' + data.errors[0]); return; }
+    var grid = document.getElementById('unsplashResults');
     if (!grid) return;
     grid.innerHTML = '';
-    (data.results || []).forEach(photo => {
-      const img = document.createElement('img');
-      img.src = photo.urls.small;
+    (data.results || []).forEach(function(photo) {
+      var img = document.createElement('img');
+      img.src = photo.urls.thumb;
       img.className = 'dt-thumb';
-      img.onclick = () => applyBg(photo.urls.regular);
+      img.dataset.unsplashId = photo.id;
+      img.title = 'Photo by ' + photo.user.name;
+      img.onclick = function() { unsplashApplyPhoto(photo); };
       grid.appendChild(img);
     });
+    if (!(data.results||[]).length) showToast('No results for "' + q + '"');
   } catch(e) { showToast('Unsplash error: ' + e.message); }
+  finally { if (btn) btn.textContent = 'Go'; }
 }
 
 async function autoFetchUnsplash(topic) {
-  const key = localStorage.getItem('unsplash_key') ||
-              ((document.getElementById('unsplashKey')||{}).value || '');
-  if (!key) return;
-  const words = topic.replace(/[^a-z0-9 ]/gi,'').split(/\s+/).slice(0,3).join(' ');
+  var key = unsplashKey(); if (!key) return;
+  var words = topic.replace(/[^a-z0-9 ]/gi,'').split(/\s+/).slice(0,3).join(' ');
   try {
-    const res  = await fetch(
-      'https://api.unsplash.com/search/photos?query=' + encodeURIComponent(words) + '&per_page=1&orientation=portrait',
+    var res  = await fetch(
+      'https://api.unsplash.com/search/photos?query=' + encodeURIComponent(words) +
+      '&per_page=1&orientation=portrait',
       { headers: { Authorization: 'Client-ID ' + key } }
     );
-    const data = await res.json();
-    const photo = (data.results||[])[0];
-    if (photo) applyBg(photo.urls.regular);
+    var data = await res.json();
+    var photo = (data.results||[])[0];
+    if (photo) unsplashApplyPhoto(photo);
   } catch(e) { /* silent */ }
 }
 
@@ -2476,6 +2543,14 @@ function updateCaptionCounter(text) {
 }
 
 // Wire caption box observer on DOM ready
+(function restoreUnsplashKey() {
+  var k = localStorage.getItem('unsplash_key');
+  if (!k) return;
+  var el = document.getElementById('unsplashKey');
+  if (el) el.value = k;
+  unsplashShowKeyStatus(true);
+})();
+
 (function wireCaptionCounter() {
   var box = document.getElementById('captionBox');
   if (!box) return;
