@@ -1412,12 +1412,14 @@ function switchTemplate(n,el){
   document.getElementById('frame'+n).classList.add('active');
   document.getElementById('topbarTitle').textContent=titles[n];
   const m=meta[n];
-  if(m){document.getElementById('spLabel').textContent=m.label;
-  document.getElementById('spDesc').textContent=m.desc;
-  document.getElementById('spDims').textContent=m.dims;
-  document.getElementById('spRatio').textContent=m.ratio;}
-  document.getElementById('spPlatforms').innerHTML=m.platforms.map(p=>`<span class="sp-tag">${p}</span>`).join('');
-  document.getElementById('spTheme').textContent=m.theme;
+  if(m){
+    document.getElementById('spLabel').textContent=m.label;
+    document.getElementById('spDesc').textContent=m.desc;
+    document.getElementById('spDims').textContent=m.dims;
+    document.getElementById('spRatio').textContent=m.ratio;
+    document.getElementById('spPlatforms').innerHTML=m.platforms.map(p=>`<span class="sp-tag">${p}</span>`).join('');
+    document.getElementById('spTheme').textContent=m.theme;
+  }
 }
 
 function replayActive(){
