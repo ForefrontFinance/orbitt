@@ -1255,7 +1255,7 @@ function updateAccent() {
 }
 
 // ─── AI GENERATION ────────────────────────────────────────────────────────────
-function buildPrompt(tpl, idea, tone) {
+function buildMegaPrompt(idea, tone) {
   const toneDesc = {
     confident: 'confident, authoritative, and direct',
     educational: 'educational, informative, and helpful',
@@ -1263,54 +1263,21 @@ function buildPrompt(tpl, idea, tone) {
     bold: 'bold, punchy, and attention-grabbing',
   }[tone] || 'confident';
 
-  const prompts = {
-    chat: `Create a social media "Conversation Starter" post.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"question":"<hook question, max 12 words>","answer":"<punchy answer, max 20 words>","caption":"<Instagram caption 2-3 sentences + 3 hashtags>"}`,
+  return `You are a social media content writer. Create content for ALL 9 post formats below about this topic: "${idea}". Tone: ${toneDesc}. Be creative, specific, and punchy. If the topic is funny or absurd, lean into it.
 
-    quote: `Create 5 bold quote variations for a social post.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only — no other text:
-{"quotes":["<quote1 max 12 words>","<quote2>","<quote3>","<quote4>","<quote5>"],"caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    myth: `Create a "Myth vs Fact" social media post.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"myth":"<common misconception about the topic, max 12 words>","fact":"<true counter, max 15 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    stats: `Create a "Stats & Facts" social media post with made-up but plausible-sounding stats.
-Topic: ${idea}. Tone: ${toneDesc}.
-Be creative and funny if the topic calls for it.
-Return JSON only:
-{"headline":"<big bold stat or number, max 8 words>","sub":"<context, max 14 words>","context":"<punchline or insight, max 18 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    pov: `Create a "POV Post" for social media.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"pov":"<POV scenario, max 20 words — second person, present tense>","caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    ba: `Create a "Before & After" social media post.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"before":"<before state, max 15 words>","after":"<after state, max 15 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    testi: `Create a funny fake testimonial for a social media post.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"quote":"<testimonial quote in first person, max 20 words>","author":"<FirstName L., role/description>","caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    list: `Create a "List Post" for social media.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"headline":"<list headline, max 8 words>","items":["<item1 max 12 words>","<item2>","<item3>"],"caption":"<caption 2-3 sentences + hashtags>"}`,
-
-    hottake: `Create a "Hot Take" social media post.
-Topic: ${idea}. Tone: ${toneDesc}.
-Return JSON only:
-{"take":"<controversial but true statement, max 12 words>","caption":"<caption 2-3 sentences + hashtags>"}`,
-  };
-  return prompts[tpl] || prompts.chat;
+Return ONLY valid JSON in exactly this structure — no commentary, no markdown:
+{
+  "chat": {"question":"<hook question max 12 words>","answer":"<punchy reply max 20 words>"},
+  "quote": {"quotes":["<quote1 max 10 words>","<quote2>","<quote3>","<quote4>","<quote5>"]},
+  "myth": {"myth":"<misconception max 12 words>","fact":"<truth max 15 words>"},
+  "stats": {"headline":"<big stat/number max 8 words>","sub":"<what it means max 12 words>","context":"<punchline max 15 words>"},
+  "pov": {"pov":"<POV scenario max 20 words, second person present tense>"},
+  "ba": {"before":"<before state max 12 words>","after":"<after state max 12 words>"},
+  "testi": {"quote":"<fake testimonial first person max 20 words>","author":"<FirstName L., description>"},
+  "list": {"headline":"<headline max 8 words>","items":["<item1 max 10 words>","<item2>","<item3>"]},
+  "hottake": {"take":"<hot take max 12 words>"},
+  "caption":"<universal caption 2-3 sentences + 4 hashtags>"
+}`;
 }
 
 async function askClaude(prompt) {
@@ -1333,55 +1300,63 @@ function parseJSON(raw) {
 function renderResult(tpl, data) {
   try {
     if (tpl === 'chat') {
-      document.getElementById('tc-q').textContent = data.question || '';
-      document.getElementById('tc-a').textContent = data.answer || '';
+      if (data.question) document.getElementById('tc-q').textContent = data.question;
+      if (data.answer)   document.getElementById('tc-a').textContent = data.answer;
     } else if (tpl === 'quote') {
-      S.quoteVariations = data.quotes || S.quoteVariations;
-      S.quoteIndex = 0;
-      document.getElementById('tq-text').textContent = S.quoteVariations[0];
-      renderCarouselDots();
+      if (data.quotes) {
+        S.quoteVariations = data.quotes;
+        S.quoteIndex = 0;
+        document.getElementById('tq-text').textContent = S.quoteVariations[0];
+        document.getElementById('tq-attr').textContent = '— ' + S.handle;
+        renderCarouselDots();
+      }
     } else if (tpl === 'myth') {
-      document.getElementById('tm-myth-text').textContent = data.myth || '';
-      document.getElementById('tm-fact-text').textContent = data.fact || '';
+      if (data.myth) document.getElementById('tm-myth-text').textContent = data.myth;
+      if (data.fact) document.getElementById('tm-fact-text').textContent = data.fact;
     } else if (tpl === 'stats') {
-      document.getElementById('ts-headline').textContent = data.headline || '';
-      document.getElementById('ts-sub').textContent = data.sub || '';
-      document.getElementById('ts-context').textContent = data.context || '';
+      if (data.headline) document.getElementById('ts-headline').textContent = data.headline;
+      if (data.sub)      document.getElementById('ts-sub').textContent = data.sub;
+      if (data.context)  document.getElementById('ts-context').textContent = data.context;
     } else if (tpl === 'pov') {
-      document.getElementById('tp-text').textContent = data.pov || '';
+      if (data.pov) document.getElementById('tp-text').textContent = data.pov;
     } else if (tpl === 'ba') {
-      document.getElementById('tba-before').textContent = data.before || '';
-      document.getElementById('tba-after').textContent = data.after || '';
+      if (data.before) document.getElementById('tba-before').textContent = data.before;
+      if (data.after)  document.getElementById('tba-after').textContent = data.after;
     } else if (tpl === 'testi') {
-      document.getElementById('tt-quote').textContent = '"' + (data.quote||'') + '"';
-      document.getElementById('tt-author').textContent = '— ' + (data.author||'');
+      if (data.quote)  document.getElementById('tt-quote').textContent = '\u201c' + data.quote + '\u201d';
+      if (data.author) document.getElementById('tt-author').textContent = '\u2014 ' + data.author;
     } else if (tpl === 'list') {
-      document.getElementById('tl-headline').textContent = data.headline || '';
-      const ul = document.getElementById('tl-list');
-      ul.innerHTML = (data.items||[]).map(i => `<li>${i}</li>`).join('');
+      if (data.headline) document.getElementById('tl-headline').textContent = data.headline;
+      if (data.items) {
+        document.getElementById('tl-list').innerHTML = data.items.map(i => `<li>${i}</li>`).join('');
+      }
     } else if (tpl === 'hottake') {
-      document.getElementById('th-text').textContent = data.take || '';
+      if (data.take) document.getElementById('th-text').textContent = data.take;
     }
-    if (data.caption) {
-      S.caption = data.caption;
-      document.getElementById('captionBox').value = data.caption;
-      scoreCaptionHook(data.caption);
-    }
-  } catch(e) { console.warn('renderResult error', e); }
+  } catch(e) { console.warn('renderResult error', tpl, e); }
 }
 
 async function generateContent() {
   const idea = document.getElementById('ideaInput').value.trim();
   if (!idea) { showToast('Add an idea first'); return; }
   S.idea = idea;
-  showLoading('Generating ' + TPL_INFO[S.tpl].name + '…');
+  showLoading('Generating all templates…');
   try {
-    const prompt = buildPrompt(S.tpl, idea, S.tone);
+    const prompt = buildMegaPrompt(idea, S.tone);
     const raw = await askClaude(prompt);
     const data = parseJSON(raw);
-    renderResult(S.tpl, data);
+    S.lastData = data;
+    // Populate ALL templates at once
+    ['chat','quote','myth','stats','pov','ba','testi','list','hottake'].forEach(tpl => {
+      if (data[tpl]) renderResult(tpl, data[tpl]);
+    });
+    if (data.caption) {
+      S.caption = data.caption;
+      document.getElementById('captionBox').value = data.caption;
+      scoreCaptionHook(data.caption);
+    }
     switchTab('caption');
-    showToast('Generated! ✦');
+    showToast('All templates generated ✦');
   } catch(e) {
     showToast('Error: ' + e.message, true);
   } finally {
@@ -1393,11 +1368,18 @@ async function iterateContent(instruction) {
   if (!S.idea) { showToast('Generate first'); return; }
   showLoading('Iterating…');
   try {
-    const base = buildPrompt(S.tpl, S.idea, S.tone);
-    const prompt = base + '\n\nIMPORTANT: Make the content ' + instruction + '. Same JSON format.';
+    const prompt = buildMegaPrompt(S.idea, S.tone) + '\n\nIMPORTANT: Make everything ' + instruction + '. Same JSON structure.';
     const raw = await askClaude(prompt);
     const data = parseJSON(raw);
-    renderResult(S.tpl, data);
+    S.lastData = data;
+    ['chat','quote','myth','stats','pov','ba','testi','list','hottake'].forEach(tpl => {
+      if (data[tpl]) renderResult(tpl, data[tpl]);
+    });
+    if (data.caption) {
+      S.caption = data.caption;
+      document.getElementById('captionBox').value = data.caption;
+      scoreCaptionHook(data.caption);
+    }
     showToast('Done — ' + instruction);
   } catch(e) {
     showToast('Error: ' + e.message, true);
