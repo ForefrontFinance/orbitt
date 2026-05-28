@@ -441,6 +441,186 @@ input[type=color]{width:34px;height:26px;border:1px solid var(--border);border-r
 /* Sidebar nav items — don't clip labels */
 .nav-item{min-width:0;overflow:visible;}
 .sidebar{overflow-y:auto;}
+
+/* ══════════════════════════════════════════════════
+   TEMPLATE STYLES — matched to actual HTML elements
+   ══════════════════════════════════════════════════ */
+
+/* ── Shared inner/content layers ── */
+.tc-inner,.tq-inner,.tm-inner,.ts-inner,.tp-inner,.tt-inner,.tl-inner,.th-inner,.tba-inner{
+  position:relative;z-index:2;display:flex;flex-direction:column;flex:1;padding:28px 26px;
+}
+
+/* ── Shared brand handle ── */
+.tc-brand{
+  position:absolute;bottom:14px;left:0;right:0;text-align:center;
+  z-index:3;font-size:11px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:.06em;
+}
+
+/* ══ 1. CHAT / CONVERSATION STARTER ══ */
+.t-chat{background:linear-gradient(160deg,#0d1321 0%,#0a0f1e 100%);}
+.tc-inner{justify-content:center;gap:14px;padding:40px 26px 50px;}
+.tc-bubble{
+  max-width:80%;padding:12px 16px;border-radius:18px;
+  font-size:14px;line-height:1.5;color:#fff;font-weight:500;
+}
+.tc-q{
+  background:rgba(255,255,255,.12);backdrop-filter:blur(8px);
+  border-bottom-left-radius:4px;align-self:flex-start;
+}
+.tc-a{
+  background:linear-gradient(135deg,var(--accent),#0369a1);
+  border-bottom-right-radius:4px;align-self:flex-end;
+}
+
+/* ══ 2. BOLD QUOTE / CAROUSEL ══ */
+.t-quote{background:#060b18;}
+.tq-inner{
+  flex:1;align-items:center;justify-content:center;text-align:center;
+  gap:12px;padding:40px 32px 60px;
+}
+.tq-mark{
+  font-size:80px;line-height:.3;color:var(--accent);
+  font-family:Georgia,serif;opacity:.8;margin-bottom:8px;
+}
+.tq-text{
+  font-size:20px;font-weight:700;line-height:1.5;color:#fff;
+  font-style:italic;text-shadow:0 2px 12px rgba(0,0,0,.5);
+}
+.tq-attr{font-size:12px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:.04em;margin-top:6px;}
+
+/* Carousel controls */
+.carousel-controls{
+  position:absolute;bottom:44px;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;gap:12px;z-index:4;
+}
+.carousel-btn{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;width:28px;height:28px;border-radius:50%;
+  font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .18s;
+}
+.carousel-btn:hover{background:rgba(255,255,255,.2);}
+.carousel-dots{display:flex;gap:5px;align-items:center;}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;}
+.carousel-dot.active{width:16px;border-radius:3px;background:var(--accent);}
+.ratio-toggle{
+  position:absolute;bottom:12px;left:0;right:0;
+  display:flex;justify-content:center;gap:6px;z-index:4;
+}
+.ratio-btn{
+  padding:4px 12px;border-radius:12px;font-size:10px;font-weight:700;
+  border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;
+  transition:all .18s;
+}
+.ratio-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* ══ 3. MYTH BUSTER ══ */
+.t-myth{background:#0e0b14;}
+.tm-inner{justify-content:center;gap:0;padding:24px 26px 50px;}
+.tm-myth{
+  background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);
+  border-radius:12px 12px 0 0;padding:16px 18px;flex:1;display:flex;flex-direction:column;gap:8px;
+}
+.tm-fact{
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-top:none;
+  border-radius:0 0 12px 12px;padding:16px 18px;flex:1;display:flex;flex-direction:column;gap:8px;
+}
+.tm-divider{
+  text-align:center;font-size:20px;padding:8px 0;
+  background:linear-gradient(to bottom,rgba(239,68,68,.15),rgba(16,185,129,.15));
+  border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08);
+}
+.tm-label{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+.tm-myth-label{color:#f87171;}
+.tm-fact-label{color:#34d399;}
+.tm-text{font-size:14px;line-height:1.5;color:#fff;font-weight:500;}
+
+/* ══ 4. STATS & FACTS ══ */
+.t-stats{background:#070d1f;}
+.ts-inner{
+  flex:1;align-items:center;justify-content:center;text-align:center;gap:14px;padding:36px 30px 50px;
+}
+.ts-headline{
+  font-size:56px;font-weight:800;color:var(--accent);
+  letter-spacing:-2px;line-height:1;text-shadow:0 0 40px rgba(14,165,233,.4);
+}
+.ts-sub{font-size:15px;font-weight:600;color:#fff;line-height:1.4;}
+.ts-context{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;max-width:340px;}
+
+/* ══ 5. POV POST ══ */
+.t-pov{background:#0a0f1e;}
+.tp-inner{justify-content:flex-end;gap:12px;padding:28px 26px 50px;}
+.tp-pov{
+  font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);
+}
+.tp-text{font-size:22px;font-weight:700;line-height:1.4;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5);}
+
+/* ══ 6. BEFORE & AFTER ══ */
+.t-ba{background:#080d1a;}
+.tba-inner{
+  flex:1;display:flex;flex-direction:row;gap:0;padding:0;align-items:stretch;
+}
+.tba-panel{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:28px 20px;gap:14px;
+}
+.tba-before{background:rgba(239,68,68,.07);border-right:1px solid rgba(255,255,255,.06);}
+.tba-after{background:rgba(16,185,129,.07);}
+.tba-tag{
+  font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+}
+.tba-before .tba-tag{color:#f87171;}
+.tba-after .tba-tag{color:#34d399;}
+.tba-text{font-size:13px;line-height:1.5;color:rgba(255,255,255,.85);}
+.tba-divider{
+  width:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:18px;color:rgba(255,255,255,.3);
+  background:rgba(255,255,255,.03);border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06);
+}
+
+/* ══ 7. TESTIMONIAL ══ */
+.t-testi{background:#080d1a;}
+.tt-inner{justify-content:center;gap:16px;padding:36px 28px 50px;}
+.tt-stars{font-size:20px;color:#fbbf24;letter-spacing:3px;}
+.tt-quote{font-size:17px;font-style:italic;line-height:1.6;color:#fff;font-weight:500;}
+.tt-author{font-size:12px;color:rgba(255,255,255,.5);font-weight:600;}
+
+/* ══ 8. LIST POST ══ */
+.t-list{background:#070d1f;}
+.tl-inner{justify-content:center;gap:16px;padding:32px 24px 50px;}
+.tl-headline{font-size:17px;font-weight:800;color:#fff;line-height:1.3;}
+.tl-list{
+  list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;
+}
+.tl-list li{
+  font-size:13px;line-height:1.5;color:rgba(255,255,255,.85);
+  padding:10px 14px;background:rgba(255,255,255,.05);
+  border-radius:8px;border-left:3px solid var(--accent);
+}
+
+/* ══ 9. HOT TAKE ══ */
+.t-hottake{background:#0d0608;}
+.th-inner{
+  flex:1;align-items:center;justify-content:center;text-align:center;gap:16px;padding:40px 28px 50px;
+}
+.th-fire{font-size:40px;}
+.th-label{
+  background:#dc2626;color:#fff;font-size:9px;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase;padding:5px 16px;
+  border-radius:20px;box-shadow:0 0 24px rgba(220,38,38,.4);
+}
+.th-text{font-size:20px;font-weight:700;line-height:1.45;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);}
+
+/* Loading overlay (was missing) */
+.loading-overlay{
+  display:none;position:fixed;inset:0;background:rgba(7,13,31,.85);
+  z-index:9000;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  backdrop-filter:blur(4px);
+}
+.loading-text{font-size:13px;color:var(--muted);}
+
 </style>
 </style>
 </head>
