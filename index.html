@@ -185,6 +185,7 @@ body{
   border-radius:38px;
   overflow:hidden;
   position:relative;
+  background:linear-gradient(160deg,#1a0d3a 0%,#0d1a2e 40%,#08080f 100%);
   box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.08);
 }
 /* story shell */
@@ -194,6 +195,7 @@ body{
   border-radius:20px;
   overflow:hidden;
   position:relative;
+  background:linear-gradient(160deg,#1a0d3a 0%,#0d1a2e 40%,#08080f 100%);
   box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.08);
 }
 /* square shell */
@@ -202,7 +204,7 @@ body{
   height:420px;
   border-radius:20px;
   overflow:hidden;
-  position:relative;
+  position:relative;  background:linear-gradient(160deg,#1a0d3a 0%,#0d1a2e 40%,#08080f 100%);
   box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.08);
 }
 /* wide shell */
@@ -211,7 +213,7 @@ body{
   height:292px;
   border-radius:20px;
   overflow:hidden;
-  position:relative;
+  position:relative;  background:linear-gradient(160deg,#1a0d3a 0%,#0d1a2e 40%,#08080f 100%);
   box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.08);
 }
 
@@ -267,9 +269,8 @@ body{
 ════════════════════════════════ */
 .t1-bg{
   position:absolute;inset:0;
-  background-image:url('');
-  background-size:cover;background-position:center;
-  filter:blur(1.5px) brightness(0.45) saturate(0.7);
+  background:url('') center/cover,linear-gradient(160deg,#1e0b40 0%,#0d1830 60%,#08080f 100%);
+  filter:blur(1.5px) brightness(0.6) saturate(0.8);
   transform:scale(1.06);
 }
 .t1-overlay{position:absolute;inset:0;background:rgba(10,7,5,0.3);}
@@ -315,9 +316,8 @@ body{
 ════════════════════════════════ */
 .t2-bg{
   position:absolute;inset:0;
-  background-image:url('');
-  background-size:cover;background-position:center 20%;
-  filter:brightness(0.38) saturate(0.6);
+  background:url('') center 20%/cover,linear-gradient(135deg,#120824 0%,#0d1028 100%);
+  filter:brightness(0.5) saturate(0.7);
   transform:scale(1.03);
 }
 .t2-gradient{
@@ -370,9 +370,8 @@ body{
 ════════════════════════════════ */
 .t3-bg{
   position:absolute;inset:0;
-  background-image:url('');
-  background-size:cover;background-position:center;
-  filter:blur(8px) brightness(0.25) saturate(0.4);
+  background:url('') center/cover,linear-gradient(160deg,#0a1020 0%,#111827 100%);
+  filter:blur(8px) brightness(0.35) saturate(0.5);
   transform:scale(1.1);
 }
 .t3-content{
@@ -429,9 +428,8 @@ body{
 ════════════════════════════════ */
 .t4-bg{
   position:absolute;inset:0;
-  background-image:url('');
-  background-size:cover;background-position:center;
-  filter:blur(10px) brightness(0.2) saturate(0.3);
+  background:url('') center/cover,linear-gradient(135deg,#0f0825 0%,#080f20 100%);
+  filter:blur(10px) brightness(0.3) saturate(0.5);
   transform:scale(1.12);
 }
 .t4-content{
@@ -486,8 +484,7 @@ body{
 ════════════════════════════════ */
 .t5-bg{
   position:absolute;inset:0;
-  background-image:url('');
-  background-size:cover;background-position:center;
+  background:url('') center/cover,linear-gradient(160deg,#180830 0%,#0d1525 100%);
   filter:brightness(0.55) saturate(0.75);
   transform:scale(1.03);
 }
@@ -670,7 +667,7 @@ html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
 
 /* ── DESKTOP LAYOUT (CapCut style) ─────────────────────────────────── */
-.layout-desktop{display:flex;flex-direction:column;height:100vh;width:100%;}
+.app{display:flex;flex-direction:column;height:100vh;width:100%;}
 
 /* Top bar */
 .dt-topbar{height:44px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:16px;flex-shrink:0;}
@@ -787,7 +784,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 
 /* Responsive breakpoint */
 @media (max-width: 768px) {
-  .layout-desktop{display:none;}
+  .app{display:none;}
   .layout-mobile{display:flex;}
 }
 
@@ -795,41 +792,234 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .template-frame{display:none;}
 .template-frame.active{display:flex;flex-direction:column;align-items:center;justify-content:center;}
 
+
+/* ══ SINGLE RESPONSIVE GRID LAYOUT ════════════════════════════════════════ */
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
+.app{display:grid;height:100vh;grid-template-areas:"topbar topbar topbar" "left preview right" "left genbar right";grid-template-columns:130px 1fr 200px;grid-template-rows:44px 1fr 80px;}
+.dt-topbar{grid-area:topbar;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;}
+.dt-logo{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:1px;font-family:'Playfair Display',serif;margin-right:4px;}
+.dt-nav{display:flex;gap:2px;}
+.dt-ntab{padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;border-radius:6px;transition:all .15s;}
+.dt-ntab:hover{color:var(--text);background:rgba(124,92,252,0.1);}
+.dt-ntab.on{color:var(--text);background:rgba(124,92,252,0.15);}
+.dt-topbar-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.dt-topbar-title{font-size:11px;color:var(--muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.dt-left{grid-area:left;background:var(--panel);border-right:1px solid var(--border);overflow-y:auto;padding:10px 8px;}
+.dt-left-label{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:4px 4px 8px;opacity:0.6;}
+.dt-tpl-grid{display:flex;flex-direction:column;gap:3px;}
+.dt-tpl-card{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all .15s;}
+.dt-tpl-card:hover{background:rgba(124,92,252,0.08);border-color:rgba(124,92,252,0.15);}
+.dt-tpl-card.active{background:rgba(124,92,252,0.15);border-color:rgba(124,92,252,0.3);}
+.dt-tpl-icon{flex-shrink:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+.dt-tpl-card.active .dt-tpl-icon{color:var(--accent);}
+.dt-tpl-name{font-size:11px;color:var(--muted);line-height:1.2;}
+.dt-tpl-card.active .dt-tpl-name{color:var(--text);}
+.dt-preview{grid-area:preview;display:flex;align-items:center;justify-content:center;position:relative;background:#08080f;overflow:hidden;}
+.dt-preview-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(124,92,252,0.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.template-frame{display:none;}
+.template-frame.active{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.dt-genbar{grid-area:genbar;background:var(--panel);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:10px;}
+.dt-idea-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text);resize:none;height:52px;font-family:'DM Sans',sans-serif;line-height:1.4;}
+.dt-idea-input:focus{outline:none;border-color:rgba(124,92,252,0.4);}
+.dt-idea-input::placeholder{color:var(--muted);}
+.dt-tone-row{display:flex;gap:4px;}
+.dt-tone{padding:3px 8px;border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.dt-tone:hover{border-color:var(--accent);color:var(--accent);}
+.dt-tone.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.dt-gen-btns{display:flex;flex-direction:column;gap:5px;align-items:flex-end;}
+.dt-iter-row{display:flex;gap:4px;}
+.dt-iter{padding:3px 8px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;font-size:10px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.dt-iter:hover{border-color:var(--accent);color:var(--accent);}
+.dt-gbtn-row{display:flex;gap:6px;align-items:center;}
+.dt-gbtn{padding:8px 16px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap;}
+.dt-gbtn:hover{opacity:0.85;}
+.dt-photo-btn{padding:7px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.dt-photo-btn:hover{border-color:var(--accent);color:var(--accent);}
+.dt-right{grid-area:right;background:var(--panel);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.dt-rtabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;}
+.dt-rtab{flex:1;padding:9px 4px;font-size:10px;color:var(--muted);text-align:center;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent;}
+.dt-rtab:hover{color:var(--text);}
+.dt-rtab.on{color:var(--accent);border-bottom-color:var(--accent);}
+.dt-rpane{display:none;flex:1;overflow-y:auto;padding:12px;}
+.dt-rpane.on{display:block;}
+.dt-rp-section{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;opacity:0.7;}
+.dt-rp-val{font-size:11px;color:var(--text);margin-bottom:10px;line-height:1.4;}
+.dt-rp-muted{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+.dt-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+.dt-tag{padding:2px 7px;border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--muted);}
+.dt-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:11px;color:var(--text);margin-bottom:8px;font-family:'DM Sans',sans-serif;}
+.dt-input::placeholder{color:var(--muted);}
+.dt-upload-btn{display:block;width:100%;padding:7px;background:rgba(255,255,255,0.04);border:1px dashed var(--border);border-radius:6px;color:var(--muted);font-size:11px;text-align:center;cursor:pointer;margin-bottom:8px;transition:all .15s;}
+.dt-upload-btn:hover{border-color:var(--accent);color:var(--accent);}
+.dt-caption-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:11px;color:var(--muted);line-height:1.4;min-height:60px;margin-bottom:8px;}
+.dt-copy-btn{width:100%;padding:6px;background:rgba(124,92,252,0.1);border:1px solid rgba(124,92,252,0.2);border-radius:6px;color:var(--accent2);font-size:11px;cursor:pointer;}
+.dt-copy-btn:hover{background:rgba(124,92,252,0.2);}
+.dt-unsplash-row{display:flex;gap:6px;margin-bottom:6px;}
+.dt-unsplash-q{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:11px;color:var(--text);font-family:'DM Sans',sans-serif;}
+.dt-unsplash-q::placeholder{color:var(--muted);}
+.dt-go-btn{padding:5px 10px;background:rgba(124,92,252,0.15);border:1px solid rgba(124,92,252,0.2);border-radius:6px;color:var(--accent);font-size:11px;cursor:pointer;}
+.dt-thumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.dt-thumb{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;cursor:pointer;border:2px solid transparent;}
+.dt-thumb.selected{border-color:var(--accent);}
+@media (max-width:768px){
+  .app{grid-template-areas:"topbar" "left" "preview" "genbar";grid-template-columns:1fr;grid-template-rows:44px auto 1fr 110px;}
+  .dt-right{display:none;}
+  .dt-left{overflow-x:auto;overflow-y:hidden;padding:6px 10px;border-right:none;border-bottom:1px solid var(--border);}
+  .dt-left-label{display:none;}
+  .dt-tpl-grid{flex-direction:row;gap:6px;}
+  .dt-tpl-card{flex-direction:column;padding:6px 8px;min-width:50px;justify-content:center;}
+  .dt-tpl-name{font-size:8px;text-align:center;}
+  .dt-genbar{flex-direction:column;height:auto;padding:8px 12px;gap:6px;align-items:stretch;}
+  .dt-idea-input{height:38px;}
+  .dt-gen-btns{flex-direction:row;align-items:center;justify-content:space-between;}
+  .dt-iter-row{display:none;}
+  .dt-gbtn{flex:1;}
+  .dt-topbar-title{display:none;}
+}
+
+
+/* ══ BRAND MODAL ════════════════════════════════════════════════════════════ */
+.brand-modal-overlay{position:fixed;inset:0;background:rgba(8,8,15,0.88);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
+.brand-modal{background:#0f0f1a;border:1px solid rgba(124,92,252,0.25);border-radius:20px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;}
+.bm-header{display:flex;align-items:center;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,0.06);gap:12px;position:sticky;top:0;background:#0f0f1a;z-index:1;border-radius:20px 20px 0 0;}
+.bm-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--accent);margin-right:auto;}
+.bm-step-dots{display:flex;gap:6px;}
+.bm-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all .2s;cursor:pointer;}
+.bm-dot.active{background:var(--accent);width:20px;border-radius:4px;}
+.bm-skip{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;padding:4px 8px;border-radius:6px;}
+.bm-skip:hover{color:var(--text);}
+.bm-step{display:none;padding:24px 28px;}
+.bm-step.active{display:block;}
+.bm-step-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--text);margin-bottom:6px;}
+.bm-step-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+.bm-fields{display:flex;flex-direction:column;gap:14px;}
+.bm-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.bm-field{display:flex;flex-direction:column;gap:5px;}
+.bm-label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;}
+.bm-optional{font-size:10px;color:rgba(255,255,255,0.25);text-transform:none;font-weight:400;margin-left:4px;}
+.bm-input,.bm-select,.bm-textarea{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .15s;width:100%;}
+.bm-input:focus,.bm-select:focus,.bm-textarea:focus{outline:none;border-color:rgba(124,92,252,0.5);}
+.bm-input::placeholder,.bm-textarea::placeholder{color:rgba(255,255,255,0.2);}
+.bm-select{cursor:pointer;}
+.bm-select option{background:#0f0f1a;color:var(--text);}
+.bm-textarea{resize:none;line-height:1.5;}
+.bm-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.bm-chip{padding:6px 12px;border:1px solid rgba(255,255,255,0.1);border-radius:20px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.bm-chip:hover{border-color:var(--accent);color:var(--accent);}
+.bm-chip.on{background:rgba(124,92,252,0.2);border-color:var(--accent);color:var(--text);}
+.bm-sliders{display:flex;flex-direction:column;gap:12px;}
+.bm-slider-row{display:flex;align-items:center;gap:10px;}
+.bm-slider-label{font-size:11px;color:var(--muted);min-width:48px;}
+.bm-slider-label:last-child{text-align:right;}
+.bm-slider{flex:1;accent-color:var(--accent);}
+.bm-radio-group{display:flex;flex-direction:column;gap:6px;}
+.bm-radio{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);cursor:pointer;}
+.bm-radio input{accent-color:var(--accent);}
+.bm-color-row{display:flex;gap:16px;}
+.bm-color-wrap{display:flex;align-items:center;gap:8px;}
+.bm-color{width:36px;height:36px;border:none;border-radius:8px;cursor:pointer;background:none;padding:0;}
+.bm-color-label{font-size:12px;color:var(--muted);}
+.bm-footer{padding:16px 24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;position:sticky;bottom:0;background:#0f0f1a;border-radius:0 0 20px 20px;}
+.bm-back{background:none;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 16px;color:var(--muted);font-size:13px;cursor:pointer;transition:all .15s;}
+.bm-back:hover{color:var(--text);border-color:rgba(255,255,255,0.25);}
+.bm-next,.bm-save{background:var(--accent);border:none;border-radius:8px;padding:9px 20px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;}
+.bm-next:hover,.bm-save:hover{opacity:0.85;}
+
+/* Brand profile card in right panel */
+.brand-profile-card{background:rgba(124,92,252,0.08);border:1px solid rgba(124,92,252,0.2);border-radius:10px;padding:12px;margin-bottom:10px;}
+.bpc-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.bpc-detail{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.bpc-colors{display:flex;gap:6px;margin-bottom:8px;}
+.bpc-swatch{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.1);}
+.bpc-edit{font-size:11px;color:var(--accent);cursor:pointer;background:none;border:none;padding:0;}
+.bpc-edit:hover{opacity:0.8;}
+
+/* ══ IMAGE PLACEMENT ════════════════════════════════════════════════════════ */
+.img-hero-badge{position:absolute;top:8px;right:8px;background:rgba(124,92,252,0.7);color:#fff;font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:1px;pointer-events:none;z-index:10;}
+
+
+/* ══ HISTORY DRAWER ══════════════════════════════════════════════════════════ */
+#historyDrawer{position:fixed;top:0;right:0;width:340px;height:100vh;background:#0f0f1a;border-left:1px solid rgba(130,100,255,0.18);z-index:900;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;}
+#historyDrawer.open{transform:translateX(0);}
+.hd-header{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;}
+.hd-title{font-size:14px;font-weight:600;color:var(--text);}
+.hd-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:0 2px;}
+.hd-close:hover{color:var(--text);}
+.hd-list{flex:1;overflow-y:auto;padding:12px;}
+.hd-item{background:rgba(124,92,252,0.06);border:1px solid rgba(124,92,252,0.12);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:background .15s;}
+.hd-item:hover{background:rgba(124,92,252,0.12);}
+.hd-item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.hd-item-idea{font-size:12px;color:var(--text);font-weight:500;line-height:1.4;flex:1;}
+.hd-item-ts{font-size:10px;color:var(--muted);white-space:nowrap;}
+.hd-item-meta{display:flex;align-items:center;gap:6px;margin-top:6px;}
+.hd-badge{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+.hd-badge.draft{background:rgba(200,190,255,0.1);color:var(--muted);}
+.hd-badge.approved{background:rgba(52,232,160,0.15);color:var(--green);}
+.hd-badge.posted{background:rgba(124,92,252,0.2);color:var(--accent2);}
+.hd-item-brand{font-size:10px;color:var(--muted);}
+.hd-item-actions{display:flex;gap:6px;margin-top:8px;}
+.hd-action{font-size:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:3px 9px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.hd-action:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.hd-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:12px;line-height:1.6;}
+.hd-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:899;display:none;}
+.hd-overlay.open{display:block;}
+
+/* ══ REGULATED / CREDIT TOGGLE ═══════════════════════════════════════════════ */
+.regulated-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,160,60,0.06);border:1px solid rgba(255,160,60,0.18);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
+.regulated-label{font-size:12px;color:var(--text);}
+.regulated-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+.toggle-switch{position:relative;width:38px;height:22px;flex-shrink:0;}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,0.1);border-radius:22px;cursor:pointer;transition:background .2s;}
+.toggle-switch input:checked+.toggle-slider{background:var(--accent);}
+.toggle-slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s;}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(16px);}
+.acl-fields{margin-top:10px;display:none;}
+.acl-fields.show{display:block;}
+.acl-field{margin-bottom:8px;}
+.acl-field label{font-size:11px;color:var(--muted);display:block;margin-bottom:4px;}
+.acl-field input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:7px 10px;color:var(--text);font-size:12px;outline:none;}
+.acl-field input:focus{border-color:rgba(255,160,60,0.5);}
+
+/* ══ CAPTION COUNTER ═════════════════════════════════════════════════════════ */
+.caption-meta{display:flex;align-items:center;justify-content:space-between;margin-top:5px;min-height:16px;}
+.caption-counter{font-size:10px;color:var(--muted);transition:color .15s;}
+.caption-counter.warn{color:#f59e0b;}
+.caption-counter.over{color:#ef4444;}
+.caption-hint{font-size:10px;color:var(--muted);opacity:0.7;}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/2.8.0/dom-to-image-more.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
-
-<!-- overlays (shared) -->
 <div class="orbitt-toast" id="orbitToast"></div>
 <div class="orbitt-loading" id="orbitLoading">
   <div class="orbitt-spinner"></div>
   <div class="orbitt-loading-text" id="orbitLoadingText">Generating…</div>
 </div>
 
-<!-- ══ DESKTOP LAYOUT ══ -->
-<div class="layout-desktop">
+<div class="app">
 
   <div class="dt-topbar">
     <div class="dt-logo">orbitt</div>
     <div class="dt-nav">
       <div class="dt-ntab on">Create</div>
-      <div class="dt-ntab">History</div>
-      <div class="dt-ntab">Brand</div>
+      <div class="dt-ntab" onclick="openHistoryDrawer()">History</div>
+      <div class="dt-ntab" onclick="openBrandModal()">Brand</div>
     </div>
-    <div class="dt-topbar-actions">
-      <span class="dt-topbar-title" id="topbarTitle">Text Chat — Conversation Format</span>
+    <div class="dt-topbar-right">
+      <span class="dt-topbar-title" id="topbarTitle">Text Chat</span>
       <button class="tbtn tbtn-outline" onclick="replayActive()" style="padding:5px 10px;font-size:11px">↺ Replay</button>
+      <button class="tbtn-variants" onclick="exportAllVariants()" title="Export 1:1, 4:5 and 9:16 as a zip">⬇ All variants</button>
       <button class="tbtn tbtn-primary" onclick="exportTemplate()" style="padding:5px 10px;font-size:11px">⬇ Export PNG</button>
     </div>
   </div>
 
-  <div class="dt-body">
-
-    <!-- Left: template grid -->
-    <div class="dt-left">
-      <div class="dt-left-label">Templates</div>
-      <div class="dt-tpl-grid">
+  <div class="dt-left">
+    <div class="dt-left-label">Templates</div>
+    <div class="dt-tpl-grid">
   <div class="dt-tpl-card active" onclick="switchTemplate(1,this)">
     <span class="dt-tpl-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="5" cy="10" r="2.5"/><circle cx="15" cy="10" r="2.5"/><path d="M7.5 8.5 Q10 5.5 12.5 8.5"/><path d="M7.5 11.5 Q10 14.5 12.5 11.5"/></svg></span>
     <span class="dt-tpl-name">Text Chat</span>
@@ -862,14 +1052,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
     <span class="dt-tpl-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="10" cy="10" r="2.5" fill="currentColor" stroke="none"/><circle cx="10" cy="10" r="7" stroke-dasharray="2 2.5"/><circle cx="10" cy="3" r="1.5"/><circle cx="17" cy="10" r="1.5"/><circle cx="3.5" cy="14.5" r="1.5"/></svg></span>
     <span class="dt-tpl-name">Tips List</span>
   </div>
-      </div>
     </div>
+  </div>
 
-    <!-- Center: preview + generate bar -->
-    <div class="dt-center">
-      <div class="dt-preview" id="previewArea">
-        <div class="dt-preview-grid"></div>
-              <!-- ── T1: TEXT CHAT ── -->
+  <div class="dt-preview" id="previewArea">
+    <div class="dt-preview-grid"></div>
+                  <!-- ── T1: TEXT CHAT ── -->
       <div class="template-frame active" id="frame1">
         <div class="phone-shell">
           <div class="t1-bg" id="bgSource" style="background-image:url('')"></div>
@@ -904,7 +1092,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
           <div class="t2-quotes-icon">"</div>
           <div class="t2-logo">@yourhandle</div>
           <div class="t2-content" id="t2content">
-            <div class="t2-eyebrow">Birth Truth</div>
+            <div class="t2-eyebrow">On Growth</div>
             <div class="t2-quote" id="t2quote"></div>
             <div class="t2-attribution" id="t2attr"></div>
           </div>
@@ -922,7 +1110,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
               <div class="t3-header-title" id="t3title"></div>
             </div>
             <div class="t3-cards" id="t3cards"></div>
-            <div class="t3-footer">Share this if it helped you 🌿</div>
+            <div class="t3-footer">Save this if it resonated 💡</div>
           </div>
         </div>
         <div class="frame-label">4:5 · Myth vs Fact</div>
@@ -934,9 +1122,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
           <div class="t4-bg"></div>
           <div class="t4-content">
             <div class="t4-eyebrow">The Numbers</div>
-            <div class="t4-title">Australia's birth statistics<br>deserve a conversation</div>
+            <div class="t4-title">The numbers don't lie.<br>Are you paying attention?</div>
             <div class="t4-grid" id="t4grid"></div>
-            <div class="t4-footer">Source: AIHW Mothers & Babies Report · Share widely 🌿</div>
+            <div class="t4-footer">Data speaks. Share if this surprised you 📊</div>
           </div>
         </div>
         <div class="frame-label">4:5 · Stat Cards</div>
@@ -1013,144 +1201,84 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
       </div>
 
       </div>
+  </div>
 
-      <!-- Generate bar -->
-      <div class="dt-genbar">
-        <div class="dt-genbar-idea">
-          <textarea class="dt-idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. Carl Sagan obsession, Watto, fast finance…"></textarea>
-        </div>
-        <div class="dt-genbar-right">
-          <div class="dt-tone-row">
-            <div class="dt-tone active" data-tone="confident" onclick="setTone(this)">Confident</div>
-            <div class="dt-tone" data-tone="bold" onclick="setTone(this)">Bold</div>
-            <div class="dt-tone" data-tone="funny" onclick="setTone(this)">Funny</div>
-            <div class="dt-tone" data-tone="casual" onclick="setTone(this)">Casual</div>
-          </div>
-          <div class="dt-gen-btns">
-            <div class="dt-iter-row">
-              <button class="dt-iter" onclick="iterateAll('shorter')">Shorter</button>
-              <button class="dt-iter" onclick="iterateAll('punchier')">Punchier</button>
-              <button class="dt-iter" onclick="iterateAll('funnier')">Funnier</button>
-            </div>
-            <label class="dt-photo-btn" title="Upload background photo">
-              <input type="file" accept="image/*" onchange="handleBgUpload(event)" style="display:none">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" width="16" height="16"><circle cx="10" cy="11" r="3.5"/><path d="M3 7h1.5L6 5h8l1.5 2H17a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
-            </label>
-            <button class="dt-gbtn" onclick="generateAll()">✦ Generate All</button>
-          </div>
-        </div>
-      </div>
+  <div class="dt-genbar">
+    <textarea class="dt-idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. Carl Sagan obsession, Watto, fast finance…"></textarea>
+    <div class="dt-tone-row">
+      <div class="dt-tone active" data-tone="confident" onclick="setTone(this)">Confident</div>
+      <div class="dt-tone" data-tone="bold" onclick="setTone(this)">Bold</div>
+      <div class="dt-tone" data-tone="funny" onclick="setTone(this)">Funny</div>
+      <div class="dt-tone" data-tone="casual" onclick="setTone(this)">Casual</div>
     </div>
-
-    <!-- Right: info/brand/export -->
-    <div class="dt-right">
-      <div class="dt-rtabs">
-        <div class="dt-rtab" onclick="switchRTab(this,'rtInfo')">Info</div>
-        <div class="dt-rtab on" onclick="switchRTab(this,'rtBrand')">Brand</div>
-        <div class="dt-rtab" onclick="switchRTab(this,'rtCaption')">Caption</div>
+    <div class="dt-gen-btns">
+      <div class="dt-iter-row">
+        <button class="dt-iter" onclick="iterateAll('shorter')">Shorter</button>
+        <button class="dt-iter" onclick="iterateAll('punchier')">Punchier</button>
+        <button class="dt-iter" onclick="iterateAll('funnier')">Funnier</button>
       </div>
-
-      <div class="dt-rpane" id="rtInfo">
-        <div class="dt-rp-section">Format</div>
-        <div class="dt-rp-val" id="spLabel">Text Chat</div>
-        <div class="dt-rp-muted" id="spDesc">Animated conversation format.</div>
-        <div class="dt-rp-section">Dimensions</div>
-        <div class="dt-rp-val" id="spDims">1080 × 1920</div>
-        <div class="dt-rp-muted" id="spRatio">9:16 vertical</div>
-        <div class="dt-rp-section">Platforms</div>
-        <div class="dt-tags" id="spPlatforms">
-          <span class="dt-tag">Instagram Reels</span>
-          <span class="dt-tag">TikTok</span>
-        </div>
-        <div class="dt-rp-muted" id="spTheme" style="font-size:10px;opacity:0.7"></div>
-      </div>
-
-      <div class="dt-rpane on" id="rtBrand">
-        <div class="dt-rp-section">Handle</div>
-        <input class="dt-input" id="brandHandle" placeholder="@yourbrand" oninput="updateHandle()"/>
-        <div class="dt-rp-section">Background</div>
-        <label class="dt-upload-btn">
+      <div class="dt-gbtn-row">
+        <label class="dt-photo-btn" title="Upload background photo">
           <input type="file" accept="image/*" onchange="handleBgUpload(event)" style="display:none">
-          ↑ Upload Photo
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" width="16" height="16"><circle cx="10" cy="11" r="3.5"/><path d="M3 7h1.5L6 5h8l1.5 2H17a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
         </label>
-        <div class="dt-unsplash-row">
-          <input class="dt-unsplash-q" id="unsplashQ" placeholder="Search Unsplash…"/>
-          <button class="dt-go-btn" onclick="searchUnsplash()">Go</button>
-        </div>
-        <input class="dt-input" id="unsplashKey" placeholder="Unsplash key" style="font-size:10px"/>
-        <div class="dt-thumb-grid" id="unsplashResults"></div>
+        <button class="dt-gbtn" onclick="generateAll()">✦ Generate All</button>
       </div>
-
-      <div class="dt-rpane" id="rtCaption">
-        <div class="dt-rp-section">Caption</div>
-        <div class="dt-caption-box" id="captionBox">Caption appears here after generating…</div>
-        <button class="dt-copy-btn" onclick="copyCaption()">Copy Caption</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══ MOBILE LAYOUT ══ -->
-<div class="layout-mobile">
-
-  <div class="mob-header">
-    <div class="mob-logo">orbitt</div>
-    <div class="mob-header-actions">
-      <button class="mob-hbtn" onclick="replayActive()">↺</button>
-      <button class="mob-hbtn" onclick="exportTemplate()">⬇ Export</button>
     </div>
   </div>
 
-  <!-- Template strip -->
-  <div class="mob-tpl-strip" id="mobTplStrip">
-    <div class="mob-tpl-chip active" onclick="switchTemplate(1,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="5" cy="10" r="2.5"/><circle cx="15" cy="10" r="2.5"/><path d="M7.5 8.5 Q10 5.5 12.5 8.5"/><path d="M7.5 11.5 Q10 14.5 12.5 11.5"/></svg></span><span class="mob-tpl-chip-name">Text Chat</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(2,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="10" cy="10" r="4"/><ellipse cx="10" cy="10" rx="9" ry="3.2" transform="rotate(-25 10 10)"/></svg></span><span class="mob-tpl-chip-name">Bold Quote</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(3,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 3.5 A5.5 5.5 0 0 0 7 16.5"/><path d="M13 3.5 A5.5 5.5 0 0 1 13 16.5"/><line x1="10" y1="2" x2="10" y2="18" stroke-dasharray="2 2" stroke-width="1"/></svg></span><span class="mob-tpl-chip-name">Myth vs Fact</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(4,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="4" cy="15" r="1.5" fill="currentColor" stroke="none"/><circle cx="9" cy="7" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="14" cy="4" r="1.5" fill="currentColor" stroke="none"/><line x1="4" y1="15" x2="9" y2="7"/><line x1="9" y1="7" x2="15" y2="12"/><line x1="9" y1="7" x2="14" y2="4"/></svg></span><span class="mob-tpl-chip-name">Stat Cards</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(5,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="14" cy="6" r="3"/><path d="M11.5 8.5 Q7 12 3 17"/><path d="M12.5 9.2 Q8.5 12.5 5.5 16.5" stroke-width="0.8" stroke-opacity="0.5"/></svg></span><span class="mob-tpl-chip-name">POV Story</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(6,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="4" cy="10" r="2.5"/><circle cx="16" cy="10" r="2.5"/><line x1="6.5" y1="10" x2="13.5" y2="10"/><polyline points="11.5,8 13.5,10 11.5,12" stroke-linejoin="round"/></svg></span><span class="mob-tpl-chip-name">Before / After</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(7,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="10" cy="10" r="3.5"/><line x1="10" y1="2" x2="10" y2="5.5"/><line x1="10" y1="14.5" x2="10" y2="18"/><line x1="2" y1="10" x2="5.5" y2="10"/><line x1="14.5" y1="10" x2="18" y2="10"/><line x1="4.5" y1="4.5" x2="6.9" y2="6.9"/><line x1="13.1" y1="13.1" x2="15.5" y2="15.5"/><line x1="15.5" y1="4.5" x2="13.1" y2="6.9"/><line x1="4.5" y1="15.5" x2="6.9" y2="13.1"/></svg></span><span class="mob-tpl-chip-name">Hot Take</span></div>
-<div class="mob-tpl-chip" onclick="switchTemplate(8,this)"><span class="mob-tpl-chip-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="10" cy="10" r="2.5" fill="currentColor" stroke="none"/><circle cx="10" cy="10" r="7" stroke-dasharray="2 2.5"/><circle cx="10" cy="3" r="1.5"/><circle cx="17" cy="10" r="1.5"/><circle cx="3.5" cy="14.5" r="1.5"/></svg></span><span class="mob-tpl-chip-name">Tips List</span></div>
-  </div>
-
-  <!-- Preview (shared frames live here on mobile too — JS handles which is active) -->
-  <div class="mob-preview" id="mobPreview">
-  </div>
-
-  <!-- Wizard input -->
-  <div class="mob-wizard">
-    <div class="mob-step">
-      <div class="mob-step-num">1</div>
-      <div class="mob-step-body">
-        <div class="mob-step-label">Your idea</div>
-        <textarea class="mob-idea-input" id="mobIdeaInput" placeholder="What do you want to post about?"></textarea>
-      </div>
+  <div class="dt-right">
+    <div class="dt-rtabs">
+      <div class="dt-rtab on" onclick="switchRTab(this,'rtBrand')">Brand</div>
+      <div class="dt-rtab" onclick="switchRTab(this,'rtInfo')">Info</div>
+      <div class="dt-rtab" onclick="switchRTab(this,'rtCaption')">Caption</div>
     </div>
-    <div class="mob-step">
-      <div class="mob-step-num">2</div>
-      <div class="mob-step-body">
-        <div class="mob-step-label">Tone</div>
-        <div class="mob-tone-row">
-          <div class="mob-tone active" data-tone="confident" onclick="setToneMob(this)">Confident</div>
-          <div class="mob-tone" data-tone="bold" onclick="setToneMob(this)">Bold</div>
-          <div class="mob-tone" data-tone="funny" onclick="setToneMob(this)">Funny</div>
-          <div class="mob-tone" data-tone="casual" onclick="setToneMob(this)">Casual</div>
-        </div>
+    <div class="dt-rpane on" id="rtBrand">
+      <div class="dt-rp-section" style="display:flex;justify-content:space-between;align-items:center">
+        Brand
+        <span class="bpc-setup-link" onclick="openBrandModal()" style="font-size:10px;color:var(--accent);cursor:pointer;font-weight:500">⚙ Setup</span>
       </div>
-    </div>
-    <div class="mob-gen-row">
-      <button class="mob-gen-btn" onclick="generateAllMob()">✦ Generate All</button>
-      <label class="mob-export-btn" style="display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;">
+      <div id="brandProfileCard"></div>
+      <div class="dt-rp-section">Handle</div>
+      <input class="dt-input" id="brandHandle" placeholder="@yourbrand" oninput="updateHandle()"/>
+      <div class="dt-rp-section">Background</div>
+      <label class="dt-upload-btn">
         <input type="file" accept="image/*" onchange="handleBgUpload(event)" style="display:none">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" width="15" height="15"><circle cx="10" cy="11" r="3"/><path d="M3 7h1.5L6 5h8l1.5 2H17a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
-        Photo
+        ↑ Upload Photo
       </label>
+      <div id="bgThumb" style="display:none;width:100%;aspect-ratio:16/9;border-radius:8px;background-size:cover;background-position:center;margin-top:6px;border:1px solid var(--border);position:relative;">
+        <span onclick="clearBg()" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.6);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;line-height:1">✕</span>
+      </div>
+      <div class="dt-unsplash-row">
+        <input class="dt-unsplash-q" id="unsplashQ" placeholder="Search Unsplash…"/>
+        <button class="dt-go-btn" onclick="searchUnsplash()">Go</button>
+      </div>
+      <input class="dt-input" id="unsplashKey" placeholder="Unsplash key" style="font-size:10px"/>
+      <div class="dt-thumb-grid" id="unsplashResults"></div>
+    </div>
+    <div class="dt-rpane" id="rtInfo">
+      <div class="dt-rp-section">Format</div>
+      <div class="dt-rp-val" id="spLabel">Text Chat</div>
+      <div class="dt-rp-muted" id="spDesc">Animated conversation format.</div>
+      <div class="dt-rp-section">Dimensions</div>
+      <div class="dt-rp-val" id="spDims">1080 × 1920</div>
+      <div class="dt-rp-muted" id="spRatio">9:16 vertical</div>
+      <div class="dt-rp-section">Platforms</div>
+      <div class="dt-tags" id="spPlatforms"><span class="dt-tag">Instagram Reels</span><span class="dt-tag">TikTok</span></div>
+      <div class="dt-rp-muted" id="spTheme" style="font-size:10px;opacity:0.7"></div>
+    </div>
+    <div class="dt-rpane" id="rtCaption">
+      <div class="caption-meta">
+        <div class="dt-rp-section" style="margin:0">Caption</div>
+        <span class="caption-counter" id="captionCounter">0 chars</span>
+      </div>
+      <div class="dt-caption-box" id="captionBox">Caption appears here after generating…</div>
+      <div style="font-size:9px;color:rgba(255,150,50,0.7);margin-top:-4px;margin-bottom:6px;display:none" id="captionWarn">⚠ Meta truncates at 125 chars in feed</div>
+      <button class="dt-copy-btn" onclick="copyCaption()">Copy Caption</button>
     </div>
   </div>
 
 </div>
-
 
 <script>
 // ── Audio ──
@@ -1234,9 +1362,9 @@ t1start();
 // TEMPLATE 2 — BOLD QUOTE
 // ──────────────────────────────────
 let t2quotes=[
-  {quote:`Her body didn't fail.<br><em>It was never given the chance.</em>`,attr:`On induction & trust`},
-  {quote:`Birth is not a medical emergency.<br><em>It is a sacred threshold.</em>`,attr:`On pathologising birth`},
-  {quote:`The most powerful thing you can do<br>is <em>ask a second question.</em>`,attr:`On informed consent`},
+  {quote:`The gap between where you are<br>and where you want to be<br><em>is just a decision.</em>`,attr:`On starting`},
+  {quote:`Most people wait for the right moment.<br><em>The right moment is now.</em>`,attr:`On momentum`},
+  {quote:`You don't need more information.<br><em>You need to begin.</em>`,attr:`On action`},
 ];
 let t2idx=0,t2timer=null;
 function t2show(i){
@@ -1257,12 +1385,12 @@ t2show(0);
 // ──────────────────────────────────
 let t3data=[
   {
-    title:`40 weeks = time's up?`,
+    title:`Hustle harder = better results?`,
     pairs:[
-      {type:'myth',text:`"You MUST be induced at 40 weeks or it becomes dangerous."`},
-      {type:'fact',text:`40 weeks is an estimate. Most healthy pregnancies go to 41–42 weeks. Risks must be weighed individually with full information.`},
-      {type:'myth',text:`"Your doctor knows what's best — you should just trust them."`},
-      {type:'fact',text:`Informed consent means you receive ALL information — risks AND benefits — before agreeing to any procedure. That is your legal right.`},
+      {type:'myth',text:`"Working longer hours is the key to getting ahead."`},
+      {type:'fact',text:`Research consistently shows that focused 4–5 hour deep work sessions outperform unfocused 10-hour days. Rest isn't laziness — it's strategy.`},
+      {type:'myth',text:`"If you're not busy, you're falling behind."`},
+      {type:'fact',text:`The most effective people protect their time fiercely. Saying no to the right things is how you say yes to what actually matters.`},
     ]
   },
 ];
@@ -1298,10 +1426,10 @@ t3start();
 // TEMPLATE 4 — STAT CARDS
 // ──────────────────────────────────
 let t4stats=[
-  {num:'41%',label:'of Australian births end in caesarean section',highlight:false},
-  {num:'35%',label:'of women are induced before labour begins naturally',highlight:false},
-  {num:'73%',label:'of people wish they had started sooner',highlight:false},
-  {num:'1 in 3',label:'women say they felt they had no real choice in their birth',highlight:false},
+  {num:'73%',label:'of people wish they had started their goal sooner',highlight:false},
+  {num:'21 days',label:'is all it takes to build a habit that actually sticks',highlight:false},
+  {num:'5x',label:'more likely to succeed when you write your goals down',highlight:false},
+  {num:'1%',label:'better every day — that is 37x better in a year',highlight:false},
 ];
 let t4timers=[];
 function t4restart(){
@@ -1330,11 +1458,11 @@ t4start();
 // TEMPLATE 5 — POV STORY
 // ──────────────────────────────────
 let t5slides=[
-  {pov:`POV: You're 40 weeks and your OB just told you to book an induction.`,tags:['#birthautonomy','#40weekspregnant']},
-  {pov:`You go home and start Googling.<br>You find out 40 weeks is not an <em>expiry date.</em>`,tags:['#informedconsent','#birthtruth']},
-  {pov:`You finally decide to just go for it.<br><em>Everything shifts from that moment.</em>`,tags:['#momentum','#juststart']},
-  {pov:`You do the work.<br>You back yourself.<br><em>You walk in ready.</em>`,tags:['#growth','#mindset']},
-  {pov:`Your baby arrives in their own time.<br>Your body didn't fail.<br><em>It was trusted.</em>`,tags:['#trustyourbody','#birthstory']},
+  {pov:`POV: You've been putting off the thing you know will change everything.`,tags:['#growth','#mindset']},
+  {pov:`You open your laptop.<br>You just start.<br><em>No plan. No perfect moment.</em>`,tags:['#juststart','#momentum']},
+  {pov:`Three hours in and you're further than six months of thinking about it.`,tags:['#action','#progress']},
+  {pov:`You realise the fear wasn't about failing.<br><em>It was about succeeding.</em>`,tags:['#selfawareness','#breakthrough']},
+  {pov:`You kept going anyway.<br><em>That's the whole thing.</em>`,tags:['#consistency','#results']},
 ];
 let t5current=0,t5interval=null,t5fillTimers=[];
 function t5restart(){
@@ -1729,75 +1857,992 @@ function switchRTab(el, paneId){
   document.getElementById(paneId).classList.add('on');
 }
 
-function setToneMob(el){
-  document.querySelectorAll('.mob-tone').forEach(b=>b.classList.remove('active'));
+
+
+
+
+// ══════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════
+const S = {
+  bg: null,
+  idea: '',
+  tone: 'confident',
+  handle: '@yourbrand',
+  caption: ''
+};
+
+function updateHandle() {
+  const v = (document.getElementById('brandHandle')||{}).value || '@yourbrand';
+  S.handle = v;
+  document.querySelectorAll('.t1-handle,.t2-handle,.t3-handle,.t4-handle,.t5-handle,.t6-handle,.t7-handle,.t8-handle')
+    .forEach(el => el.textContent = v);
+}
+
+function copyCaption() {
+  const txt = document.getElementById('captionBox').textContent;
+  navigator.clipboard.writeText(txt).then(() => showToast('Caption copied ✓'));
+}
+
+// ══════════════════════════════════════════════════════════
+// BACKGROUND IMAGE
+// ══════════════════════════════════════════════════════════
+function applyBg(src) {
+  S.bg = src;
+  document.querySelectorAll('.t1-bg,.t2-bg,.t3-bg,.t4-bg,.t5-bg,.t6-bg,.t7-bg,.t8-bg')
+    .forEach(el => {
+      el.style.backgroundImage = 'url(' + src + ')';
+      el.style.backgroundSize  = 'cover';
+      el.style.backgroundPosition = 'center';
+    });
+  // Show thumbnail in right panel
+  const thumb = document.getElementById('bgThumb');
+  if (thumb) {
+    thumb.style.display = 'block';
+    thumb.style.backgroundImage = 'url(' + src + ')';
+  }
+  if (typeof ImgPlacement !== 'undefined') ImgPlacement.runOnCurrentBg();
+}
+
+function clearBg() {
+  S.bg = null;
+  document.querySelectorAll('.t1-bg,.t2-bg,.t3-bg,.t4-bg,.t5-bg,.t6-bg,.t7-bg,.t8-bg')
+    .forEach(el => {
+      el.style.backgroundImage = '';
+      el.style.backgroundSize  = '';
+      el.style.backgroundPosition = '';
+    });
+  const thumb = document.getElementById('bgThumb');
+  if (thumb) thumb.style.display = 'none';
+}
+
+function handleBgUpload(ev) {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    applyBg(e.target.result);
+    showToast('Photo applied to all templates ✓');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function searchUnsplash() {
+  const q   = (document.getElementById('unsplashQ')  ||{}).value || '';
+  const key = (document.getElementById('unsplashKey')||{}).value ||
+              localStorage.getItem('unsplash_key') || '';
+  if (!key) { showToast('Add your Unsplash API key first'); return; }
+  if (!q) return;
+  localStorage.setItem('unsplash_key', key);
+  try {
+    const res  = await fetch(
+      'https://api.unsplash.com/search/photos?query=' + encodeURIComponent(q) + '&per_page=6&orientation=portrait',
+      { headers: { Authorization: 'Client-ID ' + key } }
+    );
+    const data = await res.json();
+    const grid = document.getElementById('unsplashResults');
+    if (!grid) return;
+    grid.innerHTML = '';
+    (data.results || []).forEach(photo => {
+      const img = document.createElement('img');
+      img.src = photo.urls.small;
+      img.className = 'dt-thumb';
+      img.onclick = () => applyBg(photo.urls.regular);
+      grid.appendChild(img);
+    });
+  } catch(e) { showToast('Unsplash error: ' + e.message); }
+}
+
+async function autoFetchUnsplash(topic) {
+  const key = localStorage.getItem('unsplash_key') ||
+              ((document.getElementById('unsplashKey')||{}).value || '');
+  if (!key) return;
+  const words = topic.replace(/[^a-z0-9 ]/gi,'').split(/\s+/).slice(0,3).join(' ');
+  try {
+    const res  = await fetch(
+      'https://api.unsplash.com/search/photos?query=' + encodeURIComponent(words) + '&per_page=1&orientation=portrait',
+      { headers: { Authorization: 'Client-ID ' + key } }
+    );
+    const data = await res.json();
+    const photo = (data.results||[])[0];
+    if (photo) applyBg(photo.urls.regular);
+  } catch(e) { /* silent */ }
+}
+
+// ══════════════════════════════════════════════════════════
+// IMAGE PLACEMENT + HERO DETECTION
+// ══════════════════════════════════════════════════════════
+const ImgPlacement = {
+  analyse(img, cols, rows) {
+    const W = 120, H = 120;
+    const cw = Math.floor(W / cols), ch = Math.floor(H / rows);
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const ctx = cv.getContext('2d');
+    ctx.drawImage(img, 0, 0, W, H);
+    const px = ctx.getImageData(0, 0, W, H).data;
+    const zones = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let bright = 0, edge = 0, n = 0;
+        for (let y = r * ch; y < (r+1) * ch; y++) {
+          for (let x = c * cw; x < (c+1) * cw; x++) {
+            const i4 = (y * W + x) * 4;
+            const lum = 0.299*px[i4] + 0.587*px[i4+1] + 0.114*px[i4+2];
+            bright += lum;
+            if (x+1 < W && y+1 < H) {
+              const ri = (y * W + x+1) * 4;
+              const di = ((y+1) * W + x) * 4;
+              const lumR = 0.299*px[ri] + 0.587*px[ri+1] + 0.114*px[ri+2];
+              const lumD = 0.299*px[di] + 0.587*px[di+1] + 0.114*px[di+2];
+              edge += Math.abs(lum - lumR) + Math.abs(lum - lumD);
+            }
+            n++;
+          }
+        }
+        zones.push({ row: r, col: c, brightness: bright / n, edge: edge / n });
+      }
+    }
+    return zones;
+  },
+  pickTextZone(zones, prefer) {
+    const maxRow = Math.max(...zones.map(z => z.row));
+    const midRow = Math.round(maxRow / 2);
+    const scored = zones.map(z => {
+      let posScore = 0;
+      if (prefer === 'bottom' && z.row === maxRow) posScore = 30;
+      if (prefer === 'top'    && z.row === 0)      posScore = 30;
+      if (prefer === 'centre' && z.row === midRow) posScore = 30;
+      const darkScore  = (255 - z.brightness) * 0.4;
+      const clearScore = (100 - Math.min(z.edge, 100)) * 0.3;
+      return Object.assign({}, z, { total: posScore + darkScore + clearScore });
+    });
+    scored.sort((a,b) => b.total - a.total);
+    return scored[0];
+  },
+  cfg: {
+    1:{cols:1,rows:3,prefer:'bottom'}, 2:{cols:1,rows:3,prefer:'bottom'},
+    3:{cols:2,rows:2,prefer:'top'},    4:{cols:2,rows:2,prefer:'top'},
+    5:{cols:1,rows:3,prefer:'bottom'}, 6:{cols:2,rows:1,prefer:'bottom'},
+    7:{cols:1,rows:3,prefer:'centre'}, 8:{cols:1,rows:3,prefer:'top'}
+  },
+  applyToFrame(frameEl, img, frameNum) {
+    const c = this.cfg[frameNum] || {cols:1,rows:3,prefer:'bottom'};
+    const zones = this.analyse(img, c.cols, c.rows);
+    const zone  = this.pickTextZone(zones, c.prefer);
+    const totalRows = c.rows;
+    const relPos = zone.row / Math.max(totalRows - 1, 1);
+    let gradDir = relPos < 0.35 ? 'to bottom' : (relPos > 0.65 ? 'to top' : 'to bottom');
+    const alpha = 0.25 + (zone.brightness / 255) * 0.45;
+    frameEl.style.setProperty('--text-color-auto', zone.brightness < 128 ? '#fff' : '#111');
+    frameEl.style.setProperty('--scrim-dir', gradDir);
+    frameEl.style.setProperty('--scrim-alpha', alpha.toFixed(2));
+  },
+  applyAll(img) {
+    for (let n = 1; n <= 8; n++) {
+      const frame = document.getElementById('frame' + n);
+      if (frame) this.applyToFrame(frame, img, n);
+    }
+  },
+  runOnCurrentBg() {
+    if (!S.bg) return;
+    const img = new Image();
+    img.onload = () => this.applyAll(img);
+    img.src = S.bg;
+  }
+};
+
+// ══════════════════════════════════════════════════════════
+// BRAND PROFILE
+// ══════════════════════════════════════════════════════════
+const Brand = {
+  key: 'orbittBrand',
+  load() {
+    try { return JSON.parse(localStorage.getItem(this.key) || 'null') || {}; }
+    catch(e) { return {}; }
+  },
+  save(data) { localStorage.setItem(this.key, JSON.stringify(data)); },
+  applyColors(b) {
+    if (b.color1) document.documentElement.style.setProperty('--brand-c1', b.color1);
+    if (b.color2) document.documentElement.style.setProperty('--brand-c2', b.color2);
+  },
+  renderProfileCard(b) {
+    const card = document.getElementById('brandProfileCard');
+    if (!card) return;
+    if (!b || !b.name) {
+      card.innerHTML = '<div style="font-size:11px;color:var(--muted);padding:6px 0">No profile yet</div>';
+      return;
+    }
+    const traitHtml = (b.traits||[]).slice(0,4).map(function(t){
+      return '<span style="display:inline-block;padding:2px 8px;background:rgba(124,92,252,0.15);border-radius:10px;font-size:10px;color:var(--accent2);margin:2px">' + t + '</span>';
+    }).join('');
+    card.innerHTML =
+      '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">' + (b.name||'') + '</div>' +
+      (b.industry ? '<div style="font-size:10px;color:var(--muted);margin-bottom:4px">' + b.industry + '</div>' : '') +
+      (traitHtml ? '<div style="margin-bottom:6px">' + traitHtml + '</div>' : '');
+  },
+  promptContext(b) {
+    if (!b || !b.name) return '';
+    var parts = [];
+    if (b.name)     parts.push('Brand: ' + b.name);
+    if (b.tagline)  parts.push('Tagline: ' + b.tagline);
+    if (b.industry) parts.push('Industry: ' + b.industry);
+    if (b.audience) parts.push('Audience: ' + b.audience);
+    if (b.traits && b.traits.length) parts.push('Voice: ' + b.traits.join(', '));
+    // Tone sliders
+    var formal = b.slFormal||40, edgy = b.slEdgy||35, length = b.slLength||30;
+    var toneDesc = (formal > 60 ? 'formal' : formal < 35 ? 'casual' : 'conversational') + ', ' +
+                   (edgy > 60 ? 'edgy/provocative' : edgy < 30 ? 'safe/professional' : 'balanced') + ', ' +
+                   (length > 60 ? 'detailed' : length < 30 ? 'punchy/short' : 'medium length');
+    parts.push('Tone style: ' + toneDesc);
+    if (b.doSay)    parts.push('We say things like: "' + b.doSay + '"');
+    if (b.dontSay)  parts.push('We never say: "' + b.dontSay + '"');
+    if (b.pillars)  parts.push('Content pillars: ' + b.pillars);
+    if (b.ctaStyle) parts.push('CTA style: ' + b.ctaStyle);
+    if (b.hashStyle) parts.push('Hashtags: ' + (b.hashStyle === 'none' ? 'none' : b.hashStyle === 'few' ? '3-5 targeted' : '8-10 broad'));
+    if (b.example)  parts.push('Example post in our voice: "' + b.example + '"');
+    return 'BRAND CONTEXT — apply to all content:\n' + parts.join('\n') + '\n\n';
+  }
+};
+
+// ══════════════════════════════════════════════════════════
+// API + GENERATION
+// ══════════════════════════════════════════════════════════
+async function apiAsk(prompt) {
+  const r = await fetch('/api/ask', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: prompt })
+  });
+  if (!r.ok) throw new Error(await r.text());
+  const d = await r.json();
+  return d.content[0].text;
+}
+
+function buildMegaPrompt(idea, tone) {
+  const toneMap = {
+    confident: 'confident and direct',
+    bold:      'bold and punchy',
+    funny:     'funny and irreverent',
+    casual:    'casual and conversational'
+  };
+  const td  = toneMap[tone] || 'confident and direct';
+  const b   = Brand.load();
+  const ctx = Brand.promptContext(b);
+  return ctx + 'Create social media content for ALL 8 formats about: "' + idea + '". Tone: ' + td + '. Be specific, creative, and punchy. Do not use placeholder text. Make every line feel real and shareable.\n\nReturn ONLY valid JSON (no markdown, no code block):\n{\n  "chat": { "messages": [ {"dir":"in","text":"..."}, {"dir":"out","text":"..."} ] },\n  "quote": { "quotes": ["quote 1","quote 2","quote 3"] },\n  "myth": { "myth": "...", "fact": "...", "extra": "optional extra fact" },\n  "stats": { "stat1": {"num":"...","label":"..."}, "stat2": {"num":"...","label":"..."}, "stat3": {"num":"...","label":"..."}, "stat4": {"num":"...","label":"..."} },\n  "pov": { "lines": ["POV line 1","POV line 2","POV line 3","POV line 4","POV line 5"] },\n  "beforeafter": { "before": "...", "after": "...", "caption": "..." },\n  "hottake": { "eyebrow": "HOT TAKE 🔥", "statement": "...", "sub": "...", "cta": "Agree or disagree? ↓" },\n  "tips": { "heading": "...", "tips": ["tip 1","tip 2","tip 3","tip 4","tip 5"] },\n  "caption": "Instagram caption with hashtags"\n}';
+}
+
+function applyGenerated(data) {
+  if (data.chat && data.chat.messages) {
+    var d = 600;
+    window._t1conv = data.chat.messages.map(function(m) {
+      var item = { dir: m.dir === 'in' ? 'in' : 'out', text: m.text, delay: d };
+      d += 1800 + m.text.length * 40;
+      return item;
+    });
+    t1restart();
+  }
+  if (data.quote && data.quote.quotes) {
+    window._t2quotes = data.quote.quotes;
+    t2restart();
+  }
+  if (data.myth) { window._mythData = data.myth; t3restart(); }
+  if (data.stats) { window._statsData = data.stats; t4restart(); }
+  if (data.pov && data.pov.lines) { window._povLines = data.pov.lines; t5restart(); }
+  if (data.beforeafter) {
+    window._t6data = { before: data.beforeafter.before||'', after: data.beforeafter.after||'', caption: data.beforeafter.caption||'' };
+    t6restart();
+  }
+  if (data.hottake) {
+    window._t7data = { eyebrow: data.hottake.eyebrow||'HOT TAKE 🔥', statement: data.hottake.statement||'', sub: data.hottake.sub||'', cta: data.hottake.cta||'Agree or disagree? ↓' };
+    t7restart();
+  }
+  if (data.tips) {
+    window._t8data = { heading: data.tips.heading||'Things worth knowing', tips: data.tips.tips||[] };
+    t8restart();
+  }
+  if (data.caption) {
+    S.caption = data.caption;
+    var cb = document.getElementById('captionBox');
+    if (cb) cb.textContent = data.caption;
+  }
+}
+
+// ── Tone selector ──────────────────────────────────────────
+function setTone(el) {
+  document.querySelectorAll('.dt-tone').forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
-  S.tone = el.dataset.tone;
-  // sync to desktop
-  document.querySelectorAll('.dt-tone').forEach(b=>{
-    b.classList.toggle('active', b.dataset.tone===S.tone);
+  S.tone = el.dataset.tone || 'confident';
+}
+
+// ── Iterate (refine) existing content ──────────────────────
+async function iterateAll(direction) {
+  const idea = S.idea || (document.getElementById('ideaInput')||{}).value || 'personal growth';
+  const directMap = {
+    shorter:  'Make all content significantly shorter and more punchy. Keep the core message but cut everything that is not essential.',
+    punchier: 'Rewrite all content to be more impactful, direct, and scroll-stopping. Every line should hit harder.',
+    funnier:  'Add wit, personality, and humour throughout. Keep the message but make it entertaining.'
+  };
+  const instruction = directMap[direction] || 'Improve the content.';
+  const btn = document.querySelector('.dt-iter[onclick*="' + direction + '"]');
+  if (btn) { btn.textContent = '...'; btn.disabled = true; }
+  try {
+    const prompt = instruction + ' Original topic: "' + idea + '". Tone: ' + (S.tone||'confident') + '. ' + Brand.promptContext(Brand.load()) + 'Return the same JSON structure with all 8 formats improved: {"chat":{...},"quote":{...},"myth":{...},"stats":{...},"pov":{...},"beforeafter":{...},"hottake":{...},"tips":{...},"caption":"..."}';
+    const raw = await apiAsk(prompt);
+    const cleaned = raw.replace(/```json\s*/gi,'').replace(/```\s*/gi,'').trim();
+    let data;
+    try { data = JSON.parse(cleaned); }
+    catch(e) { const m = cleaned.match(/\{[\s\S]*\}/); if(m) data = JSON.parse(m[0]); else throw e; }
+    applyGenerated(data);
+    showToast('Content refined ✓');
+  } catch(e) {
+    showToast('Error: ' + e.message);
+  } finally {
+    const labels = { shorter: 'Shorter', punchier: 'Punchier', funnier: 'Funnier' };
+    if (btn) { btn.textContent = labels[direction]||direction; btn.disabled = false; }
+  }
+}
+
+async function generateAll() {
+  const ideaEl = document.getElementById('ideaInput');
+  const btn    = document.querySelector('.dt-gbtn');
+  const idea   = (ideaEl ? ideaEl.value.trim() : '') || 'personal growth';
+  const tone   = S.tone || 'confident';
+  S.idea = idea;
+  if (btn) { btn.textContent = '⟳ Generating…'; btn.disabled = true; }
+  try {
+    const [, raw] = await Promise.all([
+      autoFetchUnsplash(idea),
+      apiAsk(buildMegaPrompt(idea, tone))
+    ]);
+    const cleaned = raw.replace(/```json\s*/gi,'').replace(/```\s*/gi,'').trim();
+    let data;
+    try { data = JSON.parse(cleaned); }
+    catch(e) {
+      const m = cleaned.match(/\{[\s\S]*\}/);
+      if (m) data = JSON.parse(m[0]);
+      else throw new Error('Could not parse JSON from response');
+    }
+    applyGenerated(data);
+    showToast('Content generated ✓');
+  } catch(e) {
+    showToast('Error: ' + e.message);
+    console.error(e);
+  } finally {
+    if (btn) { btn.textContent = '✶ Generate All'; btn.disabled = false; }
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// BRAND MODAL UI
+// ══════════════════════════════════════════════════════════
+var _bmStep = 0;
+
+function openBrandModal() {
+  const m = document.getElementById('brandModal');
+  if (m) { m.style.display = 'flex'; bmGoTo(0); }
+  const b = Brand.load();
+  if (b.name)     { const el = document.getElementById('bmName');     if(el) el.value = b.name; }
+  if (b.tagline)  { const el = document.getElementById('bmTagline');  if(el) el.value = b.tagline; }
+  if (b.industry) { const el = document.getElementById('bmIndustry'); if(el) el.value = b.industry; }
+  if (b.audience) { const el = document.getElementById('bmAudience'); if(el) el.value = b.audience; }
+  if (b.example)  { const el = document.getElementById('bmExample');  if(el) el.value = b.example; }
+  if (b.doSay)    { const el = document.getElementById('bmDoSay');    if(el) el.value = b.doSay; }
+  if (b.dontSay)  { const el = document.getElementById('bmDontSay'); if(el) el.value = b.dontSay; }
+  if (b.pillars)  { const el = document.getElementById('bmPillars'); if(el) el.value = b.pillars; }
+  if (b.color1)   { const el = document.getElementById('bmColor1');   if(el) el.value = b.color1; }
+  if (b.color2)   { const el = document.getElementById('bmColor2');   if(el) el.value = b.color2; }
+  if (typeof b.slFormal !== 'undefined') { const el = document.getElementById('slFormal'); if(el) el.value = b.slFormal; }
+  if (typeof b.slEdgy   !== 'undefined') { const el = document.getElementById('slEdgy');   if(el) el.value = b.slEdgy; }
+  if (typeof b.slLength !== 'undefined') { const el = document.getElementById('slLength'); if(el) el.value = b.slLength; }
+  // CTA style radio
+  if (b.ctaStyle) {
+    document.querySelectorAll('input[name="ctaStyle"]').forEach(function(r) { r.checked = r.value === b.ctaStyle; });
+  }
+  if (b.hashStyle) {
+    document.querySelectorAll('input[name="hashStyle"]').forEach(function(r) { r.checked = r.value === b.hashStyle; });
+  }
+  // Voice chips
+  document.querySelectorAll('#bmVoiceChips .bm-chip').forEach(function(c) { c.classList.remove('on'); });
+  if (b.traits) b.traits.forEach(function(t) {
+    document.querySelectorAll('#bmVoiceChips .bm-chip').forEach(function(c) {
+      if ((c.dataset.val||c.textContent.trim()) === t) c.classList.add('on');
+    });
   });
 }
 
-function generateAllMob(){
-  const mob = document.getElementById('mobIdeaInput');
-  const desk = document.getElementById('ideaInput');
-  if(mob && mob.value.trim()) desk.value = mob.value;
-  generateAll();
+function dismissBrandModal() {
+  const m = document.getElementById('brandModal');
+  if (m) m.style.display = 'none';
 }
 
-// sync mobile preview — move active frame into mob-preview
-function syncMobPreview(){
-  const mp = document.getElementById('mobPreview');
-  if(!mp) return;
-  const active = document.querySelector('.template-frame.active');
-  if(active && mp && !mp.contains(active)){
-    mp.appendChild(active);
-  }
+function bmGoTo(step) {
+  _bmStep = step;
+  // Steps are bmStep0, bmStep1, bmStep2
+  ['bmStep0','bmStep1','bmStep2'].forEach(function(id, i) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = (i === step) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.bm-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === step);
+  });
+  const back = document.getElementById('bmBack');
+  const next = document.getElementById('bmNext');
+  const save = document.getElementById('bmSave');
+  if (back) back.style.display = step > 0 ? 'inline-flex' : 'none';
+  if (next) next.style.display = step < 2 ? 'inline-flex' : 'none';
+  if (save) save.style.display = step === 2 ? 'inline-flex' : 'none';
 }
 
-// patch switchTemplate to also sync mobile preview and both nav UIs
-const _origSwitch = switchTemplate;
-function switchTemplate(n, el){
-  // update both nav strips
-  document.querySelectorAll('.dt-tpl-card').forEach((c,i)=>c.classList.toggle('active',i===n-1));
-  document.querySelectorAll('.mob-tpl-chip').forEach((c,i)=>c.classList.toggle('active',i===n-1));
-  // call original but prevent double-active-toggle (we already did it)
-  document.querySelectorAll('.template-frame').forEach(f=>f.classList.remove('active'));
-  document.getElementById('frame'+n).classList.add('active');
-  const m=meta[n];
-  if(m){
-    document.getElementById('topbarTitle').textContent=m.label+' — '+m.desc.split('.')[0];
-    document.getElementById('spLabel').textContent=m.label;
-    document.getElementById('spDesc').textContent=m.desc;
-    document.getElementById('spDims').textContent=m.dims;
-    document.getElementById('spRatio').textContent=m.ratio;
-    document.getElementById('spPlatforms').innerHTML=m.platforms.map(p=>'<span class="dt-tag">'+p+'</span>').join('');
-    document.getElementById('spTheme').textContent=m.theme;
+function bmNext() { if (_bmStep < 2) bmGoTo(_bmStep + 1); }
+function bmPrev() { if (_bmStep > 0) bmGoTo(_bmStep - 1); }
+function bmToggleChip(el) { el.classList.toggle('on'); }
+
+function saveBrandProfile() {
+  function val(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+  function radioVal(name) {
+    const checked = document.querySelector('input[name="' + name + '"]:checked');
+    return checked ? checked.value : '';
   }
-  if(n===1)t1start();
-  else if(n===2)t2start();
-  else if(n===3)t3start();
-  else if(n===4)t4start();
-  else if(n===5)t5start();
-  else if(n===6)t6start();
-  else if(n===7)t7start();
-  else if(n===8)t8start();
-  syncMobPreview();
+  const b = {
+    name:     val('bmName'),
+    tagline:  val('bmTagline'),
+    industry: val('bmIndustry'),
+    audience: val('bmAudience'),
+    example:  val('bmExample'),
+    doSay:    val('bmDoSay'),
+    dontSay:  val('bmDontSay'),
+    pillars:  val('bmPillars'),
+    color1:   val('bmColor1') || '#7c5cfc',
+    color2:   val('bmColor2') || '#a78bfa',
+    slFormal: parseInt(val('slFormal')||'40'),
+    slEdgy:   parseInt(val('slEdgy')  ||'35'),
+    slLength: parseInt(val('slLength')||'30'),
+    ctaStyle: radioVal('ctaStyle')  || 'question',
+    hashStyle: radioVal('hashStyle') || 'few',
+    traits: Array.from(document.querySelectorAll('#bmVoiceChips .bm-chip.on')).map(function(c){ return c.dataset.val||c.textContent.trim(); })
+  };
+  Brand.save(b);
+  Brand.applyColors(b);
+  Brand.renderProfileCard(b);
+  dismissBrandModal();
+  showToast('Brand profile saved ✓');
 }
 
-// On load, move active frame to mob-preview if on mobile
-document.addEventListener('DOMContentLoaded', ()=>{
-  syncMobPreview();
-  // sync mob idea input with desktop
-  const mob = document.getElementById('mobIdeaInput');
-  const desk = document.getElementById('ideaInput');
-  if(mob && desk){
-    mob.addEventListener('input', ()=>{ desk.value = mob.value; });
-    desk.addEventListener('input', ()=>{ mob.value = desk.value; });
+(function initBrand() {
+  const b = Brand.load();
+  Brand.applyColors(b);
+  Brand.renderProfileCard(b);
+  if (!b.name && !localStorage.getItem('orbittBrandSeen')) {
+    localStorage.setItem('orbittBrandSeen', '1');
+    setTimeout(function(){ openBrandModal(); }, 800);
   }
-});
+})();
+
+
+// ══════════════════════════════════════════════════════════
+// GENERATION HISTORY
+// ══════════════════════════════════════════════════════════
+var History = {
+  key: 'orbittHistory',
+  max: 20,
+
+  load: function() {
+    try { return JSON.parse(localStorage.getItem(this.key) || '[]'); }
+    catch(e) { return []; }
+  },
+
+  save: function(entries) {
+    localStorage.setItem(this.key, JSON.stringify(entries));
+  },
+
+  push: function(idea, tone, data) {
+    var entries = this.load();
+    var entry = {
+      id: (Date.now().toString(36) + Math.random().toString(36).slice(2)),
+      ts: Date.now(),
+      idea: idea,
+      tone: tone,
+      brand: Brand.load(),
+      data: data,
+      status: 'draft'
+    };
+    entries.unshift(entry);
+    if (entries.length > this.max) entries = entries.slice(0, this.max);
+    this.save(entries);
+    return entry;
+  },
+
+  updateStatus: function(id, status) {
+    var entries = this.load();
+    entries.forEach(function(e) { if (e.id === id) e.status = status; });
+    this.save(entries);
+  },
+
+  remove: function(id) {
+    var entries = this.load().filter(function(e) { return e.id !== id; });
+    this.save(entries);
+  }
+};
+
+function openHistoryDrawer() {
+  var overlay = document.getElementById('histOverlay');
+  if (overlay) { overlay.classList.add('open'); renderHistoryList(); }
+}
+
+function closeHistoryDrawer(e) {
+  if (e && e.target !== document.getElementById('histOverlay')) return;
+  var overlay = document.getElementById('histOverlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function renderHistoryList() {
+  var list = document.getElementById('histList');
+  if (!list) return;
+  var entries = History.load();
+  if (!entries.length) {
+    list.innerHTML = '<div class="hist-empty">No generations yet.<br>Hit ✦ Generate All to create your first one.</div>';
+    return;
+  }
+  list.innerHTML = entries.map(function(e) {
+    var ago = formatAgo(e.ts);
+    var statusHtml = '<span class="hist-status ' + (e.status||'draft') + '">' + (e.status||'draft') + '</span>';
+    return '<div class="hist-item" id="hitem-' + e.id + '">' +
+      '<div class="hist-item-idea">' + escHtml(e.idea) + '</div>' +
+      '<div class="hist-item-meta">' +
+        '<span>' + ago + '</span>' +
+        '<span class="hist-item-tone">' + (e.tone||'confident') + '</span>' +
+        statusHtml +
+      '</div>' +
+      '<div class="hist-actions">' +
+        '<button class="hist-btn primary" onclick="restoreHistory(\'' + e.id + '\')">↩ Restore</button>' +
+        (e.status === 'draft' ? '<button class="hist-btn" onclick="markHistStatus(\'' + e.id + '\',\'approved\')">✓ Approve</button>' : '') +
+        '<button class="hist-btn" onclick="deleteHistory(\'' + e.id + '\')" style="flex:0;padding:5px 8px">✕</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function restoreHistory(id) {
+  var entry = History.load().find(function(e) { return e.id === id; });
+  if (!entry) return;
+  S.idea = entry.idea; S.tone = entry.tone;
+  var ideaEl = document.getElementById('ideaInput');
+  if (ideaEl) ideaEl.value = entry.idea;
+  // restore tone chip
+  document.querySelectorAll('.dt-tone').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.tone === entry.tone);
+  });
+  applyGenerated(entry.data);
+  closeHistoryDrawer();
+  showToast('Restored: ' + entry.idea.slice(0,40) + (entry.idea.length>40?'…':''));
+}
+
+function markHistStatus(id, status) {
+  History.updateStatus(id, status);
+  renderHistoryList();
+}
+
+function deleteHistory(id) {
+  History.remove(id);
+  renderHistoryList();
+}
+
+function escHtml(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatAgo(ts) {
+  var diff = Date.now() - ts;
+  var m = Math.floor(diff/60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return m + 'm ago';
+  var h = Math.floor(m/60);
+  if (h < 24) return h + 'h ago';
+  return Math.floor(h/24) + 'd ago';
+}
+
+// ══════════════════════════════════════════════════════════
+// CAPTION COUNTER
+// ══════════════════════════════════════════════════════════
+function updateCaptionCounter(text) {
+  var counter = document.getElementById('captionCounter');
+  var warn    = document.getElementById('captionWarn');
+  if (!counter) return;
+  var len = (text||'').length;
+  counter.textContent = len + ' chars';
+  counter.className = 'caption-counter' + (len > 200 ? ' over' : len > 125 ? ' warn' : '');
+  if (warn) warn.style.display = len > 125 ? 'block' : 'none';
+}
+
+// Wire caption box observer on DOM ready
+(function wireCaptionCounter() {
+  var box = document.getElementById('captionBox');
+  if (!box) return;
+  var obs = new MutationObserver(function() { updateCaptionCounter(box.textContent); });
+  obs.observe(box, { childList: true, characterData: true, subtree: true });
+})();
+
+// ══════════════════════════════════════════════════════════
+// CREDIT COMPLIANCE — update Brand object methods
+// ══════════════════════════════════════════════════════════
+// Patch openBrandModal to handle regulated fields
+var _origOpenBrandModal = openBrandModal;
+openBrandModal = function() {
+  _origOpenBrandModal();
+  var b = Brand.load();
+  if (b.regulated) {
+    var el = document.getElementById('bmRegulated');
+    if (el) { el.checked = true; }
+    var row = document.getElementById('bmAclRow');
+    if (row) row.classList.add('show');
+  }
+  if (b.acl) { var el2 = document.getElementById('bmAcl'); if(el2) el2.value = b.acl; }
+  if (b.crn) { var el3 = document.getElementById('bmCrn'); if(el3) el3.value = b.crn; }
+};
+
+// Patch saveBrandProfile to capture regulated fields
+var _origSaveBrandProfile = saveBrandProfile;
+saveBrandProfile = function() {
+  _origSaveBrandProfile();
+  // Merge regulated fields into saved brand
+  var b = Brand.load();
+  var regEl = document.getElementById('bmRegulated');
+  b.regulated = regEl ? regEl.checked : false;
+  b.acl = (document.getElementById('bmAcl')||{}).value || '';
+  b.crn = (document.getElementById('bmCrn')||{}).value || '';
+  Brand.save(b);
+};
+
+// Patch buildMegaPrompt to inject compliance when regulated=true
+var _origBuildMegaPrompt = buildMegaPrompt;
+buildMegaPrompt = function(idea, tone) {
+  var base = _origBuildMegaPrompt(idea, tone);
+  var b = Brand.load();
+  if (!b.regulated) return base;
+
+  var BANNED = [
+    'guaranteed approval', 'no credit check', 'everyone qualifies',
+    'instant approval', '100% approval', 'bad credit welcome',
+    'no questions asked', 'no income check', 'no fees', 'free money',
+    'guaranteed finance', 'always approved'
+  ];
+  var disclaimer = 'Credit provided by ' + (b.name || 'the lender') +
+    (b.acl ? ' (ACL ' + b.acl + ')' : '') +
+    (b.crn ? ' (CRN ' + b.crn + ')' : '') +
+    '. Terms and conditions apply.';
+
+  var complianceBlock =
+    'COMPLIANCE RULES (Australian CREDIT special ad category — mandatory):\n' +
+    '- NEVER use these phrases or close variants: ' + BANNED.join(', ') + '\n' +
+    '- Do not make any statements about guaranteed outcomes, eligibility, or approval certainty\n' +
+    '- Keep all claims factual and substantiated\n' +
+    '- Copy length: primary text must be 125 characters or under for Meta feed ads\n' +
+    '- Append this disclaimer to the generated caption: "' + disclaimer + '"\n\n';
+
+  return complianceBlock + base;
+};
+
+// ══════════════════════════════════════════════════════════
+// PATCH generateAll TO SAVE HISTORY
+// ══════════════════════════════════════════════════════════
+var _origGenerateAll = generateAll;
+generateAll = async function() {
+  await _origGenerateAll();
+  // Save to history after generation (data was applied to S.*)
+  var ideaEl = document.getElementById('ideaInput');
+  var idea = (ideaEl ? ideaEl.value.trim() : '') || S.idea || 'untitled';
+  var tone = S.tone || 'confident';
+  // Capture current template data snapshot
+  var snapshot = {
+    chat:        window._t1conv    ? { messages: window._t1conv }    : null,
+    quote:       window._t2quotes  ? { quotes: window._t2quotes }    : null,
+    myth:        window._mythData  || null,
+    stats:       window._statsData || null,
+    pov:         window._povLines  ? { lines: window._povLines }     : null,
+    beforeafter: window._t6data    || null,
+    hottake:     window._t7data    || null,
+    tips:        window._t8data    || null,
+    caption:     S.caption         || ''
+  };
+  // Only save if we actually got content
+  if (Object.values(snapshot).some(function(v) { return v !== null && v !== ''; })) {
+    History.push(idea, tone, snapshot);
+  }
+};
+
+// ══════════════════════════════════════════════════════════
+// MULTI-RATIO EXPORT (ZIP)
+// ══════════════════════════════════════════════════════════
+async function exportAllVariants() {
+  if (typeof JSZip === 'undefined') {
+    showToast('JSZip not loaded — try refreshing'); return;
+  }
+  var btn = document.querySelector('.tbtn-variants');
+  if (btn) { btn.textContent = '⟳ Rendering…'; btn.disabled = true; }
+
+  var zip = new JSZip();
+  var idea = (S.idea || 'orbitt').replace(/[^a-z0-9]/gi, '-').slice(0,30).toLowerCase();
+
+  // Map: frameId → target dimensions → zip filename
+  var variants = [
+    { id: 'frame1', W: 1080, H: 1920, label: '9x16-phone' },     // 9:16
+    { id: 'frame2', W: 1080, H: 1080, label: '1x1-quote' },      // 1:1
+    { id: 'frame4', W: 1080, H: 1080, label: '1x1-stats' },      // 1:1
+    { id: 'frame6', W: 1080, H: 1080, label: '1x1-beforeafter' },// 1:1
+    { id: 'frame7', W: 1080, H: 1080, label: '1x1-hottake' },    // 1:1
+    { id: 'frame8', W: 1080, H: 1080, label: '1x1-tips' },       // 1:1
+  ];
+
+  var errors = [];
+  for (var i = 0; i < variants.length; i++) {
+    var v = variants[i];
+    var frame = document.getElementById(v.id);
+    if (!frame) continue;
+    var shell = frame.querySelector('.phone-shell,.square-shell,.story-shell,.wide-shell');
+    if (!shell) continue;
+    try {
+      var blob = await captureShellAsBlob(shell, v.W, v.H);
+      zip.file(idea + '-' + v.label + '.png', blob);
+    } catch(e) {
+      errors.push(v.label + ': ' + e.message);
+    }
+  }
+
+  if (errors.length) console.warn('Export errors:', errors);
+
+  var content = await zip.generateAsync({ type: 'blob' });
+  var url = URL.createObjectURL(content);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'orbitt-' + idea + '-variants.zip';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(function() { URL.revokeObjectURL(url); }, 5000);
+
+  if (btn) { btn.textContent = '⬇ All variants'; btn.disabled = false; }
+  showToast('Exported ' + (variants.length - errors.length) + ' variants ✓');
+}
+
+async function captureShellAsBlob(shell, targetW, targetH) {
+  // Get natural shell dimensions
+  var rect = shell.getBoundingClientRect();
+  var scaleX = targetW / rect.width;
+  var scaleY = targetH / rect.height;
+  var scale  = Math.min(scaleX, scaleY) * 2; // 2x for retina quality
+
+  var dataUrl = await domtoimage.toPng(shell, {
+    width:  rect.width  * scale,
+    height: rect.height * scale,
+    style:  { transform: 'scale(' + scale + ')', transformOrigin: 'top left' }
+  });
+
+  // Convert dataURL to blob
+  var arr = dataUrl.split(',');
+  var mime = arr[0].match(/:(.*?);/)[1];
+  var bstr = atob(arr[1]);
+  var n = bstr.length;
+  var u8arr = new Uint8Array(n);
+  for (var i = 0; i < n; i++) u8arr[i] = bstr.charCodeAt(i);
+  return new Blob([u8arr], { type: mime });
+}
 
 </script>
+
+<!-- ══ HISTORY DRAWER ══ -->
+<div class="hist-overlay" id="histOverlay" onclick="closeHistoryDrawer(event)">
+  <div class="hist-drawer" onclick="event.stopPropagation()">
+    <div class="hist-head">
+      <div class="hist-title">Generation history</div>
+      <button class="hist-close" onclick="closeHistoryDrawer()">✕</button>
+    </div>
+    <div class="hist-list" id="histList"></div>
+  </div>
+</div>
+
+<!-- ══ BRAND ONBOARDING MODAL ══ -->
+<div class="brand-modal-overlay" id="brandModal" style="display:none">
+  <div class="brand-modal">
+    <div class="bm-header">
+      <div class="bm-logo">orbitt</div>
+      <div class="bm-step-dots" id="bmDots">
+        <div class="bm-dot active" data-step="0"></div>
+        <div class="bm-dot" data-step="1"></div>
+        <div class="bm-dot" data-step="2"></div>
+      </div>
+      <button class="bm-skip" onclick="dismissBrandModal()">Skip for now</button>
+    </div>
+
+    <!-- Step 1: Basics -->
+    <div class="bm-step active" id="bmStep0">
+      <div class="bm-step-title">Tell us about your brand</div>
+      <div class="bm-step-sub">This shapes every piece of content we generate for you.</div>
+      <div class="bm-fields">
+        <div class="bm-field-row">
+          <div class="bm-field">
+            <label class="bm-label">Brand / business name</label>
+            <input class="bm-input" id="bmName" placeholder="e.g. Forefront Finance"/>
+          </div>
+          <div class="bm-field">
+            <label class="bm-label">Tagline <span class="bm-optional">optional</span></label>
+            <input class="bm-input" id="bmTagline" placeholder="e.g. Finance made clear"/>
+          </div>
+        </div>
+        <div class="bm-field">
+          <label class="bm-label">Industry</label>
+          <select class="bm-select" id="bmIndustry">
+            <option value="">Select industry…</option>
+            <option>Finance & Accounting</option>
+            <option>Real Estate</option>
+            <option>Health & Wellness</option>
+            <option>E-commerce / Retail</option>
+            <option>Coaching & Consulting</option>
+            <option>Food & Hospitality</option>
+            <option>Legal</option>
+            <option>Technology</option>
+            <option>Creative / Agency</option>
+            <option>Education</option>
+            <option>Trades & Construction</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="bm-field">
+          <label class="bm-label">Who are you talking to?</label>
+          <textarea class="bm-textarea" id="bmAudience" placeholder="e.g. Small business owners aged 30-50 who are time-poor and want clear financial advice without the jargon." rows="3"></textarea>
+        </div>
+        <div class="bm-regulated-row">
+          <div class="bm-regulated-icon">⚠️</div>
+          <div class="bm-regulated-text">
+            <div class="bm-regulated-label">Finance / regulated category (CREDIT)</div>
+            <div class="bm-regulated-sub">Blocks non-compliant copy. Auto-appends ACL/CRN disclaimer. Required for Australian credit advertisers.</div>
+          </div>
+          <label class="bm-toggle">
+            <input type="checkbox" id="bmRegulated" onchange="document.getElementById('bmAclRow').classList.toggle('show',this.checked)"/>
+            <div class="bm-toggle-track"></div>
+          </label>
+        </div>
+        <div class="bm-acl-row" id="bmAclRow">
+          <div class="bm-field" style="flex:1">
+            <label class="bm-label">ACL number</label>
+            <input class="bm-input" id="bmAcl" placeholder="e.g. 123456"/>
+          </div>
+          <div class="bm-field" style="flex:1">
+            <label class="bm-label">CRN <span class="bm-optional">optional</span></label>
+            <input class="bm-input" id="bmCrn" placeholder="e.g. 789012"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Voice -->
+    <div class="bm-step" id="bmStep1">
+      <div class="bm-step-title">What does your brand sound like?</div>
+      <div class="bm-step-sub">Pick the words that describe your voice. Select all that fit.</div>
+      <div class="bm-fields">
+        <div class="bm-field">
+          <label class="bm-label">Voice attributes</label>
+          <div class="bm-chips" id="bmVoiceChips">
+            <div class="bm-chip" data-val="Direct" onclick="bmToggleChip(this)">Direct</div>
+            <div class="bm-chip" data-val="Warm" onclick="bmToggleChip(this)">Warm</div>
+            <div class="bm-chip" data-val="Authoritative" onclick="bmToggleChip(this)">Authoritative</div>
+            <div class="bm-chip" data-val="Playful" onclick="bmToggleChip(this)">Playful</div>
+            <div class="bm-chip" data-val="Educational" onclick="bmToggleChip(this)">Educational</div>
+            <div class="bm-chip" data-val="Inspiring" onclick="bmToggleChip(this)">Inspiring</div>
+            <div class="bm-chip" data-val="Edgy" onclick="bmToggleChip(this)">Edgy</div>
+            <div class="bm-chip" data-val="Relatable" onclick="bmToggleChip(this)">Relatable</div>
+            <div class="bm-chip" data-val="Premium" onclick="bmToggleChip(this)">Premium</div>
+            <div class="bm-chip" data-val="Honest" onclick="bmToggleChip(this)">Honest</div>
+            <div class="bm-chip" data-val="Humorous" onclick="bmToggleChip(this)">Humorous</div>
+            <div class="bm-chip" data-val="Bold" onclick="bmToggleChip(this)">Bold</div>
+          </div>
+        </div>
+        <div class="bm-field">
+          <label class="bm-label">Tone sliders</label>
+          <div class="bm-sliders">
+            <div class="bm-slider-row">
+              <span class="bm-slider-label">Casual</span>
+              <input type="range" class="bm-slider" id="slFormal" min="0" max="100" value="40"/>
+              <span class="bm-slider-label">Formal</span>
+            </div>
+            <div class="bm-slider-row">
+              <span class="bm-slider-label">Safe</span>
+              <input type="range" class="bm-slider" id="slEdgy" min="0" max="100" value="35"/>
+              <span class="bm-slider-label">Edgy</span>
+            </div>
+            <div class="bm-slider-row">
+              <span class="bm-slider-label">Punchy</span>
+              <input type="range" class="bm-slider" id="slLength" min="0" max="100" value="30"/>
+              <span class="bm-slider-label">Detailed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Content -->
+    <div class="bm-step" id="bmStep2">
+      <div class="bm-step-title">Content style & identity</div>
+      <div class="bm-step-sub">The finishing touches that make your content unmistakably yours.</div>
+      <div class="bm-fields">
+        <div class="bm-field-row">
+          <div class="bm-field">
+            <label class="bm-label">We always say things like…</label>
+            <textarea class="bm-textarea" id="bmDoSay" placeholder="e.g. 'Your money should work harder than you do'" rows="2"></textarea>
+          </div>
+          <div class="bm-field">
+            <label class="bm-label">We never say…</label>
+            <textarea class="bm-textarea" id="bmDontSay" placeholder="e.g. Avoid jargon like 'synergise', 'leverage'" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="bm-field">
+          <label class="bm-label">Content pillars <span class="bm-optional">comma-separated</span></label>
+          <input class="bm-input" id="bmPillars" placeholder="e.g. Tax tips, Business growth, Mindset, Client wins"/>
+        </div>
+        <div class="bm-field-row">
+          <div class="bm-field">
+            <label class="bm-label">CTA style</label>
+            <div class="bm-radio-group">
+              <label class="bm-radio"><input type="radio" name="ctaStyle" value="question" checked/> End with a question</label>
+              <label class="bm-radio"><input type="radio" name="ctaStyle" value="action"/> Call to action</label>
+              <label class="bm-radio"><input type="radio" name="ctaStyle" value="statement"/> Bold statement</label>
+            </div>
+          </div>
+          <div class="bm-field">
+            <label class="bm-label">Hashtags</label>
+            <div class="bm-radio-group">
+              <label class="bm-radio"><input type="radio" name="hashStyle" value="none"/> None</label>
+              <label class="bm-radio"><input type="radio" name="hashStyle" value="few" checked/> 3–5 targeted</label>
+              <label class="bm-radio"><input type="radio" name="hashStyle" value="many"/> 8–10 broad</label>
+            </div>
+          </div>
+        </div>
+        <div class="bm-field">
+          <label class="bm-label">Brand colours <span class="bm-optional">applied to templates</span></label>
+          <div class="bm-color-row">
+            <div class="bm-color-wrap">
+              <input type="color" class="bm-color" id="bmColor1" value="#7c5cfc"/>
+              <span class="bm-color-label">Primary</span>
+            </div>
+            <div class="bm-color-wrap">
+              <input type="color" class="bm-color" id="bmColor2" value="#a78bfa"/>
+              <span class="bm-color-label">Secondary</span>
+            </div>
+          </div>
+        </div>
+        <div class="bm-field">
+          <label class="bm-label">Example post in your voice <span class="bm-optional">optional but powerful</span></label>
+          <textarea class="bm-textarea" id="bmExample" placeholder="Paste a post you've written that sounds like you at your best…" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="bm-footer">
+      <button class="bm-back" id="bmBack" onclick="bmPrev()" style="display:none">← Back</button>
+      <div style="flex:1"></div>
+      <button class="bm-next" id="bmNext" onclick="bmNext()">Next →</button>
+      <button class="bm-save" id="bmSave" onclick="saveBrandProfile()" style="display:none">Save profile ✦</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
