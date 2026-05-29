@@ -284,6 +284,13 @@ function switchTemplate(n,el){
     document.getElementById('spRatio').textContent=m.ratio;
     document.getElementById('spPlatforms').innerHTML=m.platforms.map(p=>`<span class="sp-tag">${p}</span>`).join('');
     document.getElementById('spTheme').textContent=m.theme;
+    // Update genbar info strip
+    var gn=document.getElementById('gbiName');
+    var gr=document.getElementById('gbiRatio');
+    var gp=document.getElementById('gbiPlatforms');
+    if(gn) gn.textContent=m.label;
+    if(gr) gr.textContent=m.ratio.split(' ')[0];
+    if(gp) gp.innerHTML=m.platforms.map(p=>`<span class="gbi-plat">${p}</span>`).join('<span class="gbi-sep"> · </span>');
   }
 }
 

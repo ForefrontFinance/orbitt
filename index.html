@@ -218,25 +218,35 @@
   </div>
 
   <div class="dt-genbar">
-    <textarea class="dt-idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. Carl Sagan obsession, Watto, fast finance…"></textarea>
-    <div class="dt-tone-row">
-      <div class="dt-tone active" data-tone="confident" onclick="setTone(this)">Confident</div>
-      <div class="dt-tone" data-tone="bold" onclick="setTone(this)">Bold</div>
-      <div class="dt-tone" data-tone="funny" onclick="setTone(this)">Funny</div>
-      <div class="dt-tone" data-tone="casual" onclick="setTone(this)">Casual</div>
-    </div>
-    <div class="dt-gen-btns">
-      <div class="dt-iter-row">
-        <button class="dt-iter" onclick="iterateAll('shorter')">Shorter</button>
-        <button class="dt-iter" onclick="iterateAll('punchier')">Punchier</button>
-        <button class="dt-iter" onclick="iterateAll('funnier')">Funnier</button>
+    <div class="dt-genbar-info">
+      <span class="gbi-name" id="gbiName">Text Chat</span>
+      <span class="gbi-ratio" id="gbiRatio">9:16</span>
+      <span class="gbi-sep">·</span>
+      <div class="gbi-platforms" id="gbiPlatforms">
+        <span class="gbi-plat">Instagram Reels</span><span class="gbi-sep">·</span><span class="gbi-plat">TikTok</span><span class="gbi-sep">·</span><span class="gbi-plat">YouTube Shorts</span>
       </div>
-      <div class="dt-gbtn-row">
-        <label class="dt-photo-btn" title="Upload background photo">
-          <input type="file" accept="image/*" onchange="handleBgUpload(event)" style="display:none">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" width="16" height="16"><circle cx="10" cy="11" r="3.5"/><path d="M3 7h1.5L6 5h8l1.5 2H17a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
-        </label>
-        <button class="dt-gbtn" onclick="generateAll()">✦ Generate All</button>
+    </div>
+    <div class="dt-genbar-main">
+      <textarea class="dt-idea-input" id="ideaInput" placeholder="What do you want to post about? e.g. Carl Sagan obsession, Watto, fast finance…"></textarea>
+      <div class="dt-tone-row">
+        <div class="dt-tone active" data-tone="confident" onclick="setTone(this)">Confident</div>
+        <div class="dt-tone" data-tone="bold" onclick="setTone(this)">Bold</div>
+        <div class="dt-tone" data-tone="funny" onclick="setTone(this)">Funny</div>
+        <div class="dt-tone" data-tone="casual" onclick="setTone(this)">Casual</div>
+      </div>
+      <div class="dt-gen-btns">
+        <div class="dt-iter-row">
+          <button class="dt-iter" onclick="iterateAll('shorter')">Shorter</button>
+          <button class="dt-iter" onclick="iterateAll('punchier')">Punchier</button>
+          <button class="dt-iter" onclick="iterateAll('funnier')">Funnier</button>
+        </div>
+        <div class="dt-gbtn-row">
+          <label class="dt-photo-btn" title="Upload background photo">
+            <input type="file" accept="image/*" onchange="handleBgUpload(event)" style="display:none">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" width="16" height="16"><circle cx="10" cy="11" r="3.5"/><path d="M3 7h1.5L6 5h8l1.5 2H17a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
+          </label>
+          <button class="dt-gbtn" onclick="generateAll()">✦ Generate All</button>
+        </div>
       </div>
     </div>
   </div>
