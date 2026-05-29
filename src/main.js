@@ -864,7 +864,7 @@ const Brand = {
       return;
     }
     const traitHtml = (b.traits||[]).slice(0,4).map(function(t){
-      return '<span style="display:inline-block;padding:2px 8px;background:rgba(124,92,252,0.15);border-radius:10px;font-size:10px;color:var(--accent2);margin:2px">' + t + '</span>';
+      return '<span style="display:inline-block;padding:2px 8px;background:rgba(30,136,229,0.15);border-radius:10px;font-size:10px;color:var(--accent2);margin:2px">' + t + '</span>';
     }).join('');
     card.innerHTML =
       '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px">' + (b.name||'') + '</div>' +
@@ -1103,8 +1103,8 @@ function saveBrandProfile() {
     doSay:    val('bmDoSay'),
     dontSay:  val('bmDontSay'),
     pillars:  val('bmPillars'),
-    color1:   val('bmColor1') || '#7c5cfc',
-    color2:   val('bmColor2') || '#a78bfa',
+    color1:   val('bmColor1') || '#1E88E5',
+    color2:   val('bmColor2') || '#42a5f5',
     slFormal: parseInt(val('slFormal')||'40'),
     slEdgy:   parseInt(val('slEdgy')  ||'35'),
     slLength: parseInt(val('slLength')||'30'),
@@ -1443,6 +1443,129 @@ async function captureShellAsBlob(shell, targetW, targetH) {
   for (var i = 0; i < n; i++) u8arr[i] = bstr.charCodeAt(i);
   return new Blob([u8arr], { type: mime });
 }
+
+
+// ══ 3-UP FORMAT SYSTEM ═══════════════════════════════════════════════════════
+
+// Map: template number → which slot it lives in
+var tplSlot = {1:'916',2:'11',3:'45',4:'45',5:'916',6:'11',7:'11',8:'11'};
+
+// Which frame is "preferred" per slot when a template is selected
+var slotPref = {
+  1:  {916:1, 45:3, 11:2},
+  2:  {916:1, 45:3, 11:2},
+  3:  {916:5, 45:3, 11:2},
+  4:  {916:1, 45:4, 11:8},
+  5:  {916:5, 45:3, 11:7},
+  6:  {916:1, 45:3, 11:6},
+  7:  {916:5, 45:4, 11:7},
+  8:  {916:1, 45:4, 11:8},
+};
+
+var _activeFmt = '916';
+var _activeTpl = 1;
+
+function setActiveFormat(fmt, chipEl) {
+  _activeFmt = fmt;
+  document.querySelectorAll('.fmt-chip').forEach(function(c){c.classList.toggle('active', c.dataset.fmt===fmt);});
+  document.querySelectorAll('.canvas-slot').forEach(function(s){s.classList.toggle('active-slot', s.dataset.fmt===fmt);});
+  // Update Info tab to reflect active slot's active frame
+  var activeFrameN = getActiveFrameForSlot(fmt);
+  if (activeFrameN && meta[activeFrameN]) {
+    var m = meta[activeFrameN];
+    var gn=document.getElementById('gbiName'), gr=document.getElementById('gbiRatio'), gp=document.getElementById('gbiPlatforms');
+    var sl=document.getElementById('spLabel'), sd=document.getElementById('spDesc');
+    if(gn) gn.textContent=m.label;
+    if(gr) gr.textContent=m.ratio.split(' ')[0];
+    if(gp) gp.innerHTML=m.platforms.map(function(p){return '<span class="gbi-plat">'+p+'</span>';}).join('<span class="gbi-sep"> · </span>');
+    if(sl) sl.textContent=m.label;
+    if(sd) sd.textContent=m.desc;
+  }
+}
+
+function getActiveFrameForSlot(fmt) {
+  var scale = document.getElementById('scale'+fmt);
+  if (!scale) return null;
+  var active = scale.querySelector('.template-frame.active');
+  if (!active) return null;
+  return parseInt(active.id.replace('frame',''));
+}
+
+function applySlotScales() {
+  var specs = {
+    916: {shellW:320, shellH:640, slotW:210, slotH:420},
+    45:  {shellW:300, shellH:533, slotW:224, slotH:280},
+    11:  {shellW:420, shellH:420, slotW:280, slotH:280},
+  };
+  Object.keys(specs).forEach(function(fmt) {
+    var sp = specs[fmt];
+    var el = document.getElementById('scale'+fmt);
+    if (!el) return;
+    var sx = sp.slotW / sp.shellW;
+    var sy = sp.slotH / sp.shellH;
+    var s  = Math.min(sx, sy);
+    el.style.transform = 'scale('+s+')';
+    el.style.width  = sp.shellW+'px';
+    el.style.height = sp.shellH+'px';
+  });
+}
+
+// Override switchTemplate for 3-up: activates a frame within its slot
+var _orig3upSwitchTemplate = switchTemplate;
+switchTemplate = function(n, el) {
+  _activeTpl = n;
+  // Update sidebar active state
+  document.querySelectorAll('.dt-tpl-card').forEach(function(c){c.classList.remove('active');});
+  if(el) el.classList.add('active');
+  // Set preferred frame in each slot
+  var pref = slotPref[n] || {};
+  ['916','45','11'].forEach(function(fmt) {
+    var prefN = pref[fmt];
+    if (!prefN) return;
+    var scale = document.getElementById('scale'+fmt);
+    if (!scale) return;
+    scale.querySelectorAll('.template-frame').forEach(function(f){f.classList.remove('active');});
+    var target = document.getElementById('frame'+prefN);
+    if (target) target.classList.add('active');
+  });
+  // Activate the slot corresponding to this template's natural ratio
+  var natFmt = tplSlot[n] || '916';
+  setActiveFormat(natFmt, null);
+  // Update genbar info
+  var m = meta[n];
+  if (m) {
+    var gn=document.getElementById('gbiName'), gr=document.getElementById('gbiRatio'), gp=document.getElementById('gbiPlatforms');
+    if(gn) gn.textContent = m.label;
+    if(gr) gr.textContent = m.ratio.split(' ')[0];
+    if(gp) gp.innerHTML = m.platforms.map(function(p){return '<span class="gbi-plat">'+p+'</span>';}).join('<span class="gbi-sep"> · </span>');
+    var sl=document.getElementById('spLabel'), sd=document.getElementById('spDesc');
+    if(sl) sl.textContent=m.label;
+    if(sd) sd.textContent=m.desc;
+  }
+  // Mark canvas as having content (hide empty state hint after first interaction)
+  var ce = document.getElementById('canvasEmpty');
+  if (ce) ce.classList.add('hidden');
+};
+
+// Hide empty state once generateAll is called
+var _origGenAll3up = generateAll;
+generateAll = async function() {
+  var ce = document.getElementById('canvasEmpty');
+  if (ce) ce.classList.add('hidden');
+  return _origGenAll3up.apply(this, arguments);
+};
+
+// Init on load
+(function init3up(){
+  applySlotScales();
+  // set initial active slot
+  document.querySelectorAll('.canvas-slot').forEach(function(s){
+    s.classList.toggle('active-slot', s.dataset.fmt==='916');
+  });
+})();
+
+window.addEventListener('resize', applySlotScales);
+window.setActiveFormat = setActiveFormat;
 
 // ── Expose all onclick-referenced functions to window ──────────────────────
 // (needed because index.html uses inline onclick="..." attributes)

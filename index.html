@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>orbitt — Content Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -71,150 +71,180 @@
 
   <div class="dt-preview" id="previewArea">
     <div class="dt-preview-grid"></div>
-                  <!-- ── T1: TEXT CHAT ── -->
-      <div class="template-frame active" id="frame1">
-        <div class="phone-shell">
-          <div class="t1-bg" id="bgSource" style="background-image:url('')"></div>
-          <div class="t1-overlay"></div>
-          <div class="t1-content">
-            <div class="t1-header">
-              <div style="position:relative;">
-                <div class="t1-av"><img src="" alt=""></div>
-                <div class="t1-online"></div>
+
+    <!-- ── 3-UP FORMAT STRIP ── -->
+    <div class="fmt-strip">
+      <div class="fmt-chip active" data-fmt="916" onclick="setActiveFormat('916',this)">
+        <span class="fmt-ratio">9:16</span><span class="fmt-label">Reels / TikTok</span>
+      </div>
+      <div class="fmt-chip" data-fmt="45" onclick="setActiveFormat('45',this)">
+        <span class="fmt-ratio">4:5</span><span class="fmt-label">Feed Portrait</span>
+      </div>
+      <div class="fmt-chip" data-fmt="11" onclick="setActiveFormat('11',this)">
+        <span class="fmt-ratio">1:1</span><span class="fmt-label">Square / LinkedIn</span>
+      </div>
+    </div>
+
+    <!-- ── 3-UP CANVAS ── -->
+    <div class="canvas-3up" id="canvas3up">
+
+      <!-- 9:16 slot -->
+      <div class="canvas-slot" id="slot916" data-fmt="916" onclick="setActiveFormat('916',null)">
+        <div class="canvas-slot-inner">
+          <div class="canvas-slot-scale" id="scale916">
+            <!-- frames for 9:16: frame1 (T1), frame5 (T5) -->
+            <div class="template-frame active" id="frame1">
+              <div class="phone-shell">
+                <div class="t1-bg" id="bgSource" style="background-image:url('')"></div>
+                <div class="t1-overlay"></div>
+                <div class="t1-content">
+                  <div class="t1-header">
+                    <div style="position:relative;">
+                      <div class="t1-av"><img src="" alt=""></div>
+                      <div class="t1-online"></div>
+                    </div>
+                    <div>
+                      <div class="t1-name">Bestie 🌸</div>
+                      <div class="t1-sub">Active now</div>
+                    </div>
+                    <div class="t1-hicons"><span>📞</span><span>📹</span></div>
+                  </div>
+                  <div class="t1-msgs" id="t1msgs"></div>
+                  <div class="t1-input">
+                    <input class="t1-ifield" type="text" placeholder="iMessage">
+                    <button class="t1-sbtn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+                  </div>
+                </div>
               </div>
-              <div>
-                <div class="t1-name">Bestie 🌸</div>
-                <div class="t1-sub">Active now</div>
+            </div>
+            <div class="template-frame" id="frame5">
+              <div class="story-shell">
+                <div class="t5-bg"></div>
+                <div class="t5-gradient"></div>
+                <div class="t5-content">
+                  <div class="t5-top">
+                    <div class="t5-av"><img src="" alt=""></div>
+                    <div><div class="t5-handle">@yourhandle</div></div>
+                    <button class="t5-follow">Follow</button>
+                  </div>
+                  <div class="t5-progress" id="t5progress"></div>
+                  <div class="t5-body" id="t5body"></div>
+                </div>
+                <div class="t5-actions">
+                  <div class="t5-action-btn"><div class="t5-action-icon">❤️</div>24k</div>
+                  <div class="t5-action-btn"><div class="t5-action-icon">💬</div>1.2k</div>
+                  <div class="t5-action-btn"><div class="t5-action-icon">↗️</div>Share</div>
+                </div>
               </div>
-              <div class="t1-hicons"><span>📞</span><span>📹</span></div>
-            </div>
-            <div class="t1-msgs" id="t1msgs"></div>
-            <div class="t1-input">
-              <input class="t1-ifield" type="text" placeholder="iMessage">
-              <button class="t1-sbtn"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
             </div>
           </div>
         </div>
-        <div class="frame-label">9:16 · Phone Mockup</div>
+        <div class="canvas-slot-label"><span class="csl-ratio">9:16</span> Phone / Reels</div>
       </div>
 
-      <!-- ── T2: BOLD QUOTE ── -->
-      <div class="template-frame" id="frame2">
-        <div class="square-shell">
-          <div class="t2-bg"></div>
-          <div class="t2-gradient"></div>
-          <div class="t2-quotes-icon">"</div>
-          <div class="t2-logo">@yourhandle</div>
-          <div class="t2-content" id="t2content">
-            <div class="t2-eyebrow">On Growth</div>
-            <div class="t2-quote" id="t2quote"></div>
-            <div class="t2-attribution" id="t2attr"></div>
-          </div>
-        </div>
-        <div class="frame-label">1:1 · Quote Poster</div>
-      </div>
-
-      <!-- ── T3: MYTH vs FACT ── -->
-      <div class="template-frame" id="frame3">
-        <div class="story-shell">
-          <div class="t3-bg"></div>
-          <div class="t3-content">
-            <div class="t3-header">
-              <div class="t3-header-eyebrow">Let's clear this up</div>
-              <div class="t3-header-title" id="t3title"></div>
-            </div>
-            <div class="t3-cards" id="t3cards"></div>
-            <div class="t3-footer">Save this if it resonated 💡</div>
-          </div>
-        </div>
-        <div class="frame-label">4:5 · Myth vs Fact</div>
-      </div>
-
-      <!-- ── T4: STAT CARDS ── -->
-      <div class="template-frame" id="frame4">
-        <div class="story-shell">
-          <div class="t4-bg"></div>
-          <div class="t4-content">
-            <div class="t4-eyebrow">The Numbers</div>
-            <div class="t4-title">The numbers don't lie.<br>Are you paying attention?</div>
-            <div class="t4-grid" id="t4grid"></div>
-            <div class="t4-footer">Data speaks. Share if this surprised you 📊</div>
-          </div>
-        </div>
-        <div class="frame-label">4:5 · Stat Cards</div>
-      </div>
-
-      <!-- ── T5: POV STORY ── -->
-      <div class="template-frame" id="frame5">
-        <div class="story-shell">
-          <div class="t5-bg"></div>
-          <div class="t5-gradient"></div>
-          <div class="t5-content">
-            <div class="t5-top">
-              <div class="t5-av"><img src="" alt=""></div>
-              <div>
-                <div class="t5-handle">@yourhandle</div>
+      <!-- 4:5 slot -->
+      <div class="canvas-slot" id="slot45" data-fmt="45" onclick="setActiveFormat('45',null)">
+        <div class="canvas-slot-inner">
+          <div class="canvas-slot-scale" id="scale45">
+            <!-- frames for 4:5: frame3 (T3), frame4 (T4) -->
+            <div class="template-frame active" id="frame3">
+              <div class="story-shell">
+                <div class="t3-bg"></div>
+                <div class="t3-content">
+                  <div class="t3-header">
+                    <div class="t3-header-eyebrow">Let's clear this up</div>
+                    <div class="t3-header-title" id="t3title"></div>
+                  </div>
+                  <div class="t3-cards" id="t3cards"></div>
+                  <div class="t3-footer">Save this if it resonated 💡</div>
+                </div>
               </div>
-              <button class="t5-follow">Follow</button>
             </div>
-            <div class="t5-progress" id="t5progress"></div>
-            <div class="t5-body" id="t5body"></div>
-          </div>
-          <div class="t5-actions">
-            <div class="t5-action-btn"><div class="t5-action-icon">❤️</div>24k</div>
-            <div class="t5-action-btn"><div class="t5-action-icon">💬</div>1.2k</div>
-            <div class="t5-action-btn"><div class="t5-action-icon">↗️</div>Share</div>
-          </div>
-        </div>
-        <div class="frame-label">9:16 · POV Story / Reel</div>
-      </div>
-
-      <!-- ── T6: BEFORE / AFTER ── -->
-      <div class="template-frame" id="frame6">
-        <div class="phone-shell">
-          <div class="t6-wrap">
-            <div class="t6-panel t6-before">
-              <div class="t6-label">BEFORE</div>
-              <div class="t6-text" id="t6beforeText">...</div>
-            </div>
-            <div class="t6-divider"><span class="t6-arrow">→</span></div>
-            <div class="t6-panel t6-after">
-              <div class="t6-label">AFTER</div>
-              <div class="t6-text" id="t6afterText">...</div>
+            <div class="template-frame" id="frame4">
+              <div class="story-shell">
+                <div class="t4-bg"></div>
+                <div class="t4-content">
+                  <div class="t4-eyebrow">The Numbers</div>
+                  <div class="t4-title">The numbers don't lie.<br>Are you paying attention?</div>
+                  <div class="t4-grid" id="t4grid"></div>
+                  <div class="t4-footer">Data speaks. Share if this surprised you 📊</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="t6-caption" id="t6caption"></div>
         </div>
-        <div class="frame-label">1:1 · Before / After</div>
+        <div class="canvas-slot-label"><span class="csl-ratio">4:5</span> Feed Portrait</div>
       </div>
 
-      <!-- ── T7: HOT TAKE ── -->
-      <div class="template-frame" id="frame7">
-        <div class="phone-shell">
-          <div class="t7-bg"></div>
-          <div class="t7-content">
-            <div class="t7-eyebrow" id="t7eyebrow">HOT TAKE 🔥</div>
-            <div class="t7-statement" id="t7statement">Loading...</div>
-            <div class="t7-sub" id="t7sub"></div>
-            <div class="t7-cta" id="t7cta">Agree or disagree? ↓</div>
+      <!-- 1:1 slot -->
+      <div class="canvas-slot" id="slot11" data-fmt="11" onclick="setActiveFormat('11',null)">
+        <div class="canvas-slot-inner">
+          <div class="canvas-slot-scale" id="scale11">
+            <!-- frames for 1:1: frame2 (T2), frame6 (T6), frame7 (T7), frame8 (T8) -->
+            <div class="template-frame active" id="frame2">
+              <div class="square-shell">
+                <div class="t2-bg"></div>
+                <div class="t2-gradient"></div>
+                <div class="t2-quotes-icon">"</div>
+                <div class="t2-logo">@yourhandle</div>
+                <div class="t2-content" id="t2content">
+                  <div class="t2-eyebrow">On Growth</div>
+                  <div class="t2-quote" id="t2quote"></div>
+                  <div class="t2-attribution" id="t2attr"></div>
+                </div>
+              </div>
+            </div>
+            <div class="template-frame" id="frame6">
+              <div class="phone-shell">
+                <div class="t6-wrap">
+                  <div class="t6-panel t6-before">
+                    <div class="t6-label">BEFORE</div>
+                    <div class="t6-text" id="t6beforeText">...</div>
+                  </div>
+                  <div class="t6-divider"><span class="t6-arrow">→</span></div>
+                  <div class="t6-panel t6-after">
+                    <div class="t6-label">AFTER</div>
+                    <div class="t6-text" id="t6afterText">...</div>
+                  </div>
+                </div>
+                <div class="t6-caption" id="t6caption"></div>
+              </div>
+            </div>
+            <div class="template-frame" id="frame7">
+              <div class="phone-shell">
+                <div class="t7-bg"></div>
+                <div class="t7-content">
+                  <div class="t7-eyebrow" id="t7eyebrow">HOT TAKE 🔥</div>
+                  <div class="t7-statement" id="t7statement">Loading...</div>
+                  <div class="t7-sub" id="t7sub"></div>
+                  <div class="t7-cta" id="t7cta">Agree or disagree? ↓</div>
+                </div>
+              </div>
+            </div>
+            <div class="template-frame" id="frame8">
+              <div class="phone-shell">
+                <div class="t8-bg"></div>
+                <div class="t8-content">
+                  <div class="t8-heading" id="t8heading">5 things you need to know</div>
+                  <div class="t8-list" id="t8list"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="frame-label">1:1 · Hot Take</div>
+        <div class="canvas-slot-label"><span class="csl-ratio">1:1</span> Square / LinkedIn</div>
       </div>
 
-      <!-- ── T8: TIPS LIST ── -->
-      <div class="template-frame" id="frame8">
-        <div class="phone-shell">
-          <div class="t8-bg"></div>
-          <div class="t8-content">
-            <div class="t8-heading" id="t8heading">5 things you need to know</div>
-            <div class="t8-list" id="t8list"></div>
-          </div>
-        </div>
-        <div class="frame-label">1:1 · Tips List</div>
-      </div>
+    </div><!-- /canvas-3up -->
 
-      </div>
+    <!-- ── EMPTY STATE (shown when no content generated) ── -->
+    <div class="canvas-empty" id="canvasEmpty">
+      <div class="ce-icon">✦</div>
+      <div class="ce-heading">Ready when you are</div>
+      <div class="ce-sub">Drop a photo below or hit <strong>Generate All</strong> to fill all three formats at once</div>
+      <div class="ce-arrow">↓</div>
+    </div>
+
   </div>
 
   <div class="dt-genbar">
