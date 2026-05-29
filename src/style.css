@@ -691,7 +691,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .dt-preview-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(124,92,252,0.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
 
 /* Generate bar */
-.dt-genbar{height:80px;background:var(--panel);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0;}
+.dt-genbar{background:var(--panel);border-top:1px solid var(--border);flex-shrink:0;}
 .dt-genbar-idea{flex:1;position:relative;}
 .dt-idea-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text);resize:none;height:52px;font-family:'DM Sans',sans-serif;line-height:1.4;}
 .dt-idea-input:focus{outline:none;border-color:rgba(124,92,252,0.4);}
