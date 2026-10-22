@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Working Capital Check | Forefront Equipment Finance</title>
+<meta name="description" content="Six quick questions on ABN age, turnover and tax position. See whether working capital lenders would fund your business, roughly how much, and what to do next.">
+
+<!-- Self-contained: no external fonts, scripts or images. Same tokens as the equipment quiz
+     (index.html) and landing.html so the three read as one product. -->
+<style>
+  :root{
+    --navy:#0F1E33; --navy-deep:#0A1524; --navy-mid:#16304F;
+    --blue:#2E86C1; --blue-deep:#1F6FA8; --blue-light:#7BB8DE; --blue-tint:#EAF3FA;
+    --ink:#0F172A; --graphite:#475569; --smoke:#647385; --mist:#E5E7EB; --border-light:#ECEEF1;
+    --vapor:#F5F4EE; --paper:#FAFAF7; --surface:#FFFFFF;
+    --ok:#1E8E5A; --ok-bg:#E4F4EC; --warn:#B7791F; --warn-bg:#FBF1DF; --stop:#B23A3A; --stop-bg:#F9E5E5;
+    --shadow-sm:0 1px 2px rgba(15,30,51,.05);
+    --shadow-md:0 6px 20px rgba(15,30,51,.10);
+    --shadow-lg:0 24px 60px rgba(5,14,28,.45);
+    --font-display:'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0; font-family:var(--font-display); color:var(--graphite);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    display:flex; flex-direction:column; min-height:100svh;
+    background:
+      radial-gradient(900px 520px at 15% -10%, rgba(46,134,193,.45) 0%, transparent 60%),
+      radial-gradient(700px 480px at 95% 10%, rgba(123,184,222,.25) 0%, transparent 60%),
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 45%, var(--navy-mid) 100%);
+    background-attachment:fixed;
+  }
+  /* faint grid, like a ledger */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:.35;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:linear-gradient(180deg, rgba(0,0,0,.9), transparent 85%);
+  }
+  h1,h2,h3{ color:var(--navy); letter-spacing:-0.02em; margin:0; line-height:1.15; }
+  p{ margin:0; }
+  *:focus-visible{ outline:2px solid var(--blue-light); outline-offset:2px; border-radius:4px; }
+  button{ font-family:inherit; }
+
+  .topbar{ position:relative; z-index:1; padding:1.1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+  .topbar a.home{ text-decoration:none; }
+  .wordmark{ color:#fff; font-weight:800; font-size:1.05rem; letter-spacing:-.02em; display:flex; flex-direction:column; line-height:1.05; }
+  .wordmark small{ font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9CCBEB; }
+  .topbar a.call{ color:#fff; text-decoration:none; font-weight:700; font-size:.88rem; white-space:nowrap; border:1.5px solid rgba(255,255,255,.3); border-radius:9999px; padding:.5rem 1rem; transition:border-color .15s, background .15s; }
+  .topbar a.call:hover{ border-color:#fff; background:rgba(255,255,255,.08); }
+
+  main{ position:relative; z-index:1; flex:1; display:flex; align-items:center; justify-content:center; padding:1.5rem 1.25rem 3.5rem; }
+  .card{
+    width:100%; max-width:660px; background:var(--surface); border-radius:1.5rem;
+    box-shadow:var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.08); padding:2.5rem 2.4rem; position:relative; overflow:hidden;
+  }
+  .card::before{ content:""; position:absolute; left:0; right:0; top:0; height:6px; background:linear-gradient(90deg, var(--blue-light), var(--blue), var(--blue-deep)); }
+  @media (max-width:480px){ .card{ padding:1.75rem 1.25rem; border-radius:1.1rem; } main{ padding:1rem .9rem 2.5rem; } }
+
+  .screen{ display:none; animation:fadeUp .4s cubic-bezier(.2,.8,.2,1) both; }
+  .screen.active{ display:block; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:none;} }
+  @media (prefers-reduced-motion:reduce){ .screen, .verdict, .progress-fill, .answer, .btn{ animation:none !important; transition:none !important; } }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; border:none; border-radius:.85rem; cursor:pointer; text-decoration:none; font-weight:800; font-size:1rem; white-space:nowrap; transition:background .15s ease, transform .12s ease, box-shadow .15s ease, border-color .15s ease; }
+  .btn:active{ transform:scale(.98); }
+  .btn-primary{ background:linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); color:#fff; padding:1.05rem 2rem; box-shadow:0 10px 24px rgba(31,111,168,.35); }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 14px 30px rgba(31,111,168,.42); }
+  .btn-ghost{ background:transparent; color:var(--graphite); padding:.7rem 1rem; border:1.5px solid var(--mist); font-size:.9rem; font-weight:700; }
+  .btn-ghost:hover{ border-color:var(--graphite); color:var(--navy); }
+  .btn-block{ width:100%; }
+
+  /* Start */
+  .eyebrow{ display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; background:var(--blue-tint); color:var(--blue-deep); padding:.45rem 1rem; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-bottom:1.25rem; }
+  .eyebrow .dot{ width:.45rem; height:.45rem; border-radius:9999px; background:var(--blue); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .start h1{ font-size:clamp(1.9rem,5.4vw,2.65rem); font-weight:800; margin-bottom:.9rem; max-width:17ch; }
+  .start .promise{ font-size:1.08rem; line-height:1.55; color:var(--graphite); max-width:48ch; margin-bottom:1.6rem; }
+  .checks-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:.6rem; margin-bottom:1.75rem; }
+  @media (max-width:520px){ .checks-grid{ grid-template-columns:repeat(2,1fr); } }
+  .chk{ background:var(--vapor); border-radius:.9rem; padding:.85rem .8rem; display:flex; flex-direction:column; gap:.45rem; }
+  .chk .ic{ width:32px; height:32px; border-radius:.6rem; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; }
+  .chk span{ font-size:.78rem; font-weight:800; color:var(--navy); line-height:1.2; }
+  .chk small{ font-size:.72rem; color:var(--smoke); font-weight:600; }
+  .meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1.1rem; color:var(--smoke); font-size:.84rem; font-weight:700; margin-top:1.25rem; }
+  .meta span{ display:inline-flex; align-items:center; gap:.4rem; }
+  .meta svg{ flex-shrink:0; color:var(--blue-deep); }
+
+  /* Question */
+  .progress{ display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1.6rem; }
+  .progress .count{ font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--blue-deep); white-space:nowrap; }
+  .progress-track{ flex:1; height:8px; background:var(--mist); border-radius:9999px; overflow:hidden; }
+  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--blue-light),var(--blue),var(--blue-deep)); border-radius:9999px; width:0; transition:width .45s cubic-bezier(.2,.8,.2,1); }
+  .question h2{ font-size:clamp(1.4rem,3.8vw,1.8rem); font-weight:800; margin-bottom:.5rem; }
+  .question .hint{ color:var(--smoke); font-size:.92rem; line-height:1.5; margin-bottom:1.4rem; }
+  .answers{ display:grid; gap:.65rem; }
+  .answer{
+    display:flex; align-items:center; gap:.95rem; width:100%; text-align:left;
+    background:var(--surface); border:1.5px solid var(--mist); border-radius:1rem;
+    padding:1rem 1.1rem; font-size:1rem; font-weight:700; color:var(--ink); cursor:pointer; line-height:1.4;
+    transition:border-color .15s ease, background .15s ease, transform .12s ease, box-shadow .15s ease;
+    animation:fadeUp .35s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .answer:nth-child(2){ animation-delay:.04s } .answer:nth-child(3){ animation-delay:.08s } .answer:nth-child(4){ animation-delay:.12s } .answer:nth-child(5){ animation-delay:.16s }
+  .answer:hover{ border-color:var(--blue); background:var(--blue-tint); transform:translateX(3px); box-shadow:var(--shadow-sm); }
+  .answer.selected{ border-color:var(--blue-deep); background:var(--blue-tint); box-shadow:0 0 0 3px rgba(31,111,168,.15); }
+  .answer .key{ flex-shrink:0; width:30px; height:30px; border-radius:.6rem; background:var(--vapor); color:var(--smoke); font-size:.78rem; font-weight:800; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; }
+  .answer:hover .key, .answer.selected .key{ background:var(--blue-deep); color:#fff; }
+  .answer .arrow{ margin-left:auto; color:var(--mist); flex-shrink:0; transition:color .15s, transform .15s; }
+  .answer:hover .arrow, .answer.selected .arrow{ color:var(--blue-deep); transform:translateX(2px); }
+  .nav{ display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; gap:1rem; }
+  .nav .tip{ font-size:.78rem; color:var(--smoke); font-weight:600; }
+
+  /* Gate */
+  .gate h2{ font-size:clamp(1.4rem,3.8vw,1.8rem); font-weight:800; margin-bottom:.5rem; }
+  .gate p.lead{ color:var(--smoke); margin-bottom:1.5rem; line-height:1.5; }
+  .gate-peek{ display:flex; align-items:center; gap:.9rem; background:var(--navy); color:#fff; border-radius:1rem; padding:1rem 1.1rem; margin-bottom:1.4rem; }
+  .gate-peek .ic{ width:40px; height:40px; border-radius:.7rem; background:rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--blue-light); }
+  .gate-peek strong{ display:block; font-size:.95rem; }
+  .gate-peek span{ font-size:.82rem; color:#B7C6D6; }
+  .field{ display:flex; flex-direction:column; gap:.35rem; margin-bottom:1rem; }
+  .field label{ font-size:.82rem; font-weight:800; color:var(--navy); }
+  .field label span{ color:var(--smoke); font-weight:600; }
+  .field input{ font:inherit; font-size:1rem; padding:.95rem 1rem; border:1.5px solid var(--mist); border-radius:.85rem; background:var(--surface); color:var(--ink); width:100%; }
+  .field input:focus{ border-color:var(--blue-deep); outline:none; box-shadow:0 0 0 3px rgba(31,111,168,.15); }
+  .field .err{ font-size:.8rem; color:var(--stop); display:none; }
+  .field.invalid input{ border-color:var(--stop); }
+  .field.invalid .err{ display:block; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+  @media (max-width:480px){ .row2{ grid-template-columns:1fr; } }
+  .fine{ font-size:.78rem; color:var(--smoke); line-height:1.5; margin-top:.9rem; }
+  .fine svg{ vertical-align:-2px; margin-right:.3rem; }
+
+  /* Result */
+  .result .kicker{ font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:.6rem; }
+  .verdict{ border-radius:1.1rem; padding:1.4rem 1.4rem; margin-bottom:1.1rem; color:#fff; position:relative; overflow:hidden; animation:reveal .6s cubic-bezier(.2,.8,.2,1) both; background:linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); }
+  .verdict::after{ content:""; position:absolute; right:-40px; top:-40px; width:180px; height:180px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,.14), transparent 70%); }
+  @keyframes reveal{ from{ opacity:0; transform:translateY(16px) scale(.97);} to{ opacity:1; transform:none;} }
+  .verdict .head{ display:flex; align-items:center; gap:1rem; margin-bottom:.75rem; position:relative; }
+  .verdict .icon{ width:52px; height:52px; border-radius:1rem; flex-shrink:0; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(0,0,0,.25); }
+  .verdict.ok .icon{ background:linear-gradient(135deg,#2BB673,var(--ok)); } .verdict.warn .icon{ background:linear-gradient(135deg,#E0A33A,var(--warn)); } .verdict.stop .icon{ background:linear-gradient(135deg,#D55A5A,var(--stop)); }
+  .verdict .tag{ display:inline-block; font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.25rem .6rem; border-radius:9999px; margin-bottom:.35rem; background:rgba(255,255,255,.14); color:#fff; }
+  .verdict.ok .tag{ color:#9BE4BF; } .verdict.warn .tag{ color:#F6D590; } .verdict.stop .tag{ color:#F5A3A3; }
+  .verdict h2{ color:#fff; font-size:clamp(1.45rem,4.2vw,1.9rem); font-weight:800; }
+  .verdict p{ line-height:1.55; color:#D5E1EC; position:relative; }
+  .range{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-bottom:1.25rem; }
+  @media (max-width:480px){ .range{ grid-template-columns:1fr; } }
+  .range div{ border-radius:1rem; padding:1rem 1.1rem; background:var(--blue-tint); border:1.5px solid rgba(31,111,168,.15); }
+  .range div:nth-child(2){ background:var(--vapor); border-color:var(--border-light); }
+  .range strong{ display:block; font-size:1.55rem; color:var(--navy); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .range span{ font-size:.78rem; color:var(--smoke); font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+  .checks{ list-style:none; margin:0 0 1.25rem; padding:0; display:grid; gap:.5rem; }
+  .checks li{ display:flex; gap:.75rem; align-items:flex-start; font-size:.93rem; line-height:1.45; color:var(--ink); background:var(--surface); border:1.5px solid var(--border-light); border-radius:.85rem; padding:.7rem .9rem; }
+  .checks .dot{ flex-shrink:0; width:22px; height:22px; border-radius:50%; margin-top:.05rem; display:flex; align-items:center; justify-content:center; color:#fff; background:var(--mist); }
+  .checks .dot::before{ content:""; width:6px; height:6px; border-radius:50%; background:#fff; }
+  .checks .ok .dot{ background:var(--ok);} .checks .warn .dot{ background:var(--warn);} .checks .stop .dot{ background:var(--stop);}
+  .tips{ background:var(--vapor); border-radius:1.1rem; padding:1.3rem 1.35rem; margin-bottom:1.5rem; }
+  .tips h3{ font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--smoke); margin-bottom:.85rem; }
+  .tips ol{ margin:0; padding:0; list-style:none; display:grid; gap:.8rem; counter-reset:tip; }
+  .tips li{ display:flex; gap:.85rem; align-items:flex-start; line-height:1.5; font-size:.95rem; color:var(--ink); }
+  .tips li::before{ counter-increment:tip; content:counter(tip); flex-shrink:0; width:26px; height:26px; border-radius:9999px; background:linear-gradient(135deg,var(--blue),var(--blue-deep)); color:#fff; font-size:.75rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin-top:.05rem; }
+  .fits{ display:flex; flex-wrap:wrap; gap:.45rem; margin:-.4rem 0 1.4rem; }
+  .fits span{ font-size:.8rem; font-weight:800; border-radius:9999px; padding:.4rem .9rem; color:var(--blue-deep); background:var(--blue-tint); }
+  .cta-box{ background:linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, var(--blue-deep) 140%); color:#fff; border-radius:1.1rem; padding:1.5rem; margin-bottom:1.25rem; position:relative; overflow:hidden; }
+  .cta-box::before{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 80% 0%, rgba(46,134,193,.45), transparent 55%); pointer-events:none; }
+  .cta-box p{ color:#CBDCEA; line-height:1.5; margin-bottom:1rem; position:relative; }
+  .cta-box .btn-primary{ position:relative; }
+  .cta-box .alt{ display:block; margin-top:.85rem; color:#B7C6D6; font-size:.85rem; position:relative; }
+  .cta-box .alt a{ color:#fff; font-weight:800; }
+  .result-actions{ display:flex; flex-wrap:wrap; gap:.6rem; }
+  .toast{ font-size:.82rem; color:var(--blue-deep); font-weight:700; margin-top:.6rem; min-height:1.2em; }
+
+  footer{ position:relative; z-index:1; color:#8FA3B8; padding:1.5rem 1.25rem 2rem; text-align:center; font-size:.76rem; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="home" href="https://www.forefrontfinance.com.au/" aria-label="Forefront Equipment Finance"><span class="wordmark">Forefront <small>Equipment Finance</small></span></a>
+  <a class="call" href="tel:1300982928">1300 982 928</a>
+</header>
+
+<main>
+  <div class="card">
+
+    <!-- ===== START ===== -->
+    <section class="screen start active" id="screen-start" aria-labelledby="start-title">
+      <span class="eyebrow"><span class="dot"></span> Free 60-second check</span>
+      <h1 id="start-title">Is Your Business Working-Capital Ready?</h1>
+      <p class="promise">Six quick questions on the four things cash flow lenders actually check. See where you stand, roughly how much is realistic, and exactly what to do next.</p>
+      <div class="checks-grid" aria-label="What we check">
+        <div class="chk"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div><span>ABN age</span><small>Months trading</small></div>
+        <div class="chk"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><span>Turnover</span><small>Monthly deposits</small></div>
+        <div class="chk"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><span>Tax position</span><small>ATO portal</small></div>
+        <div class="chk"><div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div><span>Purpose</span><small>What it's for</small></div>
+      </div>
+      <button class="btn btn-primary" id="btn-start" type="button">
+        Start the Check
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+      </button>
+      <div class="meta">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>60 seconds</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>No credit check</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="5" cy="17" r="2"/><circle cx="19" cy="17" r="2"/><path d="M9.8 10.6L6.6 8.2M14.2 10.6l3.2-2.4M9.8 13.4l-3.2 2.4M14.2 13.4l3.2 2.4"/></svg>30+ lenders</span>
+      </div>
+    </section>
+
+    <!-- ===== QUESTION ===== -->
+    <section class="screen question" id="screen-question" aria-live="polite">
+      <div class="progress">
+        <span class="count" id="q-count">Question 1 of 6</span>
+        <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="q-fill"></div></div>
+      </div>
+      <h2 id="q-text"></h2>
+      <p class="hint" id="q-hint"></p>
+      <div class="answers" id="q-answers" role="group" aria-labelledby="q-text"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" id="btn-back" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 19l-7-7 7-7"/></svg>
+          Back
+        </button>
+        <span class="tip">Tap an answer to continue</span>
+      </div>
+    </section>
+
+    <!-- ===== GATE ===== -->
+    <section class="screen gate" id="screen-gate" aria-labelledby="gate-title">
+      <div class="progress">
+        <span class="count">Almost there</span>
+        <div class="progress-track" aria-hidden="true"><div class="progress-fill" style="width:100%"></div></div>
+      </div>
+      <h2 id="gate-title">See your result and which lenders fit</h2>
+      <p class="lead">Your answers are matched against the criteria our panel uses. Tell us who to send the lender shortlist to and we'll show your result now.</p>
+      <div class="gate-peek">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div><strong>Your result is ready</strong><span>Indicative range, lender fit and your next three steps.</span></div>
+      </div>
+      <form id="gate-form" novalidate>
+        <div class="row2">
+          <div class="field" id="f-name">
+            <label for="lead-name">First name</label>
+            <input id="lead-name" name="firstName" type="text" autocomplete="given-name" placeholder="e.g. Dave" required>
+            <span class="err">Add your first name.</span>
+          </div>
+          <div class="field" id="f-phone">
+            <label for="lead-phone">Mobile</label>
+            <input id="lead-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx" required>
+            <span class="err">Add a mobile we can call.</span>
+          </div>
+        </div>
+        <div class="field" id="f-email">
+          <label for="lead-email">Email <span>(optional)</span></label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" placeholder="you@business.com.au">
+          <span class="err">That email doesn't look right.</span>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Show my result</button>
+        <p class="fine">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          This will not impact your credit score. Nothing goes to a lender until you've seen the terms and said yes. Your information is protected under our privacy policy.
+        </p>
+      </form>
+    </section>
+
+    <!-- ===== RESULT ===== -->
+    <section class="screen result" id="screen-result" aria-labelledby="r-name">
+      <p class="kicker" id="r-kicker">Your result</p>
+      <div class="verdict" id="r-verdict">
+        <div class="head">
+          <div class="icon" id="r-icon" aria-hidden="true"></div>
+          <div><span class="tag">Your working capital result</span><h2 id="r-name"></h2></div>
+        </div>
+        <p id="r-body"></p>
+      </div>
+      <div class="range" id="r-range"></div>
+      <ul class="checks" id="r-checks"></ul>
+      <p class="kicker">Products that typically fit</p>
+      <div class="fits" id="r-fits"></div>
+      <div class="tips">
+        <h3>What to do next</h3>
+        <ol id="r-tips"></ol>
+      </div>
+      <div class="cta-box">
+        <p id="r-cta"></p>
+        <a class="btn btn-primary" id="r-cta-link" href="https://www.forefrontfinance.com.au/contact-us/">
+          Get PreApproval &amp; Loan Options
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+        </a>
+        <span class="alt">Or call Chris direct: <a href="tel:1300982928">1300 982 928</a></span>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-ghost" id="btn-share" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+          Share this check
+        </button>
+        <button class="btn btn-ghost" id="btn-retake" type="button">Retake</button>
+      </div>
+      <p class="toast" id="share-toast" aria-live="polite"></p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Forefront Equipment Finance &middot; 1300 982 928 &middot; &copy; 2026<br>
+  Forefront Finance is a Credit Representative (478424) of Australian Credit Licence 389328. Results are indicative, based on typical lender criteria at the time of writing, and are not a credit offer or approval.
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================================
+     1. QUESTIONS
+     Each answer carries a `value` the scoring engine reads. Keep the `key` names
+     (abn, turnover, tax, purpose, amount, security) and the value codes; change
+     the wording freely. `hint` is the grey line under the question.
+     ============================================================================ */
+  var QUESTIONS = [
+    { key: "abn",
+      text: "How long has your ABN been registered?",
+      hint: "Lenders count trading history from ABN registration, not from your first invoice.",
+      answers: [
+        { text: "Under 6 months", value: "lt6" },
+        { text: "6 to 12 months", value: "6-12" },
+        { text: "1 to 2 years", value: "1-2" },
+        { text: "More than 2 years", value: "2p" }
+      ]},
+    { key: "turnover",
+      text: "What's your average monthly turnover over the last six months?",
+      hint: "Deposits into the business account before expenses. A rough figure is fine.",
+      answers: [
+        { text: "Under $10,000", value: "lt10" },
+        { text: "$10,000 to $25,000", value: "10-25" },
+        { text: "$25,000 to $75,000", value: "25-75" },
+        { text: "$75,000 to $250,000", value: "75-250" },
+        { text: "More than $250,000", value: "250p" }
+      ]},
+    { key: "tax",
+      text: "Do you owe the ATO anything that's overdue?",
+      hint: "BAS, PAYG or income tax past its due date. Amounts not yet due don't count.",
+      answers: [
+        { text: "No, all up to date", value: "none" },
+        { text: "Yes, but it's on a payment plan I'm keeping to", value: "plan" },
+        { text: "Yes, and there's no arrangement in place yet", value: "open" },
+        { text: "Not sure, I'd need to check the portal", value: "unsure" }
+      ]},
+    { key: "purpose",
+      text: "What would the money mainly be for?",
+      hint: "",
+      answers: [
+        { text: "Smoothing cash flow between jobs or slow-paying customers", value: "gap" },
+        { text: "Buying stock, materials or paying suppliers upfront", value: "stock" },
+        { text: "Clearing the ATO or other debt in one go", value: "debt" },
+        { text: "Jumping on an opportunity: a contract, a job, extra gear", value: "growth" }
+      ]},
+    { key: "amount",
+      text: "How much are you looking for?",
+      hint: "",
+      answers: [
+        { text: "Under $25,000", value: "lt25" },
+        { text: "$25,000 to $50,000", value: "25-50" },
+        { text: "$50,000 to $150,000", value: "50-150" },
+        { text: "More than $150,000", value: "150p" }
+      ]},
+    { key: "security",
+      text: "If it got you a cheaper deal, what could you put behind it?",
+      hint: "None of these are required. They change which lenders and which prices are available.",
+      answers: [
+        { text: "Property, mine or the business's", value: "property" },
+        { text: "Trucks, plant or equipment that's paid off", value: "assets" },
+        { text: "Unpaid invoices to other businesses on 30 to 90 day terms", value: "invoices" },
+        { text: "Nothing. I want it unsecured", value: "none" }
+      ]}
+  ];
+
+  /* ============================================================================
+     2. RESULT TIERS
+     The engine picks one of these four. Edit names, copy and CTA angles here.
+     ============================================================================ */
+  var TIERS = {
+    strong: {
+      cls: "ok", name: "Green Light",
+      body: "You clear the thresholds cash flow lenders care about. The job now isn't finding someone who'll say yes, it's picking the cheapest structure from the lenders who will.",
+      cta: "Most of our panel would look at this. Get your lender options and see the real numbers side by side before anyone touches your credit file.",
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+    },
+    likely: {
+      cls: "ok", name: "Fundable, With the Right Lender",
+      body: "A few lenders will pass on this, but the right ones will proceed. Expect a slightly smaller limit or a higher rate than a longer-trading business, and don't apply blind: each decline leaves an enquiry on your file.",
+      cta: "We know which two or three lenders fit this profile. Get the shortlist before you apply anywhere.",
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>'
+    },
+    possible: {
+      cls: "warn", name: "Fixable First",
+      body: "One or two factors narrow the panel. There are lenders for this profile, but pricing and structure matter a lot, and often the cheapest path is to fix the sticking point first and refinance in six months.",
+      cta: "A fifteen-minute call tells you whether to do this now or wait. Get your options and a straight answer.",
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="14" r="4"/><path d="M11 11l8-8"/><path d="M16 6l3 3"/><path d="M14 8l2.5 2.5"/></svg>'
+    },
+    notyet: {
+      cls: "stop", name: "Not Yet. Here's the Plan",
+      body: "Unsecured cash flow lenders won't look at this profile today. That's a statement about their credit box, not your business. The route is either security you already have, or a few months of clean statements.",
+      cta: "We'll tell you exactly what the statements need to look like, and what's fundable in the meantime. Get the plan.",
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+    }
+  };
+
+  /* ============================================================================
+     3. SCORING ENGINE
+     Thresholds reflect typical Australian non-bank criteria (6 months' ABN and
+     ~$5k-$6k/month to enter; 12 months and $10k+ for lines of credit; ATO debt
+     on a plan is workable, with no arrangement it narrows the panel). Edit the
+     numbers in TOMID (monthly turnover midpoints) and MULT (how many months of
+     turnover unsecured lenders will advance) to match your panel.
+     ============================================================================ */
+  var ABN  = { lt6: 0, "6-12": 1, "1-2": 2, "2p": 3 };
+  var TO   = { lt10: 0, "10-25": 1, "25-75": 2, "75-250": 3, "250p": 4 };
+  var TOMID= { lt10: 6000, "10-25": 17000, "25-75": 50000, "75-250": 150000, "250p": 400000 };
+  var AMT  = { lt25: [10000, 25000], "25-50": [25000, 50000], "50-150": [50000, 150000], "150p": [150000, 500000] };
+  var MULT = { young: 0.8, established: 1.5 };   // months of turnover for unsecured
+
+  function money(n){ return "$" + Math.round(n / 1000) + "k"; }
+
+  function evaluate(a){
+    var checks = [], fits = [], tips = [], score = 0, hard = false;
+    var abn = ABN[a.abn], to = TO[a.turnover];
+
+    // ABN age
+    if (abn === 0){ hard = true; checks.push(["stop", "ABN under 6 months: unsecured cash flow lenders won't look yet."]); }
+    else if (abn === 1){ score += 1; checks.push(["warn", "6 to 12 months' ABN: entry-level lenders only, smaller limits."]); }
+    else if (abn === 2){ score += 2; checks.push(["ok", "1 to 2 years' ABN: clears most non-bank lenders' minimum."]); }
+    else { score += 3; checks.push(["ok", "2+ years' ABN: clears every non-bank lender and most bank products."]); }
+
+    // Turnover
+    if (to === 0){ score += 1; checks.push(["warn", "Under $10k a month: entry-level unsecured lenders only (most start at $5k to $6k), and limits will be small."]); if (TOMID[a.turnover] < 5000) hard = true; }
+    else if (to === 1){ score += 2; checks.push(["ok", "$10k to $25k a month: inside the range most non-bank lenders fund."]); }
+    else if (to === 2){ score += 3; checks.push(["ok", "$25k to $75k a month: strong deposits, wider panel, better pricing."]); }
+    else if (to === 3){ score += 3; checks.push(["ok", "$75k to $250k a month: full panel including bank overdrafts and $150k+ facilities."]); }
+    else { score += 3; checks.push(["ok", "$250k+ a month: every lender on the panel, and pricing you can negotiate."]); }
+
+    // Tax
+    if (a.tax === "none"){ score += 2; checks.push(["ok", "No overdue tax: nothing for the ATO portal check to flag."]); }
+    else if (a.tax === "plan"){ score += 1; checks.push(["warn", "ATO payment plan: workable for most of the panel if it's up to date. Some lenders will refinance it into the loan."]); }
+    else if (a.tax === "open"){ checks.push(["warn", "Overdue tax with no arrangement: narrows the panel to tax-debt specialists. Usually cheapest to fund this first, then refinance."]); tips.push("Call the ATO (13 11 42) or let us fund the debt before it's reported to the credit bureaus. A plan in place changes which lenders will talk to you."); }
+    else { score += 1; checks.push(["warn", "Tax position unknown: lenders will log in to the ATO portal and look, so we check first."]); tips.push("Log in to ATO Online or ask your bookkeeper for the integrated client account balance. Two minutes now saves a surprise at approval."); }
+
+    // Security
+    var prop = a.security === "property", assets = a.security === "assets", inv = a.security === "invoices";
+    if (prop){ score += 1; checks.push(["ok", "Property available: secured facilities and larger limits open up, at lower rates."]); }
+    if (assets){ score += 1; checks.push(["ok", "Paid-off equipment: a refinance or sale-and-leaseback releases cash at asset-finance rates, not unsecured rates."]); }
+    if (inv){ checks.push(["ok", "B2B invoices on terms: invoice finance sizes on your ledger rather than your trading history."]); }
+
+    // Indicative unsecured range
+    var mult = abn >= 2 ? MULT.established : (abn === 1 ? MULT.young : 0);
+    if (a.tax === "open") mult *= 0.7;
+    var cap = TOMID[a.turnover] * mult;
+    if (prop) cap = Math.max(cap, TOMID[a.turnover] * 3);
+    var lo = Math.max(10000, Math.round(cap * 0.4 / 5000) * 5000), hi = Math.max(lo, Math.round(cap / 5000) * 5000);
+    var want = AMT[a.amount], amtFlag = false;
+    if (!hard && want[0] > hi){
+      amtFlag = true;
+      checks.push(["warn", money(want[0]) + "+ is above the usual unsecured range for your turnover." + (inv ? " Invoice finance could bridge it." : prop || assets ? " Security could bridge it." : " Splitting it across two facilities is the usual fix.")]);
+    }
+
+    // Product fits
+    if (!hard){
+      if (abn >= 1) fits.push("Unsecured business loan");
+      if (abn >= 2 && to >= 1) fits.push("Line of credit");
+      if (a.purpose === "stock" && abn >= 2) fits.push("Trade & supplier finance");
+    }
+    if (inv) fits.push("Invoice finance");
+    if ((a.tax === "open" || a.tax === "plan" || a.purpose === "debt") && abn >= 2) fits.push("ATO tax debt funding");
+    if (prop) fits.push("Secured business loan");
+    if (assets) fits.push("Equipment refinance / sale-and-leaseback");
+    if (a.purpose === "growth") fits.push("Equipment finance for the gear itself");
+    if (!fits.length) fits.push("Equipment finance (asset-backed)");
+
+    // Tier
+    var tier;
+    if (hard) tier = "notyet";
+    else if (score >= 8 && !amtFlag) tier = "strong";
+    else if (score >= 6) tier = "likely";
+    else tier = "possible";
+
+    // Tips by situation (max 3)
+    if (tier === "notyet"){
+      if (prop || assets) tips.unshift("You have security, so unsecured isn't the only road. A secured facility or equipment refinance can work now.");
+      tips.push("Trade for six months with consistent deposits and no dishonours. That alone opens most of the panel.");
+      if (a.purpose === "growth") tips.push("If the opportunity is a piece of equipment, that's fundable today: the asset is the security.");
+    } else {
+      if (abn === 1) tips.push("Keep the next few months' statements clean: no dishonours, no gambling, no cash deposits you can't explain. At 12 months the panel roughly doubles.");
+      if (amtFlag) tips.push("Think in two facilities: a cash flow loan for the working capital piece and an asset or invoice line for the rest. Cheaper than one oversized unsecured loan.");
+      if (a.purpose === "gap" && !inv && to >= 1) tips.push("If your slow payers are other businesses, ask about invoice finance. It grows with sales instead of your credit score.");
+      if (a.purpose === "stock") tips.push("Supplier or trade finance pays the supplier directly and you repay when the stock turns over. Often cheaper than a term loan for the same job.");
+      tips.push("Have six months of bank statements and an ATO portal screenshot ready. That's the whole application for most non-bank lenders.");
+      tips.push("Don't apply to lenders one by one. One enquiry through a broker beats three on your file.");
+    }
+    tips = tips.slice(0, 3);
+
+    return { tier: tier, checks: checks, fits: fits, tips: tips, range: hard ? null : [lo, hi], want: want, score: score };
+  }
+
+  /* ============================================================================
+     4. STATE + SCREENS
+     ============================================================================ */
+  var state = { index: 0, answers: {} };
+  var LEADS_KEY = "ffe_wc_check_leads";
+  var $ = function(id){ return document.getElementById(id); };
+  var screens = { start: $("screen-start"), question: $("screen-question"), gate: $("screen-gate"), result: $("screen-result") };
+
+  function show(name){
+    Object.keys(screens).forEach(function(k){ screens[k].classList.toggle("active", k === name); });
+    var first = screens[name].querySelector("h1, h2");
+    if (first){ first.setAttribute("tabindex", "-1"); first.focus(); }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  var KEYS = ["A", "B", "C", "D", "E"];
+  function renderQuestion(){
+    var q = QUESTIONS[state.index];
+    $("q-count").textContent = "Question " + (state.index + 1) + " of " + QUESTIONS.length;
+    $("q-fill").style.width = Math.round((state.index / QUESTIONS.length) * 100) + "%";
+    $("q-text").textContent = q.text;
+    $("q-hint").textContent = q.hint; $("q-hint").hidden = !q.hint;
+    var wrap = $("q-answers"); wrap.innerHTML = "";
+    q.answers.forEach(function(a, i){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "answer" + (state.answers[q.key] === a.value ? " selected" : "");
+      b.innerHTML = '<span class="key">' + KEYS[i] + '</span><span>' + a.text + '</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+      b.addEventListener("click", function(){
+        state.answers[q.key] = a.value;
+        wrap.querySelectorAll(".answer").forEach(function(x){ x.classList.remove("selected"); });
+        b.classList.add("selected");
+        setTimeout(next, 220);
+      });
+      wrap.appendChild(b);
+    });
+    $("btn-back").style.visibility = state.index === 0 ? "hidden" : "visible";
+    show("question");
+  }
+  function next(){ if (state.index < QUESTIONS.length - 1){ state.index++; renderQuestion(); } else show("gate"); }
+  function back(){ if (state.index > 0){ state.index--; renderQuestion(); } }
+
+  /* ============================================================================
+     5. LEAD CAPTURE
+     Leads save to localStorage under LEADS_KEY. In production replace the marked
+     line with a POST to HubSpot, e.g.
+       fetch("https://api.hsforms.com/submissions/v3/integration/submit/PORTAL_ID/FORM_GUID",
+         { method:"POST", headers:{ "Content-Type":"application/json" },
+           body: JSON.stringify({ fields:[
+             {name:"firstname",value:lead.firstName},{name:"mobilephone",value:lead.phone},
+             {name:"email",value:lead.email},{name:"wc_result",value:lead.result},
+             {name:"wc_answers",value:JSON.stringify(lead.answers)} ] }) });
+     ============================================================================ */
+  function saveLead(lead){
+    try { var leads = JSON.parse(localStorage.getItem(LEADS_KEY) || "[]"); leads.push(lead); localStorage.setItem(LEADS_KEY, JSON.stringify(leads)); } catch (e) {}
+    // >>> PRODUCTION: send `lead` to HubSpot / your CRM here. <<<
+  }
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function validPhone(v){ return v.replace(/\D/g, "").length >= 8; }
+
+  $("gate-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = $("lead-name").value.trim(), phone = $("lead-phone").value.trim(), email = $("lead-email").value.trim();
+    var ok = true;
+    $("f-name").classList.toggle("invalid", !name); if (!name) ok = false;
+    $("f-phone").classList.toggle("invalid", !validPhone(phone)); if (!validPhone(phone)) ok = false;
+    var emailBad = email && !validEmail(email);
+    $("f-email").classList.toggle("invalid", emailBad); if (emailBad) ok = false;
+    if (!ok) return;
+    var r = evaluate(state.answers);
+    saveLead({ firstName: name, phone: phone, email: email, result: TIERS[r.tier].name, tier: r.tier, range: r.range,
+               answers: state.answers, at: new Date().toISOString(), page: location.href });
+    renderResult(r, name);
+  });
+
+  /* ============================================================================
+     6. RESULT
+     ============================================================================ */
+  var current = null;
+  function renderResult(r, name){
+    current = r; var t = TIERS[r.tier];
+    $("r-kicker").textContent = name ? name + ", here's where you stand" : "Here's where you stand";
+    $("r-verdict").className = "verdict " + t.cls;
+    $("r-icon").innerHTML = t.icon;
+    $("r-name").textContent = t.name;
+    $("r-body").textContent = t.body;
+    $("r-range").innerHTML = r.range
+      ? '<div><strong>' + (r.range[0] === r.range[1] ? 'Up to ' + money(r.range[1]) : money(r.range[0]) + ' to ' + money(r.range[1])) + '</strong><span>Indicative unsecured range</span></div>' +
+        '<div><strong>' + (r.want[1] >= 500000 ? "$150k+" : money(r.want[0]) + ' to ' + money(r.want[1])) + '</strong><span>You asked for</span></div>'
+      : "";
+    $("r-checks").innerHTML = r.checks.map(function(c){ return '<li class="' + c[0] + '"><span class="dot"></span><span>' + c[1] + '</span></li>'; }).join("");
+    $("r-fits").innerHTML = r.fits.map(function(f){ return "<span>" + f + "</span>"; }).join("");
+    $("r-tips").innerHTML = r.tips.map(function(x){ return "<li><span>" + x + "</span></li>"; }).join("");
+    $("r-cta").textContent = t.cta;
+    $("r-cta-link").href = "https://www.forefrontfinance.com.au/contact-us/?check=" + encodeURIComponent(t.name);
+    $("share-toast").textContent = "";
+    show("result");
+  }
+
+  $("btn-share").addEventListener("click", function(){
+    var text = "Forefront's 60-second Working Capital Check: see if cash flow lenders would fund your business.";
+    var url = location.href.split("#")[0];
+    if (navigator.share){ navigator.share({ title: "Working Capital Check", text: text, url: url }).catch(function(){}); }
+    else if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text + " " + url).then(function(){ $("share-toast").textContent = "Link copied. Paste it anywhere."; }, function(){ $("share-toast").textContent = url; });
+    } else { $("share-toast").textContent = url; }
+  });
+  $("btn-retake").addEventListener("click", function(){ state = { index: 0, answers: {} }; $("gate-form").reset(); show("start"); });
+  $("btn-start").addEventListener("click", function(){ state.index = 0; renderQuestion(); });
+  $("btn-back").addEventListener("click", back);
+  document.addEventListener("keydown", function(e){
+    if (!screens.question.classList.contains("active")) return;
+    var i = KEYS.indexOf(e.key.toUpperCase()); if (i < 0) i = ["1","2","3","4","5"].indexOf(e.key);
+    if (i < 0) return;
+    var btns = $("q-answers").querySelectorAll(".answer"); if (btns[i]) btns[i].click();
+  });
+})();
+</script>
+</body>
+</html>
